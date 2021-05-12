@@ -1,0 +1,26 @@
+<h1>開講スケジュール一覧</h1>
+
+<!--開講スケジュール一覧テーブル-->
+<div>
+  <table class="table table-bordered table-striped table-condensed" id="index-schedule">
+    <tr>
+      <th>日付</th>
+      <th>場所</th>
+      <th>講師</th>
+      <th>コース種類</th>
+    </tr>
+
+    <% @schedules.each do |s| %>
+      <tr>
+        <td><%= s.date %></td>
+        <td><%= s.venue %></td>
+        <td><%= s.teacher %></td>
+        <td><%= s.course_name %></td>
+        <td><%= link_to "詳細", '#', class: "btn btn-info" %></td>
+      </tr>
+    <% end %>
+  </table>
+  <div class="center">
+    <%= link_to "<　戻る", '#', class: "btn btn-outline-secondary" %>
+  </div>
+</div>
