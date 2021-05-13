@@ -1,3 +1,3 @@
 class Schedule < ApplicationRecord
-  # validates :date, presence: true
+  validates :date, presence: true
 end
