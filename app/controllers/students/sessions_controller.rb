@@ -8,11 +8,15 @@ class Students::SessionsController < Devise::SessionsController
     
     if params[:student]['email'].present?
       self.resource = Student.where(:email => params[:student]['email']).first
-
-      set_flash_message(:notice, :signed_in) if is_flashing_format?
-      sign_in(resource_name, resource)
-      yield resource if block_given?
-      respond_with resource, :location => after_sign_in_path_for(resource)
+      if self.resource.present?
+        set_flash_message(:notice, :signed_in) if is_flashing_format?
+        sign_in(resource_name, resource)
+        yield resource if block_given?
+        respond_with resource, :location => after_sign_in_path_for(resource)
+      else
+        flash[:danger] = "Emailが違います"
+        redirect_to new_student_session_path
+      end
     else
       flash[:danger] = "Emailを入力してください"
       redirect_to new_student_session_path
