@@ -14,11 +14,11 @@ class Students::SessionsController < Devise::SessionsController
         yield resource if block_given?
         respond_with resource, :location => student_after_sign_in_path_for(resource)
       else
-        flash[:danger] = "Emailが違います"
+        flash[:danger] = "Eメールが違います"
         redirect_to new_student_session_path
       end
     else
-      flash[:danger] = "Emailを入力してください"
+      flash[:danger] = "Eメールを入力してください"
       redirect_to new_student_session_path
     end
   end
