@@ -1,6 +1,5 @@
 class Student < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  #  :recoverable, :database_authenticatable, :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :registerable, :rememberable, :validatable
 end
