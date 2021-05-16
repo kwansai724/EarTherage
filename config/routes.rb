@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :staffs
   devise_for :students, :controllers => {
     :sessions => 'students/sessions'
   }
