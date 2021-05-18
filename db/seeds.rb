@@ -22,7 +22,7 @@
   )
 end
 
-puts "therapist training course students Created"
+puts "Therapist training course students Created"
 
 10.times do |n|
   name  = Faker::Name.name
@@ -40,13 +40,25 @@ puts "therapist training course students Created"
   )
 end
 
-puts "self_care course students Created"
+puts "Self care course students Created"
+
+Staff.create!(
+  name: "管理者",
+  email: "sample0@email.com",
+  admin: true,
+  password: "password",
+  password_confirmation: "password",
+)
+
+puts "Admin Created"
 
 10.times do |n|
   email = "sample#{n+1}@email.com"
   password = "password"
   Staff.create!(
+    name: Faker::Name.name,
     email: email,
+    admin: false,
     password: password,
     password_confirmation: password,
   )

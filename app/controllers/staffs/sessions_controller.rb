@@ -12,7 +12,11 @@ class Staffs::SessionsController < Devise::SessionsController
         set_flash_message(:notice, :signed_in) if is_flashing_format?
         sign_in(resource_name, resource)
         yield resource if block_given?
-        respond_with resource, :location => staff_after_sign_in_path_for(resource)
+        if self.resource.admin == false
+          respond_with resource, :location => staff_after_sign_in_path_for(resource)
+        elsif self.resource.admin == true
+          respond_with resource, :location => admin_after_sign_in_path_for(resource)
+        end
       else
         flash[:danger] = "Eメールが違います"
         redirect_to new_staff_session_path
