@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
 
-  # studentにログイン後に遷移するpathを設定
-  def student_after_sign_in_path_for(resource)
+  # セラピスト養成コースの受講生がログイン後に遷移するpathを設定
+  def therapist_training_course_student_after_sign_in_path_for(resource)
     therapist_training_course_path(resource)
+  end
+
+  # セルフケアコースの受講生がログイン後に遷移するpathを設定
+  def self_care_course_student_after_sign_in_path_for(resource)
+   self_care_course_path(resource)
   end
 
   # staffにログイン後に遷移するpathを設定

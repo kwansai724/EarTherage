@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   }
   root 'static_pages#top'
 
-  get 'therapist_training_course' => "therapist_training_course#index", as: :therapist_training_course#セラピスト養成コース一覧
+  get 'therapist_training_course' => "therapist_training_course#index", as: :therapist_training_course#セラピスト養成コース画面
+  get 'self_care_course' => "self_care_course#index", as: :self_care_course#セルフケアコース画面
+
 
   get 'staffs_screen' => "staffs_screen#index", as: :staffs_screen#スタッフ画面
 
