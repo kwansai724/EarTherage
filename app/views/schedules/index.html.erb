@@ -1,21 +1,30 @@
 <h1>開講スケジュール一覧</h1>
 
+<!--スケジュール登録ボタン-->
+<div class="btn-schedule-new">
+  <%= link_to "新規追加", new_schedule_path(@schedule), remote: true, class: "btn btn-info" %>
+</div>
+
 <!--開講スケジュール一覧テーブル-->
 <div>
   <table class="table table-bordered table-striped table-condensed" id="index-schedule">
     <tr>
       <th>日付</th>
-      <th>場所</th>
+      <th>タイトル</th>
+      <th>種類</th>
+      <th>地域</th>
       <th>講師</th>
-      <th>コース種類</th>
+      <th></th>
     </tr>
 
     <% @schedules.each do |s| %>
       <tr>
-        <td><%= s.date %></td>
-        <td><%= s.place %></td>
+        <td><%= l(s.date, format: :long) %></td>
+        <td><%= s.title %></td>
+        <td><%= s.type %></td>
+        <td><%= s.area %></td>
         <td><%= s.teacher %></td>
-        <td><%= s.course_name %></td>
+        <td><%= s.image_name %></td>
         <td><%= link_to "詳細", '#', class: "btn btn-info" %></td>
       </tr>
     <% end %>

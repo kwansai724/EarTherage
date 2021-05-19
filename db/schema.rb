@@ -14,11 +14,15 @@ ActiveRecord::Schema.define(version: 2021_05_12_135243) do
 
   create_table "schedules", force: :cascade do |t|
     t.date "date"
+    t.string "area"
     t.string "place"
     t.string "teacher"
-    t.string "course_name"
-    t.string "details"
+    t.string "type"
+    t.string "title"
+    t.text "details"
     t.string "image_name"
+    t.string "public_status"
+    t.boolean "judgment_of_menbers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

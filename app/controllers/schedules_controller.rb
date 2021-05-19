@@ -1,7 +1,7 @@
 class SchedulesController < ApplicationController
   # スケジュール一覧
   def index
-    @schedules = Schedule.all
+    @schedules = Schedule.all.order(date: "DESC")
   end
 
   # スケジュール詳細
