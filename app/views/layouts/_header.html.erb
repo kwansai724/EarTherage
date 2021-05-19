@@ -1,0 +1,25 @@
+<header>
+  <nav class="navbar navbar-expand navbar-light">
+    <%= link_to "EarTherageトップページ", root_path, class: 'navbar-brand' %>
+    <div id="Navber">
+      <ul class="navbar-nav">
+        <% if student_signed_in? %>
+          <li class="nav-item active">
+            <%= link_to 'ログアウト', destroy_student_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+        <% elsif staff_signed_in? %>
+          <li class="nav-item active">
+            <%= link_to 'ログアウト', destroy_staff_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+        <% else %>
+          <li class="nav-item active">
+            <%= link_to "student新規登録", new_student_registration_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "staff新規登録", new_staff_registration_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</header>
