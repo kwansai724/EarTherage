@@ -1,0 +1,61 @@
+<h1>受講生一覧</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-1">
+      ID
+    </div>
+    <div class="col-2">
+      名前
+    </div>
+    <div class="col-3">
+      Eメール
+    </div>
+    <div class="col-2">
+      コース
+    </div>
+    <div class="col-2">
+      電話番号
+    </div>
+    <% if current_staff.present? %>
+      <div class="col-1">
+      </div>
+      <div class="col-1">
+      </div>
+    <% end %>
+  </div>
+  <% @students.each do |student| %>
+    <div class="row justify-content-md-center">
+      <div class="col-1">
+        <%= student.id %>
+      </div>
+      <% if current_staff.present? %>
+        <div class="col-2">
+          <%= link_to student.name, student_edit_admin_path(student_id: student.id) %>
+        </div>
+      <% else %>
+          <div class="col-2">
+            <%= student.name %>
+          </div>
+      <% end %>
+      <div class="col-3">
+        <%= student.email %>
+      </div>
+      <div class="col-2">
+        <%= student.course_type %>
+      </div>
+      <div class="col-2">
+        <%= student.phone_number %>
+      </div>
+      <% if current_staff.present? %>
+        <div class="col-1">
+          <%= link_to "削除", student, method: :delete,
+              data: { confirm: "削除してよろしいですか？" },
+              class: "btn btn-danger" %>
+        </div>
+        <div class="col-1">
+          <%= link_to "詳細", student_path(student) %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

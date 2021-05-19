@@ -1,0 +1,2 @@
+module StaffBlogsHelper
+end
