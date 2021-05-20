@@ -7,6 +7,21 @@
 </div>
 
 <div class="container col-10 col-md-10 col-lg-10">
-  <%= @student.name %> 様 <br>
-  <%= @student.course_type %>
+  <div class="students-info">
+    <h2>名前</h2><br>
+      <p class="info"><%= @student.name %> 様</p>
+    <h2>メールアドレス</h2><br>
+      <p class="info"><%= @student.email %></p>
+    <h2>電話番号</h2><br>
+      <p class="info"><%= @student.phone_number %></p>
+    <h2>受講コース</h2><br>
+      <p class="info"><%= @student.course_type %> 様 <br>
+  </div>
+  <div class="back-btn">
+    <% if @student.course_type == "therapist_training" %>
+      <%= link_to "戻る", therapist_training_course_path(current_student), class: "btn btn-outline-secondary" %>
+    <% elsif @student.course_type == "self_care" %>  
+      <%= link_to "戻る", self_care_course_path(current_student), class: "btn btn-outline-secondary" %>
+    <% end %>
+  </div>   
 </div>  
