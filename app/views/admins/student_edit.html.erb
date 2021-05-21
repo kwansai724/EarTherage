@@ -1,2 +1,9 @@
-<h1>Admins#student_edit</h1>
-<p>Find me in app/views/admins/student_edit.html.erb</p>
+<% provide(:class_text, 'student--edit') %>
+<% provide(:button_text, '編集') %>
+<h1>アカウント情報の更新</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render 'admins/form' %>
+  </div>
+</div>

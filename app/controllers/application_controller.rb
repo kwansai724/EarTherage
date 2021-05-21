@@ -29,4 +29,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  private
+
+    def admin_only
+      unless current_staff.present? && current_staff.admin == true
+        flash[:danger] = "管理者しか受講生管理は出来ません。"
+        redirect_to root_path
+      end
+    end
+
 end
