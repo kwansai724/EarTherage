@@ -2,7 +2,7 @@
 
 <!--スケジュール登録ボタン-->
 <div class="btn-schedule-new">
-  <%= link_to "新規追加", new_schedule_path(@schedule), remote: true, class: "btn btn-info" %>
+  <%= link_to "新規追加", new_schedule_path(@schedule), class: "btn btn-info" %>
 </div>
 
 <!--開講スケジュール一覧テーブル-->
@@ -25,7 +25,7 @@
         <td><%= s.type %></td>
         <td><%= s.area %></td>
         <td><%= s.teacher %></td>
-        <td><%= s.image_name %></td>
+        <td><%= s.image %></td>
         <td><%= link_to "詳細", '#', class: "btn btn-info" %></td>
       </tr>
     <% end %>

@@ -45,6 +45,9 @@ gem 'devise-bootstrap-views', '~> 1.0'
 #サンプル追加
 gem 'faker'
 
+# 画像投稿機能
+gem 'carrierwave'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

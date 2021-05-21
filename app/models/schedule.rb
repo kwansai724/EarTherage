@@ -1,3 +1,6 @@
 class Schedule < ApplicationRecord
-  validates :date, presence: true
+  mount_uploader :image, ImageUploader
+
+
+  # validates :date, presence: true
 end
