@@ -1,21 +1,17 @@
 <div class="student_sidebar">
-  <ul>
-    <li>スタッフブログ</li>
-    <li>イベント/セミナー</li>
-    <li>せらぽけ</li>
-  </ul>
+  <%= render 'sidebar' %>
 </div>
 
 <div class="container col-10 col-md-10 col-lg-10">
   <div class="students-info">
-    <h2>名前</h2><br>
-      <p class="info"><%= @student.name %> 様</p>
-    <h2>メールアドレス</h2><br>
-      <p class="info"><%= @student.email %></p>
-    <h2>電話番号</h2><br>
-      <p class="info"><%= @student.phone_number %></p>
-    <h2>受講コース</h2><br>
-      <p class="info"><%= @student.course_type %> 様 <br>
+    <h4>名前</h4><br>
+      <p><%= @student.name %> 様</p>
+    <h4>メールアドレス</h4><br>
+      <p><%= @student.email %></p>
+    <h4>電話番号</h4><br>
+      <p><%= @student.phone_number %></p>
+    <h4>受講コース</h4><br>
+      <p><%= course_status(@student) %><br>
   </div>
   <div class="back-btn">
     <% if @student.course_type == "therapist_training" %>
