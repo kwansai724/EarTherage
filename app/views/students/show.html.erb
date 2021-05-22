@@ -2,45 +2,49 @@
 <%= render 'layouts/flash_messages' %>
 <div class="container">
   <div class="row">
-    <div class="border col-3">
+    <div class="d-flex align-items-center border student--show col-3">
       ID:
     </div>
-    <div class="border-top border-right border-bottom col-6">
+    <div class="d-flex align-items-center border-right border-top border-bottom student--show col-6">
       <%= @student.id %>
     </div>
   </div>
   <div class="row">
-    <div class="border-left border-right border-bottom col-3">
+    <div class="d-flex align-items-center border student--show col-3">
       名前:
     </div>
-    <div class="border-right border-bottom col-6">
+    <div class="d-flex align-items-center border-right border-top border-bottom student--show col-6">
       <%= @student.name %>
     </div>
   </div>
   <div class="row">
-    <div class="border-left border-right border-bottom col-3">
+    <div class="d-flex align-items-center border student--show col-3">
       Eメール:
     </div>
-    <div class ="border-right border-bottom col-6">
+    <div class ="d-flex align-items-center border-right border-top border-bottom student--show col-6">
       <%= @student.email %>
     </div>
   </div>
   <div class="row">
-    <div class="border-left border-right border-bottom col-3">
+    <div class="d-flex align-items-center border student--show col-3">
       電話番号:
     </div>
-    <div class="border-right border-left border-bottom col-6">
+    <div class="d-flex align-items-center border-right border-top border-bottom student--show col-6">
       <%= @student.phone_number %>
     </div>
   </div>
   <div class="row">
-    <div class="border-left border-right border-bottom col-3">
+    <div class="d-flex align-items-center border student--show col-3">
       コース:
     </div>
-    <div class="border-right border-bottom col-6">
-      <%= @student.course_type %>
+    <div class="d-flex align-items-center border-right border-top border-bottom student--show col-6">
+      <% if @student.course_type == "therapist_training" %>
+        セラピスト養成コース
+      <% elsif @student.course_type == "self_care" %>
+        セルフケアコース
+      <% end %>
     </div>
   </div>
 </div>
 <br>
-<%= link_to "戻る", students_path %>
+<%= link_to "戻る", students_path , class: "btn btn-primary" %>

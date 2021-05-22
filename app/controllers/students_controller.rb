@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   before_action :admin_only, only: [:index, :show, :update, :destroy]
 
   def index
-    @students = Student.all
+    @students = Student.paginate(page: params[:page], per_page: 10)
   end
 
   def update
