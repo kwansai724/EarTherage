@@ -50,7 +50,7 @@ a.navbar-brand {
 }
 
 .eartherage_logo {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 
@@ -67,3 +67,20 @@ a.navbar-brand {
   box-sizing:         border-box;
 }
 
+//スマホ用
+@media screen and (max-width:480px) {
+
+// ナビゲーションバー
+a.navbar-brand {
+  font-family: serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+.navbar-nav img {
+  width: 35px;
+  height: 35px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+  
+}

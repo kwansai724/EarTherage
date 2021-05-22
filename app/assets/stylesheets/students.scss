@@ -23,6 +23,12 @@
   font-weight: 600;
 }
 
+
+.image-top img {
+  margin-top: 10px;
+  margin-left: -250px;
+}
+
 .students-info {
   text-align: center;
 }
@@ -39,4 +45,30 @@
 
 .back-btn {
   text-align: right;
+}
+
+//スマホ用
+@media screen and (max-width:480px) {
+
+  .student-top {
+    text-align: center;
+  }
+  .student-top h1 {
+    font-size: 20px;
+  }
+  .image-top img {
+    width: 100%;
+    margin-top: 0;
+    margin-left: 0;  
+   }   
+  .students-info h4 {
+    font-size: 15px;
+  }
+  .students-info p {
+    font-size: 20px;
+  }
+  .back-btn a {
+    font-size: 13px;
+  }
+  
 }
