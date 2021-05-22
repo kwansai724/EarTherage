@@ -29,4 +29,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_student
+    @student = current_student
+  end  
+
 end

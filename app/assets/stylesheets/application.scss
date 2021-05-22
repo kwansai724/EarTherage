@@ -10,7 +10,10 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require_tree .
+ *= require_self
  */
+ 
 
 @import "bootstrap";
 
@@ -30,6 +33,27 @@
   @extend .alert-danger;
 }
 
+// ナビゲーションバー
+a.navbar-brand {
+  font-family: serif;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.navbar-nav img {
+  width: 50px;
+  height: 50px;
+  //サイズ指定
+  border-radius: 100px;
+  object-fit: cover;
+  //タテヨコ比を変えないままトリミング
+}
+
+.eartherage_logo {
+  margin-right: 10px;
+}
+
+
 
  /* debug */
 
@@ -43,3 +67,20 @@
   box-sizing:         border-box;
 }
 
+//スマホ用
+@media screen and (max-width:480px) {
+
+// ナビゲーションバー
+a.navbar-brand {
+  font-family: serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+.navbar-nav img {
+  width: 35px;
+  height: 35px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+  
+}

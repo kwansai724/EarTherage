@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'therapist_training_course' => "therapist_training_course#index", as: :therapist_training_course#セラピスト養成コース画面
   get 'self_care_course' => "self_care_course#index", as: :self_care_course#セルフケアコース画面
 
+  resources :students, only: :show #受講生マイページ
+
   get 'admin_screen' => "admin_screen#index", as: :admin_screen#管理者画面
   get 'staffs_screen' => "staffs_screen#index", as: :staffs_screen#スタッフ画面
 

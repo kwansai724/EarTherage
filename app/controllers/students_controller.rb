@@ -1,7 +1,7 @@
-class TherapistTrainingCourseController < ApplicationController
+class StudentsController < ApplicationController
   before_action :authenticate_student!
   before_action :set_student
 
-  def index
+  def show
   end
 end
