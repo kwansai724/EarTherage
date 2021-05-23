@@ -23,6 +23,12 @@ class StudentsController < ApplicationController
     redirect_to students_url
   end
 
+  def import
+    #fileはtmpに自動で一時保存される
+    Student.import(params[:file])
+    redirect_to students_url
+  end
+
   private
 
     def set_student

@@ -1,5 +1,12 @@
 <h1>受講生一覧</h1>
 <%= render 'layouts/flash_messages' %>
+
+<%= form_with url: import_students_path, multipart: true, local: true do |f| %>
+  <%= f.file_field :file, class: "file_field" %>
+  <%= f.submit "CSVをインポート" ,class: "btn btn-primary csv-button", formtarget: "_blank" %>
+<% end %>
+
+
 <div class="container">
   <div class="row">
     <div class="d-flex align-items-center student--index col-1">
