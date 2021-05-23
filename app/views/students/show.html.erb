@@ -1,23 +1,46 @@
-<div class="student_sidebar">
-  <%= render 'sidebar' %>
-</div>
-
-<div class="container col-10 col-md-10 col-lg-10">
-  <div class="students-info">
-    <h4>名前</h4><br>
-      <p><%= @student.name %> 様</p>
-    <h4>メールアドレス</h4><br>
-      <p><%= @student.email %></p>
-    <h4>電話番号</h4><br>
-      <p><%= @student.phone_number %></p>
-    <h4>受講コース</h4><br>
-      <p><%= course_status(@student) %><br>
+<h1>受講生詳細</h1>
+<%= render 'layouts/flash_messages' %>
+<div class="container">
+  <div class="row">
+    <div class="border col-3">
+      ID:
+    </div>
+    <div class="border-top border-right border-bottom col-6">
+      <%= @student.id %>
+    </div>
   </div>
-  <div class="back-btn">
-    <% if @student.course_type == "therapist_training" %>
-      <%= link_to "戻る", therapist_training_course_path(current_student), class: "btn btn-outline-secondary" %>
-    <% elsif @student.course_type == "self_care" %>  
-      <%= link_to "戻る", self_care_course_path(current_student), class: "btn btn-outline-secondary" %>
-    <% end %>
-  </div>   
-</div>  
+  <div class="row">
+    <div class="border-left border-right border-bottom col-3">
+      名前:
+    </div>
+    <div class="border-right border-bottom col-6">
+      <%= @student.name %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="border-left border-right border-bottom col-3">
+      Eメール:
+    </div>
+    <div class ="border-right border-bottom col-6">
+      <%= @student.email %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="border-left border-right border-bottom col-3">
+      電話番号:
+    </div>
+    <div class="border-right border-left border-bottom col-6">
+      <%= @student.phone_number %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="border-left border-right border-bottom col-3">
+      コース:
+    </div>
+    <div class="border-right border-bottom col-6">
+      <%= @student.course_type %>
+    </div>
+  </div>
+</div>
+<br>
+<%= link_to "戻る", students_path %>

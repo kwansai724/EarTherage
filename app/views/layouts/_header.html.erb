@@ -1,7 +1,12 @@
 <header>
   <nav class="navbar navbar-expand navbar-light" style="background-color:#ffe1fc;">
     <ul class="navbar-nav mr-auto">
-      <%= link_to "EarTherage", root_path, class: 'navbar-brand' %>
+      <% if student_signed_in? %>
+        <!--「toppage_routes」はstudent_helper.rbに記載-->
+        <%= link_to "EarTherage", toppage_routes(current_student), class: 'navbar-brand' %>
+      <% else %>
+        <%= link_to "EarTherage", root_path, class: 'navbar-brand' %>
+      <% end %>  
     </ul>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -16,7 +21,9 @@
               <%= image_tag "eartherage_logo.jpg", class: "eartherage_logo" %>
             </a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li><%= link_to 'マイページ', student_path(current_student), class: 'nav-link' %></li>
+              <!--「mypage_routes」はstudent_helper.rbに記載-->
+              <li><%= link_to 'マイページ', mypage_routes(current_student), class: 'nav-link' %></li>
+              <li><%= link_to "スタッフブログ", "#", class: 'nav-link' %></li>
               <li><%= link_to "イベント/セミナー", "#", class: 'nav-link' %></li>
               <li><%= link_to "せらぽけ", "#", class: 'nav-link' %></li>
               <div class="dropdown-divider"></div>

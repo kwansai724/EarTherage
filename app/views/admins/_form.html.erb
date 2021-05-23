@@ -1,0 +1,18 @@
+<%= form_with(model: @student, local: true) do |f| %>
+  <!--%= render 'shared/error_messages_student', object: @student %-->
+  <%= render 'devise/shared/error_messages', resource: @student %>
+
+  <%= f.label :name, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_field :name, class: "form-control" %>
+
+  <%= f.label :email, class: "label-#{yield(:class_text)}" %>
+  <%= f.email_field :email, class: "form-control" %>
+
+  <%= f.label :course_type, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_field :course_type, class: "form-control" %>
+
+  <%= f.label :phone_number, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_field :phone_number, class: "form-control" %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary btn-block btn-#{yield(:class_text)}" %>
+<% end %>
