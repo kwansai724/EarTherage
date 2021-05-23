@@ -1,7 +1,8 @@
 module StudentsHelper
 
-  def course_status(student)
-    return "セラピスト養成コース" if student.course_type == "therapist_training"
-    return "セルフケアコース" if student.course_type == "self_care"
+  #navbar右端のアイコンからマイページ選択時のルーティング
+  def mypage_rotes(student)
+    return therapist_training_course_show_path(current_student) if student.course_type == "therapist_training"
+    return self_care_course_show_path(current_student) if student.course_type == "self_care"
   end
 end
