@@ -6,41 +6,41 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#10.times do |n|
-#  name  = Faker::Name.name
-#  email = "sample-#{n+1}@email.com"
-#  course_type = "therapist_training"
-#  phone_number = Faker::Number.number(digits: 11)
-#  password = "password"
-#  Student.create!(
-#    name: name,
-#    email: email,
-#    course_type: course_type,
-#    phone_number: phone_number,
-#    password: password,
-#    password_confirmation: password,
-#  )
-#end
+10.times do |n|
+  name  = Faker::Name.name
+  email = "sample-#{n+1}@email.com"
+  course_type = "therapist_training"
+  phone_number = Faker::Number.number(digits: 11)
+  password = "password"
+  Student.create!(
+    name: name,
+    email: email,
+    course_type: course_type,
+    phone_number: phone_number,
+    password: password,
+    password_confirmation: password,
+  )
+end
 
-#puts "Therapist training course students Created"
+puts "Therapist training course students Created"
 
-#10.times do |n|
-#  name  = Faker::Name.name
-#  email = "sample-#{n+11}@email.com"
-#  course_type = "self_care"
-#  phone_number = Faker::Number.number(digits: 11)
-#  password = "password"
-#  Student.create!(
-#    name: name,
-#    email: email,
-#    course_type: course_type,
-#    phone_number: phone_number,
-#    password: password,
-#    password_confirmation: password,
-#  )
-#end
-#
-#puts "Self care course students Created"
+10.times do |n|
+  name  = Faker::Name.name
+  email = "sample-#{n+11}@email.com"
+  course_type = "self_care"
+  phone_number = Faker::Number.number(digits: 11)
+  password = "password"
+  Student.create!(
+    name: name,
+    email: email,
+    course_type: course_type,
+    phone_number: phone_number,
+    password: password,
+    password_confirmation: password,
+  )
+end
+
+puts "Self care course students Created"
 
 Staff.create!(
   name: "管理者",
