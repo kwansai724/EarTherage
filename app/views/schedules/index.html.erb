@@ -9,7 +9,8 @@
 <div>
   <table class="table table-bordered table-striped table-condensed" id="index-schedule">
     <tr>
-      <th>日付</th>
+      <th>作成日</th>
+      <th>開催日</th>
       <th>タイトル</th>
       <th>種類</th>
       <th>地域</th>
@@ -20,13 +21,14 @@
 
     <% @schedules.each do |s| %>
       <tr>
-        <td><%= l(s.date, format: :long) %></td>
+        <td><%= l(s.created_at, format: :long) %></td>
+        <td></td>
         <td><%= s.title %></td>
         <td><%= s.type %></td>
         <td><%= s.area %></td>
         <td><%= s.teacher %></td>
-        <td><%= s.image %></td>
-        <td><%= link_to "詳細", '#', class: "btn btn-info" %></td>
+        <td><%= image_tag s.image.thumb.to_s if s.image? %></td>
+        <td><%= link_to "詳細", schedule_path(s), class: "btn btn-info" %></td>
       </tr>
     <% end %>
   </table>

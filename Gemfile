@@ -48,6 +48,9 @@ gem 'faker'
 # 画像投稿機能
 gem 'carrierwave'
 
+# 画像のリサイズ
+gem 'mini_magick'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

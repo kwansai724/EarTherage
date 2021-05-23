@@ -4,7 +4,7 @@ class SchedulesController < ApplicationController
 
   # スケジュール一覧
   def index
-    @schedules = Schedule.all.order(date: "DESC")
+    @schedules = Schedule.all.order(created_at: "DESC")
   end
 
   # スケジュール詳細
@@ -20,7 +20,7 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
     if @schedule.save
-      flash[:success] = 'スケジュールを作成しました。'
+      flash.now[:success] = 'スケジュールを作成しました。'
       redirect_to @schedule
     else
       render :new
