@@ -3,28 +3,31 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-
-.image-top img {
-  margin-top: 10px;
-  margin-left: -250px;
-}
-
-.students-info {
+// 受講生トップページ
+.student-top{
   text-align: center;
 }
+.image-top img {
+  margin-top: 10px;
+  margin-left: 60px;
+}
 
+// 受講生マイページ
+.students-info {
+  margin-top: 10px;
+  text-align: center;
+}
 .students-info h4 {
   color: rgb(100, 100, 100);
 }
-
 .students-info p {
   font-size: 25px;
   margin-top: -20px;
   margin-bottom: 40px;
 }
-
 .back-btn {
-  text-align: right;
+  text-align: center;
+  margin-left: 300px;
 }
 
 //スマホ用
@@ -46,6 +49,10 @@
   }
   .students-info p {
     font-size: 20px;
+  }
+  .back-btn {
+    text-align: right;
+    margin-left: 0;
   }
   .back-btn a {
     font-size: 13px;
