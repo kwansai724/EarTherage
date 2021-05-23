@@ -1,14 +1,75 @@
-// Place all the styles related to the Students controller here.
+// Place all the styles related to the therapist_training_course controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// 受講生一覧
 .student--index {
   margin-top: 10px;
   padding-top: 10px;
  }
 
+// 受講生詳細表示
 .student--show {
   margin-top: 10px;
   padding: 10px;
  }
 
+
+// 受講生トップページ
+.student-top{
+  text-align: center;
+}
+.image-top {
+  margin-top: 15px;
+  text-align: center;
+}
+
+// 受講生マイページ
+.students-info {
+  margin-top: 10px;
+  text-align: center;
+}
+.students-info h4 {
+  color: rgb(100, 100, 100);
+}
+.students-info p {
+  font-size: 25px;
+  margin-top: -20px;
+  margin-bottom: 40px;
+}
+.back-btn {
+  text-align: center;
+  margin-left: 300px;
+}
+
+//スマホ用
+@media screen and (max-width:480px) {
+
+  .student-top {
+    text-align: center;
+  }
+  .student-top h1 {
+    font-size: 20px;
+  }
+  .image-top {
+    margin-top: 0;
+  }  
+  .image-top img {
+    width: 100%;
+   }   
+  .students-info h4 {
+    font-size: 15px;
+  }
+  .students-info p {
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+  .back-btn {
+    text-align: right;
+    margin-left: 0;
+  }
+  .back-btn a {
+    font-size: 13px;
+  }
+
+}
