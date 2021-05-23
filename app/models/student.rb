@@ -34,8 +34,18 @@ class Student < ApplicationRecord
 
       # hhから取ってくるカラムだけを選択してstudentに設定
       student.attributes = hh.slice(*updatable_attributes)
+
+      # 型番の値によってcouse_typeを設定する
+      if hh["型番"] == "M-H"
+        student.attributes = { course_type: "therapist_training" }
+      elsif hh["型番"] == "S-C"
+        student.attributes = { course_type: "self_care" }
+      else
+        student.attributes = { course_type: "therapist_training" }
+      end
+
       # 足らないカラムの値を追加
-      student.attributes = { course_type: "therapist_training", password: "password", password_confirmation: "password" }
+      student.attributes = { password: "password", password_confirmation: "password" }
       #保存する
       student.save
       i += 1
