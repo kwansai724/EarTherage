@@ -7,9 +7,9 @@
 .student-top{
   text-align: center;
 }
-.image-top img {
-  margin-top: 10px;
-  margin-left: 60px;
+.image-top {
+  margin-top: 15px;
+  text-align: center;
 }
 
 // 受講生マイページ
@@ -39,16 +39,18 @@
   .student-top h1 {
     font-size: 20px;
   }
+  .image-top {
+    margin-top: 0;
+  }  
   .image-top img {
     width: 100%;
-    margin-top: 0;
-    margin-left: 0;  
    }   
   .students-info h4 {
     font-size: 15px;
   }
   .students-info p {
     font-size: 20px;
+    margin-bottom: 25px;
   }
   .back-btn {
     text-align: right;
