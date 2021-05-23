@@ -3,25 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.student_sidebar {
-  background-color: #ff9efa;
-  position: fixed;
-  top: 0;
-  left: 0;
-  min-height: 100%;
-  z-index: -1;
-}
-
-.student_sidebar ul {
-  line-height: 200%;
-  list-style: none;
-  padding: 100px 20px 0 20px;
-}
-
-.student_sidebar a {
-  color: black;
-  font-weight: 600;
-}
 
 .image-top img {
   margin-top: 10px;

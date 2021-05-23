@@ -2,8 +2,25 @@ ja:
   activerecord:
     models:
       schedule: スケジュール
+      student: 受講生
+      staff: スタッフ
     attributes:
         schedule:
-
           created_at: 作成日
           updated_at: 更新日
+        student:
+          id: ID
+          name: 名前
+          email: Eメール
+          course_type: コース
+          phone_number: 電話番号
+          created_at: 作成日
+          updated_at: 更新日
+        staff:
+          id: ID
+          name: 名前
+          email: Eメール
+          admin: 管理者
+          created_at: 作成日
+          updated_at: 更新日
+
