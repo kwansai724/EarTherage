@@ -1,0 +1,15 @@
+<div class="container col-10 col-md-10 col-lg-10">
+  <div class="students-info">
+    <h4>名前</h4><br>
+      <p><%= @student.name %> 様</p>
+    <h4>メールアドレス</h4><br>
+      <p><%= @student.email %></p>
+    <h4>電話番号</h4><br>
+      <p><%= @student.phone_number %></p>
+    <h4>受講コース</h4><br>
+      <p><%= course_name(@student) %><br>
+    <div class="back-btn">
+      <%= link_to "戻る", toppage_routes(current_student), class: "btn btn-outline-secondary" %>
+    </div>   
+  </div>
+</div>  

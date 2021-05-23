@@ -29,6 +29,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_student
+    @student = current_student
+  end  
   private
 
     def admin_only
