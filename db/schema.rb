@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_05_18_125633) do
     t.string "title"
     t.text "details"
     t.string "image"
-    t.string "public_status"
+    t.integer "public_status"
     t.boolean "judgment_of_menbers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

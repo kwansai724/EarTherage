@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :staff_blogs#スタッフブログ
 
-  # resources :start_schedules#開講スケジュール
+  resources :start_schedules#開講スケジュール
 
   resources :schedules
 

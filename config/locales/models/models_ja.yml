@@ -6,6 +6,15 @@ ja:
       staff: スタッフ
     attributes:
         schedule:
+          date: 開催日
+          area: 地域
+          place: 場所
+          teacher: 講師
+          type: 種類
+          title: タイトル
+          details: 詳細
+          public_status: 公開状況
+          judgment_of_members: 会員or非会員
           created_at: 作成日
           updated_at: 更新日
         student:

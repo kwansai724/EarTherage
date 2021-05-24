@@ -24,3 +24,19 @@ h1 {
     text-align: center;
   }
 }
+
+/* スケジュール新規作成ボタン */
+.btn-schedule-new{
+  text-align: left;
+}
+
+/* スケジュール作成フォーム */
+.label-schedule-new{
+  margin-top: 10px;
+}
+
+/* ラジオボタン（丸）の非表示 */
+.radio_view{
+  appearance: none;
+  position: absolute;
+}

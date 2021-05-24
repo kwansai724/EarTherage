@@ -69,7 +69,7 @@ puts "Staff Created"
               title: title,
               area: area,
               teacher: teacher,
-              image: File.open("public/uploads/schedule/image/2/heart.jpg")
+              image: File.open("public/uploads/schedule/image/1/something.jpg")
               )
 end
 puts 'スケジュール作成'
