@@ -1,5 +1,7 @@
 <%= render 'layouts/flash_messages' %>
-<h1><%= t('.sign_in') %></h1>
+<div class="student--title">
+  <h1><%= t('.sign_in') %></h1>
+</div>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-group">
@@ -15,23 +17,23 @@
   <% if devise_mapping.rememberable? %>
     <div class="form-group form-check">
       <%= f.check_box :remember_me, class: 'form-check-input' %>
-      <%= f.label :remember_me, class: 'form-check-label' do %>
+      <%= f.label :remember_me, class: 'form-check-label student--new' do %>
         <%= resource.class.human_attribute_name('remember_me') %>
       <% end %>
     </div>
   <% end %>
 
   <div class="form-group">
-    <%= f.submit  t('.sign_in'), class: 'btn btn-primary btn-block' %>
+    <%= f.submit  t('.sign_in'), class: 'btn btn-primary btn-block btn--resize' %>
   </div>
 <% end %>
 
 <% if resource_name == :student %>
-  <%= link_to '管理者・スタッフはこちら', new_staff_session_path %>
+  <%= link_to '管理者・スタッフはこちら', new_staff_session_path , class: "btn--resize"%>
 <% end %>
 
 <% if resource_name == :staff %>
-  <%= link_to '受講生はこちら', new_student_session_path %>
+  <%= link_to '受講生はこちら', new_student_session_path, class: "btn--resize"%>
 <% end %>
 
 <!--%= render 'devise/shared/links' %-->

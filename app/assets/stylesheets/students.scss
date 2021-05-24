@@ -45,6 +45,26 @@
 //スマホ用
 @media screen and (max-width:480px) {
 
+  .student--title h1 {
+    font-size : 20px;
+  }
+
+  .btn--resize {
+    font-size: 10px;
+  }
+
+  .student--index {
+    font-size: 10px;
+  }
+
+  .student--show {
+    font-size: 10px;
+  }
+
+  .student--new {
+    font-size: 10px;
+  }
+
   .student-top {
     text-align: center;
   }

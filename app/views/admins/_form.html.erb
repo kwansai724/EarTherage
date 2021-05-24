@@ -2,17 +2,17 @@
   <!--%= render 'shared/error_messages_student', object: @student %-->
   <%= render 'devise/shared/error_messages', resource: @student %>
 
-  <%= f.label :name, class: "label-#{yield(:class_text)}" %>
-  <%= f.text_field :name, class: "form-control" %>
+  <%= f.label :name, class: "student--edit" %>
+  <%= f.text_field :name, class: "form-control student--edit" %>
 
-  <%= f.label :email, class: "label-#{yield(:class_text)}" %>
-  <%= f.email_field :email, class: "form-control" %>
+  <%= f.label :email, class: "student--edit" %>
+  <%= f.email_field :email, class: "form-control student--edit" %>
 
-  <%= f.label :course_type, class: "label-#{yield(:class_text)}" %>
-  <%= f.select :course_type, [['セラピスト養成コース', 'therapist_training'], ['セルフケアコース', 'self_care']], { include_blank: '選択してください'}, { class: 'form-control' , required: true } %>
+  <%= f.label :course_type, class: "student--edit" %>
+  <%= f.select :course_type, [['セラピスト養成コース', 'therapist_training'], ['セルフケアコース', 'self_care']], { include_blank: '選択してください'}, { class: 'form-control student--edit' , required: true } %>
 
-  <%= f.label :phone_number, class: "label-#{yield(:class_text)}" %>
-  <%= f.text_field :phone_number, class: "form-control" %>
+  <%= f.label :phone_number, class: "student--edit" %>
+  <%= f.text_field :phone_number, class: "form-control student--edit" %>
 
-  <%= f.submit yield(:button_text), class: "btn btn-primary btn-block btn-#{yield(:class_text)}" %>
+  <%= f.submit yield(:button_text), class: "btn btn-primary btn-block btn-student--edit btn--resize" %>
 <% end %>
