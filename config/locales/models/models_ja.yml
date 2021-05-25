@@ -10,7 +10,7 @@ ja:
           area: 地域
           place: 場所
           teacher: 講師
-          type: 種類
+          event_type: 種類
           title: タイトル
           details: 詳細
           public_status: 公開状況
