@@ -33,6 +33,12 @@ class SchedulesController < ApplicationController
 
   # スケジュール更新
   def update
+    if @schedule.update_attributes!(schedule_params)
+      flash.now[:success] = "スケジュールを更新しました。"
+      redirect_to @schedule
+    else
+      render :edit
+    end
   end
 
   # スケジュール削除
