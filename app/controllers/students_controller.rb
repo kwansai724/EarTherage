@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   before_action :admin_only, only: [:index, :show, :update, :destroy]
 
   def index
-    @students = Student.all
+    @students = Student.paginate(page: params[:page], per_page: 10)
   end
 
   def update
@@ -20,6 +20,12 @@ class StudentsController < ApplicationController
   def destroy
     @student.destroy
     flash[:success] = "「#{@student.name}」のデータを削除しました。"
+    redirect_to students_url
+  end
+
+  def import
+    #fileはtmpに自動で一時保存される
+    Student.import(params[:file])
     redirect_to students_url
   end
 

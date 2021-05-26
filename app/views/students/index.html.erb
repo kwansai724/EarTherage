@@ -1,62 +1,72 @@
-<h1>受講生一覧</h1>
+<div class="student--title">
+  <h1>受講生一覧</h1>
+</div>
 <%= render 'layouts/flash_messages' %>
+
+<%= form_with url: import_students_path, multipart: true, local: true do |f| %>
+  <%= f.file_field :file, class: "file_field btn--resize" %>
+  <%= f.submit "CSVをインポート" ,class: "btn btn-primary csv-button btn--resize", formtarget: "_blank" %>
+<% end %>
+
+
 <div class="container">
-  <div class="row">
-    <div class="col-1">
-      ID
-    </div>
-    <div class="col-2">
-      名前
-    </div>
-    <div class="col-3">
-      Eメール
-    </div>
-    <div class="col-2">
-      コース
-    </div>
-    <div class="col-2">
-      電話番号
-    </div>
-    <% if current_staff.present? %>
-      <div class="col-1">
-      </div>
-      <div class="col-1">
-      </div>
-    <% end %>
-  </div>
   <% @students.each do |student| %>
-    <div class="row justify-content-md-center">
-      <div class="col-1">
+    <div class="row">
+      <div class="d-flex align-items-center border-top border-dark  student--index col-3">
+        ID:
+      </div>
+      <div class="d-flex align-items-center border-top border-dark student--index col-5">
         <%= student.id %>
       </div>
-      <% if current_staff.present? %>
-        <div class="col-2">
-          <%= link_to student.name, student_edit_admin_path(student_id: student.id) %>
-        </div>
-      <% else %>
-          <div class="col-2">
-            <%= student.name %>
-          </div>
-      <% end %>
-      <div class="col-3">
-        <%= student.email %>
-      </div>
-      <div class="col-2">
-        <%= student.course_type %>
-      </div>
-      <div class="col-2">
-        <%= student.phone_number %>
-      </div>
-      <% if current_staff.present? %>
-        <div class="col-1">
+      <% if current_staff.present? && current_staff.admin == true %>
+        <div class="border-top d-flex align-items-center border-dark student--index col-2">
           <%= link_to "削除", student, method: :delete,
               data: { confirm: "削除してよろしいですか？" },
-              class: "btn btn-danger" %>
+              class: "btn btn-danger btn--resize" %>
         </div>
-        <div class="col-1">
+        <div class="border-top d-flex align-items-center border-dark student--index col-2">
           <%= link_to "詳細", student_path(student) %>
         </div>
       <% end %>
     </div>
+    <div class="row">
+      <div class="d-flex align-items-center border-top student--index col-3">
+        名前:
+      </div>
+      <div class="border-top d-flex align-items-center student--index col-9">
+        <%= link_to student.name, student_edit_admin_path(student_id: student.id) %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="d-flex align-items-center border-top student--index col-3">
+        Eメール:
+      </div>
+      <div class="border-top d-flex align-items-center student--index col-9">
+        <%= student.email %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="d-flex align-items-center border-top student--index col-3">
+        コース:
+      </div>
+      <div class="border-top d-flex align-items-center student--index col-9">
+        <% if student.course_type == "therapist_training" %>
+          セラピスト養成コース
+        <% elsif student.course_type == "self_care" %>
+          セルフケアコース
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="d-flex align-items-center border-top student--index col-3">
+        電話番号:
+      </div>
+      <div class="border-top d-flex align-items-center student--index col-9">
+        <%= student.phone_number %>
+      </div>
+    </div>
   <% end %>
 </div>
+<br>
+<%= will_paginate(@pusers, :previous_label => ' &lt 前へ', :next_label => '次へ &gt', class: "pagination justify-content-center mt-6 mb-7 btn--resize", renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+<%= link_to "戻る", admin_screen_path, class: "btn btn-primary btn--resize" %>

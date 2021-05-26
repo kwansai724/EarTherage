@@ -2,6 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// 受講生一覧
+.student--index {
+  margin-top: 10px;
+  padding-top: 10px;
+ }
+
+// 受講生詳細表示
+.student--show {
+  margin-top: 10px;
+  padding: 10px;
+ }
+
 
 // 受講生トップページ
 .student-top{
@@ -33,6 +45,26 @@
 //スマホ用
 @media screen and (max-width:480px) {
 
+  .student--title h1 {
+    font-size : 20px;
+  }
+
+  .btn--resize {
+    font-size: 10px;
+  }
+
+  .student--index {
+    font-size: 10px;
+  }
+
+  .student--show {
+    font-size: 10px;
+  }
+
+  .student--new {
+    font-size: 10px;
+  }
+
   .student-top {
     text-align: center;
   }
@@ -59,5 +91,5 @@
   .back-btn a {
     font-size: 13px;
   }
-  
+
 }
