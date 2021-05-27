@@ -1,3 +1,25 @@
 // Place all the styles related to the admins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.btn-student--edit {
+  margin-top: 20px;
+}
+
+//スマホ用↲
+ @media screen and (max-width:480px) {
+
+ .student--title h1 {
+    font-size : 20px;
+  }
+
+  .btn--resize {
+    font-size: 10px;
+  }
+
+   .student--edit {
+    font-size: 10px;
+  }
+
+}
+

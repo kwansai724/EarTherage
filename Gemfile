@@ -50,6 +50,12 @@ gem 'carrierwave'
 
 # 画像のリサイズ
 gem 'mini_magick'
+#will_paginate
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+
+#csvファイルimport
+gem 'roo'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   get 'diploma' => 'diploma#index', as: :diploma#ディプロマ
 
-  get '/admin/:student_id/student_edit' => 'admins#student_edit', as: :student_edit_admin
+  get '/admin/:student_id/student_edit' => 'admins#student_edit', as: :student_edit_admin#student編集
+
+  post '/students/import' => 'students#import', as: :import_students#csvファイル取り込み
 
 end
