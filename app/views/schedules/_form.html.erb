@@ -1,0 +1,68 @@
+<%= form_with model: @schedule, local: true  do |f| %> 
+  <%= f.label :date, class: "label-#{yield(:class_text)}" %>
+  <%= f.date_field :date, class: "form-control" %>
+
+  <%= f.label :event_type, class: "label-#{yield(:class_text)}" %>
+  <%= f.select :event_type, ['イベント', '講座'], {include_blank: false}, class: "form-control" %>
+
+  <%= f.label :title, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_field :title, class: "form-control" %>
+
+  <%= f.label :area, class: "label-#{yield(:class_text)}" %>
+  <%= f.select :area, ['関東', '関西', '中国・四国', '九州', 'オンライン'], {include_blank: false}, class: "form-control" %>
+
+  <%= f.label :teacher, class: "label-#{yield(:class_text)}" %>
+  <%= f.select :teacher, ['田中', '山本', '井上'], {include_blank: false}, class: "form-control" %>
+
+  <%= f.label :details, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_area :details, class: "form-control" %>
+
+  <%= f.label "画像をアップロード", class: "label-#{yield(:class_text)}" %><br>
+    <%= image_tag @schedule.image.url(:thumb), id: :img_prev if @schedule.image? %>
+  <%= f.file_field :image, id: "schedule_image", class: "form-control" %>
+
+  <%= f.label :public_status, class: "label-#{yield(:class_text)}" %><br>
+  <div class="col-sm-10 btn-group" data-toggle="buttons">
+    <label class="btn btn-outline-secondary active" style="width:50%">
+      <%= f.radio_button :public_status, '公開', {checked: true, class: "radio_view"} %> 公開
+    </label>
+    <label class="btn btn-outline-secondary" style="width:50%">
+      <%= f.radio_button :public_status, '非公開', {class: "radio_view"} %> 非公開
+    </label>
+    <label class="btn btn-outline-secondary" style="width:50%">
+      <%= f.radio_button :public_status, '中止', {class: "radio_view"} %> 中止
+    </label>
+  </div><br>
+
+  <%= f.check_box :judgement_of_members %>
+  <%= f.label :会員限定, class: "label-#{yield(:class_text)}" %><br>
+
+  <div class="row center-block text-center">
+    <div class="col-1">
+    </div>
+    <div class="col-5">
+      <%= link_to "戻る", schedules_path, class: "btn btn-outline-secondary btn-block" %>
+    </div>
+    <div class="col-5">
+      <%= f.submit yield(:button_text), class: "btn btn-outline-primary btn-block btn-#{yield(:class_text)}" %>
+    </div>
+  </div>
+<% end %>
+
+<!-- 編集画面にサムネイルの画像を表示させる-->
+<script type="text/javascript">
+$(function() {
+ function readURL(input) {
+   if (input.files && input.files[0]) {
+     var reader = new FileReader();
+     reader.onload = function (e) {
+       $('#img_prev').attr('src', e.target.result);
+     }
+     reader.readAsDataURL(input.files[0]);
+   }
+ }
+ $("#schedule_image").change(function(){
+   readURL(this);
+ });
+});
+</script>
