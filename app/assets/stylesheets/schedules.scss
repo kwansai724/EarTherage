@@ -46,13 +46,13 @@ h1 {
   margin-right: 2%;
 }
 
-.contents-box .image{
-  display: block;
-	// margin-bottom: 3rem;
-	width: 100%;
-	height: auto;
-  // align-items: flex-start;
-}
+// .contents-box .thumb-image{
+//   display: block;
+// 	// margin-bottom: 3rem;
+// 	width: 100%;
+// 	height: auto;
+//   // align-items: flex-start;
+// }
 
 @media screen and (max-width: 768px){
 	.contents-wrap {
@@ -64,11 +64,11 @@ h1 {
 	}
 }
 
+/* スケジュール詳細画面 */
+.schedule-show{
+  text-align: center;
+}
 
-
-// .index-image image{
-//   max-width: 100%;
-// }
 
 /* スケジュール新規作成ボタン */
 .btn-schedule-new{

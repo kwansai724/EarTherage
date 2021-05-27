@@ -8,16 +8,24 @@
   <div class="contents-wrap">
     <% @schedules.each do |s| %>
       <div class="contents-box">
-        <div><%= l(s.created_at, format: :long) %></div>
-        <div class="image"><%= link_to (image_tag s.image.thumb.to_s if s.image?), s %></div>
-        <label><%= link_to (s.title), s %></label>
-        <label>開催エリア：<%= s.area %></label>
+        <p>
+          <%= l(s.created_at, format: :long) %>
+          <% if s.event_type == "イベント" %>
+            <button type="button" class="btn btn-outline-success btn-sm">イベント</button>
+          <% else %>
+            <button type="button" class="btn btn-outline-primary btn-sm">講座</button>
+          <% end %>
+         </p>
+        <p><%= link_to (image_tag s.image.thumb.to_s if s.image?), s, class: "thumb-image" %></p>
+        <label><%= link_to (s.title), s %></label><br>
+        <label>開催エリア：<%= s.area %></label><br>
         <% if s.date != nil %>
-          <label>開催日：<%= l(s.date, format: :default) %></label>
+          <label>開催日：<%= l(s.date, format: :default) %></label><br>
         <% else %>
-          <div></div>
+          <p></p>
         <% end %>
         <label>セラピスト名：<%= s.teacher %></label><br>
+
         <%= link_to "編集", edit_schedule_path(s), class: "btn btn-primary" %>
         <%= link_to "削除", schedule_path(s), method: :delete,
               data: {confirm: "削除してよろしいですか？" },
