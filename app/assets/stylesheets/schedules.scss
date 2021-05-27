@@ -1,0 +1,88 @@
+// Place all the styles related to the Schedules controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap";
+
+/* スケジュール一覧 */
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* スケジュール一覧 */
+#index-schedule {
+  th {
+    vertical-align: middle;
+    text-align: center;
+  }
+  td {
+    vertical-align: middle;
+    text-align: center;
+  }
+}
+
+.contents-wrap{
+  // display: -webkit-box;
+	// display: -ms-flexbox;
+	display: flex; /* 横並びにする */
+  flex-wrap: wrap; /* 折り返し表示 */
+  // justify-content: space-between;
+}
+
+.contents-box{
+  margin-bottom: 3rem;
+	padding: 3rem;
+  flex-basis: 32%;
+	// width: 32%;
+	background-color: #f0f0f0;
+}
+
+.contents-box:not(:nth-child(3n)){
+  margin-right: 2%;
+}
+
+// .contents-box .thumb-image{
+//   display: block;
+// 	// margin-bottom: 3rem;
+// 	width: 100%;
+// 	height: auto;
+//   // align-items: flex-start;
+// }
+
+@media screen and (max-width: 768px){
+	.contents-wrap {
+		flex-direction: column;
+	}
+
+	.contents-box {
+		width: 100%;
+	}
+}
+
+/* スケジュール詳細画面 */
+.schedule-show{
+  text-align: center;
+}
+
+
+/* スケジュール新規作成ボタン */
+.btn-schedule-new{
+  text-align: left;
+}
+
+/* スケジュール作成フォーム */
+.label-schedule-new{
+  margin-top: 10px;
+}
+
+/* ラジオボタン（丸）の非表示 */
+.radio_view{
+  appearance: none;
+  position: absolute;
+}
+
