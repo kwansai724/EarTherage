@@ -17,8 +17,8 @@
   <%= f.label :details, class: "label-#{yield(:class_text)}" %>
   <%= f.text_area :details, class: "form-control" %>
 
-  <%= f.label "画像をアップロード", class: "label-#{yield(:class_text)}" %>
-    <%= image_tag @schedule.image.url, id: :img_prev if @schedule.image? %>
+  <%= f.label "画像をアップロード", class: "label-#{yield(:class_text)}" %><br>
+    <%= image_tag @schedule.image.url(:thumb), id: :img_prev if @schedule.image? %>
   <%= f.file_field :image, id: "schedule_image", class: "form-control" %>
 
   <%= f.label :public_status, class: "label-#{yield(:class_text)}" %><br>
@@ -49,6 +49,7 @@
   </div>
 <% end %>
 
+<!-- 編集画面にサムネイルの画像を表示させる-->
 <script type="text/javascript">
 $(function() {
  function readURL(input) {

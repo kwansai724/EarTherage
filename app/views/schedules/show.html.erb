@@ -1,10 +1,5 @@
 <%= image_tag @schedule.image.url if @schedule.image? %>
 
-<%= link_to "編集", edit_schedule_path(@schedule), class: "btn btn-primary" %></td>
-<%= link_to "削除", schedule_path(@schedule), method: :delete,
-      data: {confirm: "削除してよろしいですか？" },
-      class: "btn btn-danger" %>
-
 <div>
   <%= link_to "戻る", schedules_path, class: "btn btn-outline-secondary" %>
 </div>

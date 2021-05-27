@@ -14,6 +14,7 @@ h1 {
   text-align: center;
 }
 
+/* スケジュール一覧 */
 #index-schedule {
   th {
     vertical-align: middle;
@@ -24,6 +25,50 @@ h1 {
     text-align: center;
   }
 }
+
+.contents-wrap{
+  // display: -webkit-box;
+	// display: -ms-flexbox;
+	display: flex; /* 横並びにする */
+  flex-wrap: wrap; /* 折り返し表示 */
+  // justify-content: space-between;
+}
+
+.contents-box{
+  margin-bottom: 3rem;
+	padding: 3rem;
+  flex-basis: 32%;
+	// width: 32%;
+	background-color: #f0f0f0;
+}
+
+.contents-box:not(:nth-child(3n)){
+  margin-right: 2%;
+}
+
+.contents-box .image{
+  display: block;
+	// margin-bottom: 3rem;
+	width: 100%;
+	height: auto;
+  // align-items: flex-start;
+}
+
+@media screen and (max-width: 768px){
+	.contents-wrap {
+		flex-direction: column;
+	}
+
+	.contents-box {
+		width: 100%;
+	}
+}
+
+
+
+// .index-image image{
+//   max-width: 100%;
+// }
 
 /* スケジュール新規作成ボタン */
 .btn-schedule-new{
@@ -40,3 +85,4 @@ h1 {
   appearance: none;
   position: absolute;
 }
+

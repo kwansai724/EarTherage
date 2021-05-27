@@ -5,31 +5,26 @@
   <div class="btn-schedule-new">
     <%= link_to "新規追加", new_schedule_path(@schedule), class: "btn btn-info" %>
   </div>
-  <table class="table table-bordered table-striped table-condensed" id="index-schedule">
-    <tr>
-      <th>作成日</th>
-      <th>開催日</th>
-      <th>タイトル</th>
-      <th>種類</th>
-      <th>地域</th>
-      <th>講師</th>
-      <th></th>
-      <th></th>
-    </tr>
-
+  <div class="contents-wrap">
     <% @schedules.each do |s| %>
-      <tr>
-        <td><%= l(s.created_at, format: :long) %></td>
-        <td></td>
-        <td><%= s.title %></td>
-        <td><%= s.event_type %></td>
-        <td><%= s.area %></td>
-        <td><%= s.teacher %></td>
-        <td><%= image_tag s.image.thumb.to_s if s.image? %></td>
-        <td><%= link_to "詳細", schedule_path(s), class: "btn btn-info" %></td>
-      </tr>
+      <div class="contents-box">
+        <div><%= l(s.created_at, format: :long) %></div>
+        <div class="image"><%= link_to (image_tag s.image.thumb.to_s if s.image?), s %></div>
+        <label><%= link_to (s.title), s %></label>
+        <label>開催エリア：<%= s.area %></label>
+        <% if s.date != nil %>
+          <label>開催日：<%= l(s.date, format: :default) %></label>
+        <% else %>
+          <div></div>
+        <% end %>
+        <label>セラピスト名：<%= s.teacher %></label><br>
+        <%= link_to "編集", edit_schedule_path(s), class: "btn btn-primary" %>
+        <%= link_to "削除", schedule_path(s), method: :delete,
+              data: {confirm: "削除してよろしいですか？" },
+              class: "btn btn-danger" %>
+      </div>
     <% end %>
-  </table>
+  </div>
   <div class="center">
     <%= link_to "<　戻る", '#', class: "btn btn-outline-secondary" %>
   </div>

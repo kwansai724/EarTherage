@@ -36,7 +36,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # 上記とは別にサムネイルを別サイズで表示
   version :thumb do
-    process resize_to_fill: [100, 100]
+    process resize_to_fill: [200, 200]
   end
 
   # Add an allowlist of extensions which are allowed to be uploaded.
