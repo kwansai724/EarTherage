@@ -5,6 +5,9 @@ class SchedulesController < ApplicationController
   # スケジュール一覧
   def index
     @schedules = Schedule.all.order(created_at: "DESC")
+    if params[:search].present?
+      @schedules = Schedule.paginate(page: params[:page]).search(params[:search]) 
+    end
   end
 
   # スケジュール詳細
