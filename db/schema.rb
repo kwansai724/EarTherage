@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_125633) do
+ActiveRecord::Schema.define(version: 2021_05_28_141549) do
+
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.date "date"
+    t.string "image_name"
+    t.string "share_with"
+    t.integer "staff_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["staff_id"], name: "index_blogs_on_staff_id"
+  end
 
   create_table "schedules", force: :cascade do |t|
     t.date "date"
