@@ -1,0 +1,21 @@
+<% provide(:class_text, 'schedule-edit') %>
+<% provide(:button_text, '編集する') %>
+
+<h1>イベント／講座編集</h1><br>
+
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+      <%= render 'form' %>
+  </div>
+</div>
+
+<!-- 画像ファルは5MBまで、というメッセージ（ただの警告） -->
+<script type="text/javascript">
+  $('#schedule_image').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('ファイルサイズは5MBまでです。小さいサイズのファイルを選択してください。');
+    }
+  });
+</script>

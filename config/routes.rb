@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   resources :start_schedules#開講スケジュール
 
+  resources :schedules
+
   resources :students#ユーザー管理
 
   get 'serapoke' => 'serapoke#index', as: :serapoke#せらポケ
