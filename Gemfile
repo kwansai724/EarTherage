@@ -52,6 +52,8 @@ gem 'bootstrap-will_paginate'
 gem 'roo'
 
 group :development, :test do
+  gem 'rspec-rails', '~> 3.6.0'
+  gem 'factory_bot_rails', '~> 4.10.0'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
@@ -60,6 +62,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-commands-rspec'
 end
 
 group :test do
