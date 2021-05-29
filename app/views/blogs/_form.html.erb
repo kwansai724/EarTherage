@@ -1,0 +1,16 @@
+<%= form_with model: @blog, url: staff_blogs_url(staff_id: @staff.id, id: @blog.id), local: true, method: :post do |f| %>
+  
+  <%= f.hidden_field :staff_id, :value => @staff.id %>
+  
+  <%= f.label :title, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_field :title, class: "form-control" %>
+
+  <%= f.label :date, class: "label-#{yield(:class_text)}" %>
+  <%= f.date_field :date, class: "form-control" %>
+
+  <%= f.label "画像をアップロード", class: "label-#{yield(:class_text)}" %><br>
+    <%= image_tag @blog.image_name.url(:thumb), id: :img_prev if @blog.image_name? %>
+  <%= f.file_field :image_name, id: "blog_image", class: "form-control" %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-outline-primary btn-block btn-#{yield(:class_text)}" %>
+<% end %>

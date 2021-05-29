@@ -1,0 +1,10 @@
+<h1>スタッフブログ一覧</h1>
+<div>
+  <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info" %>
+</div>
+<% @blogs.each do |b| %>
+  <div>
+    <!-- blogインスタンスの画像ファイルのURLを取得し表示 -->
+    <p><%= link_to (image_tag b.image_name.thumb.to_s if b.image_name?), staff_blog_url(@staff, b) %></p>
+  </div>
+<% end %>
