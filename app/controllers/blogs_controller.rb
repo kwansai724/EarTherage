@@ -20,6 +20,35 @@ class BlogsController < ApplicationController
     end
   end
 
+  def show
+    @blog = Blog.find(params[:id])
+    @staff = Staff.find(params[:staff_id])
+  end
+
+  def edit
+    @blog = Blog.find(params[:id])
+    @staff = Staff.find(@blog.staff_id)
+  end
+
+  def update
+    @blog = Blog.find(params[:id])
+    @staff = Staff.find(@blog.staff_id)
+    if @blog.update_attributes!(blog_params)
+      flash[:success] = "ブログを更新しました。"
+      redirect_to staff_blogs_url(@staff)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @blog = Blog.find(params[:id])
+    @staff = Staff.find(@blog.staff_id)
+    @blog.destroy
+    flash[:success] = "ブログのデータを削除しました。"
+    redirect_to staff_blogs_url(@staff)
+  end
+
   private
 
     def blog_params

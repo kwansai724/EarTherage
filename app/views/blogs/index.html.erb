@@ -1,4 +1,5 @@
 <h1>スタッフブログ一覧</h1>
+<%= render 'layouts/flash_messages' %>
 <div>
   <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info" %>
 </div>
@@ -13,7 +14,12 @@
   <div>
     <%= blog.datetime %>
   </div>
+  <% staff = Staff.find(blog.staff_id) %>
   <div>
-    <%= @staff.name %>
+    <%= staff.name %>
   </div>
+  <%= link_to "編集", edit_staff_blog_path(staff, blog), class: "btn btn-primary" %>
+  <%= link_to "削除", staff_blog_path(staff, blog), method: :delete,
+                                        data: {confirm: "削除してよろしいですか？" },
+                                        class: "btn btn-danger" %>
 <% end %>

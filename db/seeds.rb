@@ -73,3 +73,16 @@ puts "Staff Created"
               )
 end
 puts 'スケジュール作成'
+
+5.times do |n|
+  datetime = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default)
+  title = Faker::Educator.degree
+  Blog.create!(datetime: datetime,
+               title: title,
+               image: File.open("public/uploads/blog/image/#{n+1}/something.jpg"),
+               staff_id: n+1,
+              )
+end
+
+puts "ブログ作成"
+

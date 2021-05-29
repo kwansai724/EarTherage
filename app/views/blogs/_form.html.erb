@@ -1,4 +1,4 @@
-<%= form_with model: @blog, url: staff_blogs_url(staff_id: @staff.id, id: @blog.id), local: true, method: :post do |f| %>
+<%= form_with model: [@staff,@blog], local: true do |f| %>
   
   <%= f.hidden_field :staff_id, :value => @staff.id %>
   
