@@ -12,6 +12,21 @@
 
 ActiveRecord::Schema.define(version: 2021_05_18_125633) do
 
+  create_table "schedules", force: :cascade do |t|
+    t.date "date"
+    t.string "area"
+    t.string "place"
+    t.string "teacher"
+    t.string "event_type"
+    t.string "title"
+    t.text "details"
+    t.string "image"
+    t.integer "public_status", default: 0, null: false
+    t.boolean "judgment_of_menbers"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "staffs", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

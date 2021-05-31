@@ -29,6 +29,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # paramsハッシュからスケジュールを取得します。
+  def set_schedule
+    @schedule = Schedule.find(params[:id])
+  end
+  
   def set_student
     @student = current_student
   end  
