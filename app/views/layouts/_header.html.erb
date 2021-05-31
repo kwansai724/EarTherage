@@ -2,8 +2,11 @@
   <nav class="navbar navbar-expand navbar-light" style="background-color:#ffe1fc;">
     <ul class="navbar-nav mr-auto">
       <% if student_signed_in? %>
-        <!--「toppage_routes」はstudent_helper.rbに記載-->
-        <%= link_to "EarTherage", toppage_routes(current_student), class: 'navbar-brand' %>
+        <!--「student_toppage_routes」はstudents_helper.rbに記載-->
+        <%= link_to "EarTherage", student_toppage_routes(current_student), class: 'navbar-brand' %>
+      <% elsif staff_signed_in? %>
+        <!--「staff_toppage_routes」はstaffs_helper.rbに記載-->
+        <%= link_to "EarTherage", staff_toppage_routes(current_staff), class: 'navbar-brand' %>
       <% else %>
         <%= link_to "EarTherage", root_path, class: 'navbar-brand' %>
       <% end %>  
