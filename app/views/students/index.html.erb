@@ -1,7 +1,6 @@
 <div class="student--title">
   <h1>受講生一覧</h1>
 </div>
-<%= render 'layouts/flash_messages' %>
 
 <%= form_with url: import_students_path, multipart: true, local: true do |f| %>
   <%= f.file_field :file, class: "file_field btn--resize" %>
