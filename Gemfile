@@ -44,6 +44,10 @@ gem 'devise-bootstrap-views', '~> 1.0'
 #サンプル追加
 gem 'faker'
 
+# リッチテキスト
+gem 'simple_form'
+gem 'summernote-rails', '~> 0.8.10.0'
+
 # 画像投稿機能
 gem 'carrierwave'
 
