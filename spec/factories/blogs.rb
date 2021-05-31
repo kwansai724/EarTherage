@@ -1,9 +1,14 @@
 FactoryBot.define do
   factory :blog do
-    title "MyString"
-    date "2021-05-28"
-    image_name "MyString"
-    share_with "MyString"
-    staff nil
+    title { "MyString" }
+    datetime { DateTime.now }
+    staff
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'public/uploads/blog/image/1/something.jpg')) }
+
+    trait :admin do
+      staff { FactoryBot.create(:staff, :admin) }
+    end
+
   end
+
 end
