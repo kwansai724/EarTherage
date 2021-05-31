@@ -8,6 +8,10 @@ class StudentsController < ApplicationController
     @students = Student.paginate(page: params[:page], per_page: 10)
   end
 
+  # def show
+  #   @students = Student.paginate(page: params[:page], per_page: 10)
+  # end
+
   def update
     if @student.update_attributes(student_params)
       flash[:success] = "受講生情報を更新しました。"

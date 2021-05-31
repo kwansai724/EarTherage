@@ -49,4 +49,4 @@
   </div>
 </div>
 <br>
-<%= link_to "戻る", students_path , class: "btn btn-primary btn--resize" %>
+<%= link_to "戻る", students_path(page: @students.current_page, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer), class: "btn btn-outline-secondary btn--resize" %>
