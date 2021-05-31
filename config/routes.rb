@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'uploads/create'
+  get 'uploads/destroy'
   devise_for :staffs, :controllers => {
     :sessions => 'staffs/sessions'
   }
@@ -22,6 +24,8 @@ Rails.application.routes.draw do
   resources :schedules
 
   resources :students#ユーザー管理
+
+  resources :uploads, only: [:create, :destroy]
 
   get 'serapoke' => 'serapoke#index', as: :serapoke#せらポケ
 
