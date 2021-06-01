@@ -4,7 +4,7 @@
 
 <%= form_with url: import_students_path, multipart: true, local: true do |f| %>
   <%= f.file_field :file, class: "file_field btn--resize" %>
-  <%= f.submit "CSVをインポート" ,class: "btn btn-primary csv-button btn--resize", formtarget: "_blank" %>
+  <%= f.submit "CSVをインポート", class: "btn btn-primary csv-button btn--resize" %>
 <% end %>
 
 

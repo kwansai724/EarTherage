@@ -28,9 +28,15 @@ class StudentsController < ApplicationController
   end
 
   def import
-    #fileはtmpに自動で一時保存される
-    Student.import(params[:file])
-    redirect_to students_url
+    if params[:file].blank?
+      flash[:danger] = "csvデータが選択されていません。"
+      redirect_to students_url
+    else
+      #fileはtmpに自動で一時保存される
+      Student.import(params[:file])
+      flash[:success] = "CSVデータをインポートしました。"
+      redirect_to students_url
+    end
   end
 
   private
