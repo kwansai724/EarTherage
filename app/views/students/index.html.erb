@@ -44,20 +44,20 @@
         <%= student.email %>
       </div>
     </div>
+        <div class="row">
+      <div class="d-flex align-items-center border-top student--index col-3">
+        電話番号:
+      </div>
+      <div class="border-top d-flex align-items-center student--index col-9">
+        <%= student.phone_number %>
+      </div>
+    </div>
     <div class="row">
       <div class="d-flex align-items-center border-top student--index col-3">
         コース:
       </div>
       <div class="border-top d-flex align-items-center student--index col-9">
         <%= student.course_name %><!--「course_name」はstudent_decoratorに記載-->
-      </div>
-    </div>
-    <div class="row">
-      <div class="d-flex align-items-center border-top student--index col-3">
-        電話番号:
-      </div>
-      <div class="border-top d-flex align-items-center student--index col-9">
-        <%= student.phone_number %>
       </div>
     </div>
   <% end %>
