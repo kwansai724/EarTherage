@@ -40,13 +40,9 @@
       コース:
     </div>
     <div class="d-flex align-items-center border-right border-top border-bottom student--show col-9">
-      <% if @student.course_type == "therapist_training" %>
-        セラピスト養成コース
-      <% elsif @student.course_type == "self_care" %>
-        セルフケアコース
-      <% end %>
+      <%= @student.course_name %><!--「course_name」はstudent_decoratorに記載-->
     </div>
   </div>
 </div>
 <br>
-<%= link_to "戻る", students_path(page: @students.current_page, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer), class: "btn btn-outline-secondary btn--resize" %>
+<%= link_to "戻る", students_path, class: "btn btn-outline-secondary btn--resize" %>

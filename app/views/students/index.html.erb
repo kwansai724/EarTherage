@@ -49,11 +49,7 @@
         コース:
       </div>
       <div class="border-top d-flex align-items-center student--index col-9">
-        <% if student.course_type == "therapist_training" %>
-          セラピスト養成コース
-        <% elsif student.course_type == "self_care" %>
-          セルフケアコース
-        <% end %>
+        <%= student.course_name %><!--「course_name」はstudent_decoratorに記載-->
       </div>
     </div>
     <div class="row">
