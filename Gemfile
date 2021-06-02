@@ -57,6 +57,9 @@ gem 'bootstrap-will_paginate'
 #csvファイルimport
 gem 'roo'
 
+# デコレーター
+gem 'active_decorator'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

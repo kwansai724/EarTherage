@@ -1,40 +1,41 @@
-<%= render 'layouts/flash_messages' %>
-<div class="student--title">
-  <h1><%= t('.sign_in') %></h1>
-</div>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', required: true %>
+<div class="container col-10 col-md-10 col-lg-4">
+  <%= render 'layouts/flash_messages' %>
+  <div class="student--title">
+    <h1><%= t('.sign_in') %></h1>
   </div>
 
-  <!--div class="form-group"-->
-    <!--%= f.label :password %-->
-    <!--%= f.password_field :password, autocomplete: 'current-password', class: 'form-control' %-->
-  <!--/div-->
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', required: true %>
+    </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="form-group form-check">
-      <%= f.check_box :remember_me, class: 'form-check-input' %>
-      <%= f.label :remember_me, class: 'form-check-label student--new' do %>
-        <%= resource.class.human_attribute_name('remember_me') %>
-      <% end %>
+    <!--div class="form-group"-->
+      <!--%= f.label :password %-->
+      <!--%= f.password_field :password, autocomplete: 'current-password', class: 'form-control' %-->
+    <!--/div-->
+
+    <% if devise_mapping.rememberable? %>
+      <div class="form-group form-check">
+        <%= f.check_box :remember_me, class: 'form-check-input' %>
+        <%= f.label :remember_me, class: 'form-check-label student--new' do %>
+          <%= resource.class.human_attribute_name('remember_me') %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.submit  t('.sign_in'), class: 'btn btn-primary btn-block btn--resize' %>
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.submit  t('.sign_in'), class: 'btn btn-primary btn-block btn--resize' %>
-  </div>
-<% end %>
+  <% if resource_name == :student %>
+    <%= link_to '管理者・スタッフはこちら', new_staff_session_path , class: "btn--resize"%>
+  <% end %>
 
-<% if resource_name == :student %>
-  <%= link_to '管理者・スタッフはこちら', new_staff_session_path , class: "btn--resize"%>
-<% end %>
+  <% if resource_name == :staff %>
+    <%= link_to '受講生の方はこちら', new_student_session_path, class: "btn--resize"%>
+  <% end %>
 
-<% if resource_name == :staff %>
-  <%= link_to '受講生はこちら', new_student_session_path, class: "btn--resize"%>
-<% end %>
-
-<!--%= render 'devise/shared/links' %-->
-
+  <!--%= render 'devise/shared/links' %-->
+</div>

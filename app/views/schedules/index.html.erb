@@ -46,10 +46,11 @@
     <% end %>
   </div>
   <div class="center">
-    <% if params[:search].present?%>
+    <% if params[:search].present? %>
       <%= link_to "<　一覧へ戻る", schedules_path, class: "btn btn-outline-secondary" %>
     <% else %>
-      <%= link_to "<　戻る", '#', class: "btn btn-outline-secondary" %>
+      <!-- 「staff_toppage_routes」はstaffs_helper.rbに記載 -->
+      <%= link_to "<　戻る", staff_toppage_routes(current_staff), class: "btn btn-outline-secondary" %>
     <% end %>
   </div>
 </div>
