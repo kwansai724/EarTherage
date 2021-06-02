@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :blog do
-    title { "MyString" }
-    datetime { DateTime.now }
+    sequence(:title) { |n| "title#{n}" }
+    datetime         { DateTime.now }
     staff
-    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'public/uploads/blog/image/1/something.jpg')) }
+    sequence(:image) { |n| Rack::Test::UploadedFile.new(File.join(Rails.root, "public/uploads/blog/image/#{n}/something.jpg")) }
 
     trait :admin do
       staff { FactoryBot.create(:staff, :admin) }
