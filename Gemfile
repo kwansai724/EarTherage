@@ -5,9 +5,7 @@ ruby '2.6.6'
 
 gem 'rails', '~> 5.2.4', '>= 5.2.4.5'
 #gem 'rails-i18n'
-gem 'sqlite3'
 gem 'puma', '~> 3.11'
-gem 'faker'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -57,7 +55,11 @@ gem 'bootstrap-will_paginate'
 #csvファイルimport
 gem 'roo'
 
+# デコレーター
+gem 'active_decorator'
+
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
@@ -72,6 +74,10 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+end
+
+group :production do
+  gem 'pg', '0.20.0'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

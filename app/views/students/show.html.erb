@@ -1,7 +1,6 @@
 <div class="student--title">
   <h1>受講生詳細</h1>
 </div>
-<%= render 'layouts/flash_messages' %>
 <div class="container">
   <div class="row">
     <div class="d-flex align-items-center border student--show col-3">
@@ -40,13 +39,9 @@
       コース:
     </div>
     <div class="d-flex align-items-center border-right border-top border-bottom student--show col-9">
-      <% if @student.course_type == "therapist_training" %>
-        セラピスト養成コース
-      <% elsif @student.course_type == "self_care" %>
-        セルフケアコース
-      <% end %>
+      <%= @student.course_name %><!--「course_name」はstudent_decoratorに記載-->
     </div>
   </div>
 </div>
 <br>
-<%= link_to "戻る", students_path , class: "btn btn-primary btn--resize" %>
+<%= link_to "戻る", students_path, class: "btn btn-outline-secondary btn--resize" %>
