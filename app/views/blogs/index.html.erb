@@ -6,7 +6,7 @@
 <% @blogs.each_with_index do |blog, n| %>
   <div>
     <!-- blogインスタンスの画像ファイルのURLを取得し表示 -->
-    <p><%= link_to (image_tag(blog.image.thumb.to_s, alt: "Show#{n}") if blog.image?), staff_blog_url(@staff, blog) %></p>
+    <p><%= link_to (image_tag(blog.image.thumb.to_s, alt: "show#{n}") if blog.image?), staff_blog_url(@staff, blog) %></p>
   </div>
   <div>
     <%= blog.title %>
@@ -18,7 +18,7 @@
   <div>
     <%= staff.name %>
   </div>
-  <%= link_to "編集", edit_staff_blog_path(staff, blog), class: "btn btn-primary" %>
+  <%= link_to "編集", edit_staff_blog_path(staff, blog), class: "btn btn-primary edit#{n}" %>
   <%= link_to "削除", staff_blog_path(staff, blog), method: :delete,
                                         data: {confirm: "削除してよろしいですか？" },
                                         class: "btn btn-danger" %>

@@ -75,7 +75,7 @@ end
 puts 'スケジュール作成'
 
 5.times do |n|
-  datetime = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default)
+  datetime = Faker::Time.between(from: DateTime.current- 1, to: DateTime.current, format: :default)
   title = Faker::Educator.degree
   Blog.create!(datetime: datetime,
                title: title,

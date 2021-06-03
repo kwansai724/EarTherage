@@ -20,7 +20,7 @@ RSpec.feature "Blogs", type: :feature do
       expect {
         click_link "新規作成"
         fill_in "Title", with: "title0"
-        fill_in "Datetime", with: DateTime.now
+        fill_in "Datetime", with: DateTime.current
         attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
         click_button '作成する'
         expect(page).to have_content "title0"
@@ -39,12 +39,12 @@ RSpec.feature "Blogs", type: :feature do
       expect {
         click_link "新規作成"
         fill_in "Title", with: "title1"
-        fill_in "Datetime", with: DateTime.now
+        fill_in "Datetime", with: DateTime.current
         attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
         click_button '作成する'
         expect(page).to have_content "title1"
         expect(page).to have_content Date.today
-        expect(page).to have_content "staff"
+        expect(page).to have_content "staff1"
       }.to change(staff.blogs, :count).by(1)
     end
 
@@ -68,13 +68,13 @@ RSpec.feature "Blogs", type: :feature do
       expect(page).to have_content Date.today
       expect(page).to have_content "管理者"
       expect(page).to have_content blog[0].title
-      expect(page).to have_content "staff2"
+      expect(page).to have_content "#{Staff.find(blog[0].staff_id).name}"
       expect(page).to have_content blog[1].title
-      expect(page).to have_content "staff3"
+      expect(page).to have_content "#{Staff.find(blog[1].staff_id).name}"
       expect(page).to have_content blog[2].title
-      expect(page).to have_content "staff3"
+      expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}"
       expect(page).to have_content blog[3].title
-      expect(page).to have_content "staff4"
+      expect(page).to have_content "#{Staff.find(blog[3].staff_id).name}"
     end
 
     # スタッフはブログを一覧表示する
@@ -105,7 +105,7 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: admin.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "Show0"
+        click_link "show0"
         expect(page).to have_content "スタッフブログ詳細表示"
         expect(page).to have_content admin_blog.title
         expect(page).to have_content "管理者"
@@ -123,10 +123,10 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: admin.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "Show2"
+        click_link "show2"
         expect(page).to have_content "スタッフブログ詳細表示"
         expect(page).to have_content blog[1].title # = show - 1
-        expect(page).to have_content "staff11" #= show + 9
+        expect(page).to have_content "#{Staff.find(blog[1].staff_id).name}" #= show + 9
       end
     end
 
@@ -143,6 +143,60 @@ RSpec.feature "Blogs", type: :feature do
     #  expect(page).to have_content "MyString"
     #  expect(page).to have_content "staff4"
     #end
+
+  end
+
+  describe "編集機能" do
+
+    context "管理者は管理者自身のブログを編集する" do
+      scenario "admin edits admin's blog" do
+        admin_blog = FactoryBot.create(:blog, :admin)
+        blog = []
+        4.times do |n|
+          blog[n] = FactoryBot.create(:blog)
+        end
+        admin = Staff.find(admin_blog.staff_id)
+        fill_in "Eメール", with: admin.email
+        click_button 'ログイン'
+        click_link "スタッフブログ投稿"
+        find(".edit0").click
+        expect(page).to have_content "管理者のブログ編集"
+        expect(page).to have_field("Title", with: admin_blog.title)
+        fill_in "Title", with: admin_blog.title + "-updated"
+        fill_in "Datetime", with: DateTime.current + 1
+        attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+        click_button "編集する"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page).to have_content admin_blog.title + "-updated"
+        expect(page).to have_content Date.today + 1
+        expect(page).to have_content "管理者"
+      end
+    end
+
+    context "管理者はスタッフのブログを編集する" do
+      scenario "admin edits staff's blog" do
+        admin_blog = FactoryBot.create(:blog, :admin)
+        blog = []
+        4.times do |n|
+          blog[n] = FactoryBot.create(:blog)
+        end
+        admin = Staff.find(admin_blog.staff_id)
+        fill_in "Eメール", with: admin.email
+        click_button 'ログイン'
+        click_link "スタッフブログ投稿"
+        find(".edit3").click
+        expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}のブログ編集" # edit -1
+        expect(page).to have_field("Title", with: blog[2].title) # edit -1
+        fill_in "Title", with: blog[2].title + "-updated" # edit - 1
+        fill_in "Datetime", with: DateTime.current + 1
+        attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+        click_button "編集する"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page).to have_content blog[2].title + "-updated" # edit -1
+        expect(page).to have_content Date.today + 1
+        expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}" # edit + 17
+      end
+    end
 
   end
 
