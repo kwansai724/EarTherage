@@ -1,6 +1,6 @@
 class SelfCareCourseController < ApplicationController
   before_action :authenticate_student!
-  before_action :set_student
+  before_action :set_students
 
   def index
   end

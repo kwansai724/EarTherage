@@ -6,7 +6,6 @@ ruby '2.6.6'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.5'
 #gem 'rails-i18n'
 gem 'puma', '~> 3.11'
-gem 'faker'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -59,6 +58,9 @@ gem 'bootstrap-will_paginate'
 
 #csvファイルimport
 gem 'roo'
+
+# デコレーター
+gem 'active_decorator'
 
 group :development, :test do
   gem 'sqlite3'

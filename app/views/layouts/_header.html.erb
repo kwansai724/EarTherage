@@ -2,8 +2,11 @@
   <nav class="navbar navbar-expand navbar-light" style="background-color:#ffe1fc;">
     <ul class="navbar-nav mr-auto">
       <% if student_signed_in? %>
-        <!--「toppage_routes」はstudent_helper.rbに記載-->
-        <%= link_to "EarTherage", toppage_routes(current_student), class: 'navbar-brand' %>
+        <!--「student_toppage_routes」はstudents_helper.rbに記載-->
+        <%= link_to "EarTherage", student_toppage_routes(current_student), class: 'navbar-brand' %>
+      <% elsif staff_signed_in? %>
+        <!--「staff_toppage_routes」はstaffs_helper.rbに記載-->
+        <%= link_to "EarTherage", staff_toppage_routes(current_staff), class: 'navbar-brand' %>
       <% else %>
         <%= link_to "EarTherage", root_path, class: 'navbar-brand' %>
       <% end %>  
@@ -38,13 +41,17 @@
           <li class="nav-item active">
             <%= link_to 'ログアウト', destroy_staff_session_path, method: :delete, class: 'nav-link' %>
           </li>
-        <% else %>
+        <%
+=begin%>
+ <% else %>
           <li class="nav-item active">
             <%= link_to "student新規登録", new_student_registration_path, class: 'nav-link' %>
           </li>
           <li class="nav-item active">
             <%= link_to "staff新規登録", new_staff_registration_path, class: 'nav-link' %>
-          </li>
+          </li> 
+<%
+=end%>
         <% end %>
       </ul>
     </div>  

@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  get 'uploads/create'
-  get 'uploads/destroy'
+  #rootを受講生ログイン画面に設定
+  devise_scope :student do
+    root "students/sessions#new"
+  end
+
   devise_for :staffs, :controllers => {
     :sessions => 'staffs/sessions'
   }
   devise_for :students, :controllers => {
     :sessions => 'students/sessions'
   }
-  root 'static_pages#top'
 
   get 'therapist_training_course' => 'therapist_training_course#index', as: :therapist_training_course#セラピスト養成コース画面トップページ
   get 'self_care_course' => "self_care_course#index", as: :self_care_course#セルフケアコース画面トップページ
@@ -19,9 +21,7 @@ Rails.application.routes.draw do
 
   resources :staff_blogs#スタッフブログ
 
-  resources :start_schedules#開講スケジュール
-
-  resources :schedules
+  resources :schedules#開講スケジュール
 
   resources :students#ユーザー管理
 
