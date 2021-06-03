@@ -15,7 +15,7 @@
   <%= f.select :teacher, ['田中', '山本', '井上'], {include_blank: false}, class: "form-control" %>
 
   <%= f.label :details, class: "label-#{yield(:class_text)}" %>
-  <%= f.text_area :details, class: "form-control" %>
+  <%= f.text_area :details, 'data-provider': :summernote %>
 
   <%= f.label "画像をアップロード", class: "label-#{yield(:class_text)}" %><br>
     <%= image_tag @schedule.image.url(:thumb), id: :img_prev if @schedule.image? %>
