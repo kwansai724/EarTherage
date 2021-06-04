@@ -4,7 +4,7 @@ RSpec.feature "Blogs", type: :feature do
 
   before do
     visit root_path
-    click_link "受講生の方はこちら"
+    #click_link "受講生の方はこちら"
     click_link "管理者・スタッフはこちら"
   end
 
