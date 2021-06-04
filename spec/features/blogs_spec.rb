@@ -95,7 +95,7 @@ RSpec.feature "Blogs", type: :feature do
   describe "詳細表示機能" do
 
     context "管理者は管理者自身のブログを詳細表示する" do
-      scenario "admin views admin's blog details" do
+      scenario "admin views admin's own blog in detail" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         4.times do |n|
@@ -113,7 +113,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "管理者はスタッフのブログを詳細表示する" do
-      scenario "admin views staff's blog details" do
+      scenario "admin views staff's blog in detail" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         4.times do |n|
@@ -149,7 +149,7 @@ RSpec.feature "Blogs", type: :feature do
   describe "編集機能" do
 
     context "管理者は管理者自身のブログを編集する" do
-      scenario "admin edits admin's blog" do
+      scenario "admin edits admin's own blog" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         4.times do |n|
@@ -166,6 +166,7 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Datetime", with: DateTime.current + 1
         attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
         click_button "編集する"
+        expect(page).to have_content "ブログを更新しました。"
         expect(page).to have_content "スタッフブログ一覧"
         expect(page).to have_content admin_blog.title + "-updated"
         expect(page).to have_content Date.today + 1
@@ -190,7 +191,8 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Title", with: blog[2].title + "-updated" # edit - 1
         fill_in "Datetime", with: DateTime.current + 1
         attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
-        click_button "編集する"
+        click_button "編集する" 
+        expect(page).to have_content "ブログを更新しました。"
         expect(page).to have_content "スタッフブログ一覧"
         expect(page).to have_content blog[2].title + "-updated" # edit -1
         expect(page).to have_content Date.today + 1
@@ -199,5 +201,53 @@ RSpec.feature "Blogs", type: :feature do
     end
 
   end
+
+    describe "削除機能" do
+
+    context "管理者は管理者自身のブログを削除する" do
+      scenario "admin deteles admin's own blog" do
+        admin_blog = FactoryBot.create(:blog, :admin)
+        blog = []
+        4.times do |n|
+          blog[n] = FactoryBot.create(:blog)
+        end
+        admin = Staff.find(admin_blog.staff_id)
+        fill_in "Eメール", with: admin.email
+        click_button 'ログイン'
+        click_link "スタッフブログ投稿"
+        expect {
+          find(".delete0").click
+          expect(page).to have_content "ブログのデータを削除しました。"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to_not have_content admin_blog.title
+          expect(page).to_not have_content "管理者"
+        }.to change(admin.blogs, :count).by(-1)
+      end
+    end
+
+    context "管理者はスタッフのブログを削除する" do
+      scenario "admin deletes staff's blog" do
+        #admin_blog = FactoryBot.create(:blog, :admin)
+        admin = FactoryBot.create(:staff, :admin)
+        blog = []
+        4.times do |n|
+          blog[n] = FactoryBot.create(:blog)
+        end
+        #admin = Staff.find(admin_blog.staff_id)
+        fill_in "Eメール", with: admin.email
+        click_button 'ログイン'
+        click_link "スタッフブログ投稿"
+        expect {
+          find(".delete3").click
+          expect(page).to have_content "ブログのデータを削除しました。"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to_not have_content blog[3].title
+          expect(page).to_not have_content "#{Staff.find(blog[3].staff_id).name}"
+        }.to change(Staff.find(blog[3].staff_id).blogs, :count).by(-1)
+      end
+    end
+
+  end
+
 
 end

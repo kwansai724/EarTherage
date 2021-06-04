@@ -21,5 +21,5 @@
   <%= link_to "編集", edit_staff_blog_path(staff, blog), class: "btn btn-primary edit#{n}" %>
   <%= link_to "削除", staff_blog_path(staff, blog), method: :delete,
                                         data: {confirm: "削除してよろしいですか？" },
-                                        class: "btn btn-danger" %>
+                                        class: "btn btn-danger delete#{n}" %>
 <% end %>

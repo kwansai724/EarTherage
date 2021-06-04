@@ -75,7 +75,8 @@ group :test do
   gem 'capybara', '>= 2.15'
   #gem 'launchy', '~> 2.4.3'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
+  #gem 'chromedriver-helper'
+  gem 'webdrivers', '~> 3.0'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
