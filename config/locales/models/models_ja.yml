@@ -4,6 +4,7 @@ ja:
       schedule: スケジュール
       student: 受講生
       staff: スタッフ
+      blog: スタッフブログ
     attributes:
         schedule:
           date: 開催日
@@ -32,4 +33,12 @@ ja:
           admin: 管理者
           created_at: 作成日
           updated_at: 更新日
-
+        blog:
+          id: ID
+          title: タイトル
+          datetime: 日時
+          image: 画像
+          share_with: アクセス制限
+          staff_id: スタッフID
+          created_at: 作成日
+          updated_at: 更新日

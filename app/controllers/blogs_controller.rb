@@ -12,10 +12,11 @@ class BlogsController < ApplicationController
   def create
     @blog = Blog.new(blog_params)
     @staff = Staff.find(params[:staff_id])
-    if @blog.save!
+    if @blog.save
       flash.now[:success] = "ブログを作成しました。"
       redirect_to staff_blogs_url(@staff)
     else
+      flash.now[:danger] = "#{@blog.errors.full_messages}" if @blog.errors.present?
       render :new
     end
   end
@@ -33,10 +34,11 @@ class BlogsController < ApplicationController
   def update
     @blog = Blog.find(params[:id])
     @staff = Staff.find(@blog.staff_id)
-    if @blog.update_attributes!(blog_params)
+    if @blog.update_attributes(blog_params)
       flash[:success] = "ブログを更新しました。"
       redirect_to staff_blogs_url(@staff)
     else
+      flash.now[:danger] = "#{@blog.errors.full_messages}" if @blog.errors.present?
       render :edit
     end
   end

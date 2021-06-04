@@ -1,5 +1,5 @@
 <%= form_with model: [@staff,@blog], local: true do |f| %>
-  
+  <%= render 'layouts/error_messages', model: f.object %>
   <%= f.hidden_field :staff_id, :value => @staff.id %>
   
   <%= f.label :title, class: "label-#{yield(:class_text)}" %>

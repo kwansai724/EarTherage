@@ -39,6 +39,13 @@
   @extend .alert-danger;
 }
 
+// alert flash message用
+#field_with_errors{
+  color: #000;
+  background-color: #fcc;
+  border-color: #fcc;
+}
+
 // ナビゲーションバー
 a.navbar-brand {
   font-family: serif;

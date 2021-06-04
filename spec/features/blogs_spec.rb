@@ -10,43 +10,133 @@ RSpec.feature "Blogs", type: :feature do
 
   describe "新規作成機能" do
 
-    # 管理者は新しいブログを作成する
-    scenario "admin creates new blog" do
-      admin = FactoryBot.create(:staff, :admin)
-      fill_in "Eメール", with: admin.email
-      click_button 'ログイン'
-      click_link "スタッフブログ投稿"
-      expect(page).to have_content "スタッフブログ一覧"
-      expect {
-        click_link "新規作成"
-        fill_in "Title", with: "title0"
-        fill_in "Datetime", with: DateTime.current
-        attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
-        click_button '作成する'
-        expect(page).to have_content "title0"
-        expect(page).to have_content Date.today
-        expect(page).to have_content "管理者"
-      }.to change(admin.blogs, :count).by(1)
+    context "正常系" do
+
+      context "管理者は新しいブログを作成する" do
+        scenario "admin creates new blog" do
+          admin = FactoryBot.create(:staff, :admin)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title0"
+            fill_in "日時", with: DateTime.current
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            click_button '作成する'
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          }.to change(admin.blogs, :count).by(1)
+        end
+      end
+
+      # スタッフは新しいブログを作成する
+      #scenario "a staff creates new blog" do
+      #  staff = FactoryBot.create(:staff)
+      #  fill_in "Eメール", with: staff.email
+      #  click_button 'ログイン'
+      #  click_link "スタッフブログ投稿"
+      #  expect(page).to have_content "スタッフブログ一覧"
+      #  expect {
+      #    click_link "新規作成"
+      #    fill_in "タイトル", with: "title1"
+      #    fill_in "日時", with: DateTime.current
+      #    attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+      #    click_button '作成する'
+      #    expect(page).to have_content "title1"
+      #    expect(page).to have_content Date.today
+      #    expect(page).to have_content staff.name
+      #  }.to change(staff.blogs, :count).by(1)
+      #end
+
     end
 
-    # スタッフは新しいブログを作成する
-    scenario "a staff creates new blog" do
-      staff = FactoryBot.create(:staff)
-      fill_in "Eメール", with: staff.email
-      click_button 'ログイン'
-      click_link "スタッフブログ投稿"
-      expect(page).to have_content "スタッフブログ一覧"
-      expect {
-        click_link "新規作成"
-        fill_in "Title", with: "title1"
-        fill_in "Datetime", with: DateTime.current
-        attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
-        click_button '作成する'
-        expect(page).to have_content "title1"
-        expect(page).to have_content Date.today
-        expect(page).to have_content "staff1"
-      }.to change(staff.blogs, :count).by(1)
+    context "異常系" do
+
+      context "管理者はタイトルの無い新しいブログを作成する" do
+        scenario "admin creates new blog without a title" do
+          admin = FactoryBot.create(:staff, :admin)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: ""
+            fill_in "日時", with: DateTime.current
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            click_button '作成する'
+            expect(page).to have_content "タイトルを入力してください"
+            expect(page).to have_content "スタッフブログ作成"
+          }.to change(admin.blogs, :count).by(0)
+        end
+      end
+
+      context "管理者は日時の無い新しいブログを作成する" do
+        scenario "admin creates new blog without datetime" do
+          admin = FactoryBot.create(:staff, :admin)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title0"
+            fill_in "日時", with: ""
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            click_button '作成する'
+            expect(page).to have_content "日時を入力してください"
+            expect(page).to have_content "スタッフブログ作成"
+          }.to change(admin.blogs, :count).by(0)
+        end
+      end
+
+      context "管理者はタイトルと日時の無い新しいブログを作成する" do
+        scenario "admin creates new blog without a title and datetime" do
+          admin = FactoryBot.create(:staff, :admin)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: ""
+            fill_in "日時", with: ""
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            click_button '作成する'
+            expect(page).to have_content "タイトルを入力してください"
+            expect(page).to have_content "日時を入力してください"
+            expect(page).to have_content "スタッフブログ作成"
+          }.to change(admin.blogs, :count).by(0)
+        end
+      end
+
+
+
+      # スタッフは新しいブログを作成する
+      #scenario "a staff creates new blog" do
+      #  staff = FactoryBot.create(:staff)
+      #  fill_in "Eメール", with: staff.email
+      #  click_button 'ログイン'
+      #  click_link "スタッフブログ投稿"
+      #  expect(page).to have_content "スタッフブログ一覧"
+      #  expect {
+      #    click_link "新規作成"
+      #    fill_in "タイトル", with: "title1"
+      #    fill_in "日時", with: DateTime.current
+      #    attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+      #    click_button '作成する'
+      #    expect(page).to have_content "title1"
+      #    expect(page).to have_content Date.today
+      #    expect(page).to have_content staff.name
+      #  }.to change(staff.blogs, :count).by(1)
+      #end
+
+
     end
+
 
   end
 
@@ -148,57 +238,209 @@ RSpec.feature "Blogs", type: :feature do
 
   describe "編集機能" do
 
-    context "管理者は管理者自身のブログを編集する" do
-      scenario "admin edits admin's own blog" do
-        admin_blog = FactoryBot.create(:blog, :admin)
-        blog = []
-        4.times do |n|
-          blog[n] = FactoryBot.create(:blog)
+    context "正常系" do
+
+      context "管理者は管理者自身のブログを編集する" do
+        scenario "admin edits admin's own blog" do
+          admin_blog = FactoryBot.create(:blog, :admin)
+          blog = []
+          4.times do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          admin = Staff.find(admin_blog.staff_id)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          find(".edit0").click
+          expect(page).to have_content "管理者のブログ編集"
+          expect(page).to have_field("タイトル", with: admin_blog.title)
+          fill_in "タイトル", with: admin_blog.title + "-updated"
+          fill_in "日時", with: DateTime.current + 1
+          attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+          click_button "編集する"
+          expect(page).to have_content "ブログを更新しました。"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to have_content admin_blog.title + "-updated"
+          expect(page).to have_content Date.today + 1
+          expect(page).to have_content "管理者"
         end
-        admin = Staff.find(admin_blog.staff_id)
-        fill_in "Eメール", with: admin.email
-        click_button 'ログイン'
-        click_link "スタッフブログ投稿"
-        find(".edit0").click
-        expect(page).to have_content "管理者のブログ編集"
-        expect(page).to have_field("Title", with: admin_blog.title)
-        fill_in "Title", with: admin_blog.title + "-updated"
-        fill_in "Datetime", with: DateTime.current + 1
-        attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
-        click_button "編集する"
-        expect(page).to have_content "ブログを更新しました。"
-        expect(page).to have_content "スタッフブログ一覧"
-        expect(page).to have_content admin_blog.title + "-updated"
-        expect(page).to have_content Date.today + 1
-        expect(page).to have_content "管理者"
       end
+
+      context "管理者はスタッフのブログを編集する" do
+        scenario "admin edits staff's blog" do
+          admin_blog = FactoryBot.create(:blog, :admin)
+          blog = []
+          4.times do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          admin = Staff.find(admin_blog.staff_id)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          find(".edit3").click
+          expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}のブログ編集" # edit -1
+          expect(page).to have_field("タイトル", with: blog[2].title) # edit -1
+          fill_in "タイトル", with: blog[2].title + "-updated" # edit - 1
+          fill_in "日時", with: DateTime.current + 1
+          attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+          click_button "編集する" 
+          expect(page).to have_content "ブログを更新しました。"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to have_content blog[2].title + "-updated" # edit -1
+          expect(page).to have_content Date.today + 1
+          expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}" # edit + 17
+        end
+      end
+
     end
 
-    context "管理者はスタッフのブログを編集する" do
-      scenario "admin edits staff's blog" do
-        admin_blog = FactoryBot.create(:blog, :admin)
-        blog = []
-        4.times do |n|
-          blog[n] = FactoryBot.create(:blog)
+    context "異常系" do
+
+      context "管理者はタイトルの無い管理者自身のブログを編集する" do
+        scenario "admin edits admin's own blog without a title" do
+          admin_blog = FactoryBot.create(:blog, :admin)
+          blog = []
+          4.times do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          admin = Staff.find(admin_blog.staff_id)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          find(".edit0").click
+          expect(page).to have_content "管理者のブログ編集"
+          expect(page).to have_field("タイトル", with: admin_blog.title)
+          fill_in "タイトル", with: ""
+          fill_in "日時", with: DateTime.current + 1
+          attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+          click_button "編集する"
+          expect(page).to have_content "タイトルを入力してください"
+          expect(page).to have_content "管理者のブログ編集"
         end
-        admin = Staff.find(admin_blog.staff_id)
-        fill_in "Eメール", with: admin.email
-        click_button 'ログイン'
-        click_link "スタッフブログ投稿"
-        find(".edit3").click
-        expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}のブログ編集" # edit -1
-        expect(page).to have_field("Title", with: blog[2].title) # edit -1
-        fill_in "Title", with: blog[2].title + "-updated" # edit - 1
-        fill_in "Datetime", with: DateTime.current + 1
-        attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
-        click_button "編集する" 
-        expect(page).to have_content "ブログを更新しました。"
-        expect(page).to have_content "スタッフブログ一覧"
-        expect(page).to have_content blog[2].title + "-updated" # edit -1
-        expect(page).to have_content Date.today + 1
-        expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}" # edit + 17
       end
+
+      context "管理者は日時の無い管理者自身のブログを編集する" do
+        scenario "admin edits admin's own blog without datetime" do
+          admin_blog = FactoryBot.create(:blog, :admin)
+          blog = []
+          4.times do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          admin = Staff.find(admin_blog.staff_id)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          find(".edit0").click
+          expect(page).to have_content "管理者のブログ編集"
+          expect(page).to have_field("タイトル", with: admin_blog.title)
+          fill_in "タイトル", with: admin_blog.title + "-updated"
+          fill_in "日時", with: ""
+          attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+          click_button "編集する"
+          expect(page).to have_content "日時を入力してください"
+          expect(page).to have_content "管理者のブログ編集"
+        end
+      end
+
+      context "管理者はタイトルと日時の無い管理者自身のブログを編集する" do
+        scenario "admin edits admin's own blog without a title and datetime" do
+          admin_blog = FactoryBot.create(:blog, :admin)
+          blog = []
+          4.times do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          admin = Staff.find(admin_blog.staff_id)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          find(".edit0").click
+          expect(page).to have_content "管理者のブログ編集"
+          expect(page).to have_field("タイトル", with: admin_blog.title)
+          fill_in "タイトル", with: ""
+          fill_in "日時", with: ""
+          attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+          click_button "編集する"
+          expect(page).to have_content "タイトルを入力してください"
+          expect(page).to have_content "日時を入力してください"
+          expect(page).to have_content "管理者のブログ編集"
+        end
+      end
+
+      context "管理者はタイトルの無いスタッフのブログを編集する" do
+        scenario "admin edits staff's blog without a title" do
+          admin_blog = FactoryBot.create(:blog, :admin)
+          blog = []
+          4.times do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          admin = Staff.find(admin_blog.staff_id)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          find(".edit3").click
+          expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}のブログ編集" # edit -1
+          expect(page).to have_field("タイトル", with: blog[2].title) # edit -1
+          fill_in "タイトル", with: ""
+          fill_in "日時", with: DateTime.current + 1
+          attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+          click_button "編集する"
+          expect(page).to have_content "タイトルを入力してください"
+          expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}のブログ編集"
+        end
+      end
+
+      context "管理者は日時の無いスタッフのブログを編集する" do
+        scenario "admin edits staff's blog without datetime" do
+          admin_blog = FactoryBot.create(:blog, :admin)
+          blog = []
+          4.times do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          admin = Staff.find(admin_blog.staff_id)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          find(".edit3").click
+          expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}のブログ編集" # edit -1
+          expect(page).to have_field("タイトル", with: blog[2].title) # edit -1
+          fill_in "タイトル", with: blog[2].title + "-updated"
+          fill_in "日時", with: ""
+          attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+          click_button "編集する"
+          expect(page).to have_content "日時を入力してください"
+          expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}のブログ編集"
+        end
+      end
+
+      context "管理者はタイトルと日時の無いスタッフのブログを編集する" do
+        scenario "admin edits staff's blog without a title and datetime" do
+          admin_blog = FactoryBot.create(:blog, :admin)
+          blog = []
+          4.times do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          admin = Staff.find(admin_blog.staff_id)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          find(".edit3").click
+          expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}のブログ編集" # edit -1
+          expect(page).to have_field("タイトル", with: blog[2].title) # edit -1
+          fill_in "タイトル", with: ""
+          fill_in "日時", with: ""
+          attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+          click_button "編集する"
+          expect(page).to have_content "タイトルを入力してください"
+          expect(page).to have_content "日時を入力してください"
+          expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}のブログ編集"
+        end
+      end
+
+
+
     end
+
+
 
   end
 

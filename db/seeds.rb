@@ -75,11 +75,11 @@ end
 puts 'スケジュール作成'
 
 5.times do |n|
-  datetime = Faker::Time.between(from: DateTime.current- 1, to: DateTime.current, format: :default)
+  datetime = DateTime.current
   title = Faker::Educator.degree
   Blog.create!(datetime: datetime,
                title: title,
-               image: File.open("public/uploads/blog/image/#{n+1}/something.jpg"),
+               image: File.open("public/uploads/blog/image/1/something.jpg"),
                staff_id: n+1,
               )
 end
