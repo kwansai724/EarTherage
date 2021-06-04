@@ -67,4 +67,10 @@ ActiveRecord::Schema.define(version: 2021_05_28_141549) do
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 
+  create_table "uploads", force: :cascade do |t|
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end

@@ -5,9 +5,7 @@ ruby '2.6.6'
 
 gem 'rails', '~> 5.2.4', '>= 5.2.4.5'
 #gem 'rails-i18n'
-gem 'sqlite3'
 gem 'puma', '~> 3.11'
-gem 'faker'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -45,6 +43,10 @@ gem 'devise-bootstrap-views', '~> 1.0'
 #サンプル追加
 gem 'faker'
 
+# リッチテキスト
+gem 'simple_form'
+gem 'summernote-rails', '~> 0.8.10.0'
+
 # 画像投稿機能
 gem 'carrierwave'
 
@@ -57,9 +59,13 @@ gem 'bootstrap-will_paginate'
 #csvファイルimport
 gem 'roo'
 
+# デコレーター
+gem 'active_decorator'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.6.0'
   gem 'factory_bot_rails', '~> 4.10.0'
+  gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
@@ -77,6 +83,10 @@ group :test do
   gem 'selenium-webdriver'
   #gem 'chromedriver-helper'
   gem 'webdrivers', '~> 3.0'
+end
+
+group :production do
+  gem 'pg', '0.20.0'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

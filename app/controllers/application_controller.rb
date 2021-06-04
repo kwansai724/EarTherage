@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     @schedule = Schedule.find(params[:id])
   end
   
-  def set_student
+  def set_students
     @student = current_student
   end  
   private
