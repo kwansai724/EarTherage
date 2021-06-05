@@ -1,10 +1,9 @@
-class ImageUploader < CarrierWave::Uploader::Base
+class BlogUploader < CarrierWave::Uploader::Base
   # リサイズや画像形式を変更するのに必要
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
-  # 
   storage :file
   # storage :fog
 
@@ -27,16 +26,18 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
+
   # このアップローダーを利用した画像の最大値を指定
-  process resize_to_fit: [400, 500]
+  process resize_to_fill: [100, 100, "Center"]
   #
   # def scale(width, height)
   #   # do something
   # end
 
+
   # 上記とは別にサムネイルを別サイズで表示
   version :thumb do
-    process resize_to_fill: [200, 200]
+    process resize_to_fit: [100, 100]
   end
 
   # Add an allowlist of extensions which are allowed to be uploaded.
