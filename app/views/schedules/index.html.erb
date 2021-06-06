@@ -1,6 +1,6 @@
-<% if params[:search].present?%>
+<% if params[:area].present? || params[:event_type].present? || params[:teacher].present? %>
   <h1>検索結果</h1>
-<% elsif params[:search].blank? %>
+<% else %>
   <h1>イベント/講座一覧</h1>
 <% end %>
 
@@ -59,7 +59,7 @@
     <% end %>
   </div>
   <div class="center">
-    <% if params[:search].present? %>
+    <% if params[:area].present? || params[:event_type].present? || params[:teacher].present? %>
       <%= link_to "<　一覧へ戻る", schedules_path, class: "btn btn-outline-secondary" %>
     <% else %>
       <!-- 「staff_toppage_routes」はstaffs_helper.rbに記載 -->

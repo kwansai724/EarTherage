@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_124454) do
+ActiveRecord::Schema.define(version: 2021_06_06_043756) do
 
   create_table "schedules", force: :cascade do |t|
     t.date "date"
-    t.string "area"
+    t.integer "area"
     t.string "place"
-    t.string "teacher"
-    t.string "event_type"
+    t.integer "teacher"
+    t.integer "event_type"
     t.string "title"
     t.text "details"
     t.string "image"
