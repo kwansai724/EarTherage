@@ -7,8 +7,23 @@ class BlogsController < ApplicationController
   before_action :correct_staff_only, only: [:edit, :update, :destroy]
 
   def index
-    @blogs = Blog.all
-    @staff = Staff.find(current_staff.id)
+    if current_staff.present?
+      @blogs = Blog.all
+    elsif current_student.present?
+      if current_student.course_type == "therapist_training"
+        @blogs = Blog.where(share_with: 1..3)
+      elsif current_student.course_type == "self_care"
+        @blogs = Blog.where(share_with: 2..3)
+      end
+    else
+      @blogs = Blog.where(share_with: 3)
+    end
+
+    if current_staff.present?
+      @staff = Staff.find(current_staff.id)
+    else
+      @staff = nil
+    end
   end
 
   def new

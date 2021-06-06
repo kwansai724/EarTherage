@@ -645,7 +645,7 @@ RSpec.feature "Blogs", type: :feature do
 
   end
 
-    describe "削除機能" do
+  describe "削除機能" do
 
     context "管理者は管理者自身のブログを削除する" do
       scenario "admin deteles admin's own blog" do
