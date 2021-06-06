@@ -5,9 +5,22 @@ class SchedulesController < ApplicationController
   # スケジュール一覧
   def index
     @schedules = Schedule.all.order(created_at: "DESC")
-    if params[:search].present?
-      @schedules = Schedule.paginate(page: params[:page]).search(params[:search]) 
+    # if params[:search].present?
+    #   @schedules = Schedule.paginate(page: params[:page]).search(params[:search]) 
+    # end
+
+#追加分-------------------------------------------------------------------
+    if params[:area].present?
+      @schedules = @schedules.get_by_area params[:area]
+      # @schedules = Schedule.areas.key(params[:area].to_i)
     end
+    if params[:event_type].present?
+      @schedules = @schedules.get_by_event_type params[:event_type]
+    end
+    if params[:teacher].present?
+      @schedules = @schedules.get_by_teacher params[:teacher]
+    end
+#--------------------------------------------------------------------------    
   end
 
   # スケジュール詳細

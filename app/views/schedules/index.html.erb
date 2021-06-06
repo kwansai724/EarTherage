@@ -1,16 +1,29 @@
 <% if params[:search].present?%>
   <h1>検索結果</h1>
 <% elsif params[:search].blank? %>
-  <h1>開講スケジュール一覧</h1>
+  <h1>イベント/講座一覧</h1>
 <% end %>
 
-<div class="col-md-4 offset-md-8">
+<!--<div class="col-md-4 offset-md-8">
   <%= form_tag(schedules_path, :method => 'get') do %>
     <%= text_field_tag :search %>
     <%= submit_tag '項目検索' %>
   <% end %>
-</div>
+</div>-->
 
+<!--追加分------------------------------------------------------------------------------------------------>
+<div>
+  <%= form_tag(schedules_path, method: "get") do %>
+    <%= label_tag :area, "開催地域" %>
+    <%= select_tag :area, options_for_select(Schedule.areas), include_blank: true %>
+     / <%= label_tag :event_type, "種別" %>
+    <%= select_tag :event_type, options_for_select(Schedule.event_types), include_blank: true %>
+     / <%= label_tag :teacher, "講師" %>
+    <%= select_tag :teacher, options_for_select(Schedule.teachers), include_blank: true %>
+    <%= submit_tag "検索" %>
+  <% end %>
+</div>
+<!-------------------------------------------------------------------------------------------------------->
 
 <!--開講スケジュール一覧テーブル-->
 <div class="col-md-10 offset-md-1">
