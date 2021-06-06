@@ -9,7 +9,7 @@ class SchedulesController < ApplicationController
     #   @schedules = Schedule.paginate(page: params[:page]).search(params[:search]) 
     # end
 
-#追加分-------------------------------------------------------------------
+  #検索機能-------------------------------------------------------------------
     if params[:area].present?
       @schedules = @schedules.get_by_area params[:area]
       # @schedules = Schedule.areas.key(params[:area].to_i)
@@ -20,7 +20,7 @@ class SchedulesController < ApplicationController
     if params[:teacher].present?
       @schedules = @schedules.get_by_teacher params[:teacher]
     end
-#--------------------------------------------------------------------------    
+  #--------------------------------------------------------------------------    
   end
 
   # スケジュール詳細
