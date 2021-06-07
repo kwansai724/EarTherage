@@ -79,7 +79,7 @@ puts 'スケジュール作成'
   title = Faker::Educator.degree
   Blog.create!(datetime: datetime,
                title: title,
-               image: File.open("public/uploads/blog/image/1/something.jpg"),
+              #  image: File.open("public/uploads/blog/image/1/something.jpg"),
                staff_id: n+1,
               )
 end
