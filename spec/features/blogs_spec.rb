@@ -735,4 +735,500 @@ RSpec.feature "Blogs", type: :feature do
 
   end
 
+  describe "閲覧可能範囲設定" do
+
+    context "新規作成系" do
+
+      context "管理者が閲覧可能範囲でスタッフを指定してブログを新規作成" do
+
+        before do
+
+          admin = FactoryBot.create(:staff, :admin)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title0"
+            fill_in "日時", with: DateTime.current
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            find("option[value='staff']").select_option
+            click_button '作成する'
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          }.to change(admin.blogs, :count).by(1)
+          click_link "ログアウト"
+          click_link "受講生の方はこちら"
+
+        end
+
+        context "セラピスト養成コースの受講生からは見えない" do
+          scenario "therapist training course students can't see staff blog" do
+            student = FactoryBot.create(:student)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content "管理者"
+          end
+        end
+
+        context "セルフケアコースの受講生からは見えない" do
+          scenario "self care course students can't see staff blog" do
+            student = FactoryBot.create(:student, :self_care)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content "管理者"
+          end
+        end
+
+
+
+
+
+
+
+
+      end
+
+      context "スタッフが閲覧可能範囲でスタッフを指定してブログを新規作成" do
+
+        before do
+
+          @staff = FactoryBot.create(:staff)
+          fill_in "Eメール", with: @staff.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title0"
+            fill_in "日時", with: DateTime.current
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            find("option[value='staff']").select_option
+            click_button '作成する'
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          }.to change(@staff.blogs, :count).by(1)
+          click_link "ログアウト"
+          click_link "受講生の方はこちら"
+
+        end
+
+        context "セラピスト養成コースの受講生からは見えない" do
+          scenario "therapist training course students can't see staff blog" do
+            student = FactoryBot.create(:student)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content @staff.name
+          end
+        end
+
+        context "セルフケアコースの受講生からは見えない" do
+          scenario "self care course students can't see staff blog" do
+            student = FactoryBot.create(:student, :self_care)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content @staff.name
+          end
+        end
+
+
+
+
+
+
+
+
+      end
+
+      context "管理者が閲覧可能範囲でセラピスト養成コースを指定してブログを新規作成" do
+
+        before do
+
+          admin = FactoryBot.create(:staff, :admin)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title0"
+            fill_in "日時", with: DateTime.current
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            find("option[value='therapist_training']").select_option
+            click_button '作成する'
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          }.to change(admin.blogs, :count).by(1)
+          click_link "ログアウト"
+          click_link "受講生の方はこちら"
+
+        end
+
+        context "セラピスト養成コースの受講生から見える" do
+          scenario "therapist training course students can see staff blog" do
+            student = FactoryBot.create(:student)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+        context "セルフケアコースの受講生からは見えない" do
+          scenario "self care course students can't see staff blog" do
+            student = FactoryBot.create(:student, :self_care)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content "管理者"
+          end
+        end
+
+
+
+
+
+
+
+
+      end
+
+      context "スタッフが閲覧可能範囲でセラピスト養成コースを指定してブログを新規作成" do
+
+        before do
+
+          @staff = FactoryBot.create(:staff)
+          fill_in "Eメール", with: @staff.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title0"
+            fill_in "日時", with: DateTime.current
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            find("option[value='therapist_training']").select_option
+            click_button '作成する'
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          }.to change(@staff.blogs, :count).by(1)
+          click_link "ログアウト"
+          click_link "受講生の方はこちら"
+
+        end
+
+        context "セラピスト養成コースの受講生からは見える" do
+          scenario "therapist training course students can see staff blog" do
+            student = FactoryBot.create(:student)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+        context "セルフケアコースの受講生からは見えない" do
+          scenario "self care course students can't see staff blog" do
+            student = FactoryBot.create(:student, :self_care)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content @staff.name
+          end
+        end
+
+
+
+
+
+
+
+
+      end
+
+
+      context "管理者が閲覧可能範囲でセルフケアコースを指定してブログを新規作成" do
+
+        before do
+
+          admin = FactoryBot.create(:staff, :admin)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title0"
+            fill_in "日時", with: DateTime.current
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            find("option[value='self_care']").select_option
+            click_button '作成する'
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          }.to change(admin.blogs, :count).by(1)
+          click_link "ログアウト"
+          click_link "受講生の方はこちら"
+
+        end
+
+        context "セラピスト養成コースの受講生から見える" do
+          scenario "therapist training course students can see staff blog" do
+            student = FactoryBot.create(:student)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+        context "セルフケアコースの受講生からは見える" do
+          scenario "self care course students can see staff blog" do
+            student = FactoryBot.create(:student, :self_care)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+
+
+
+
+
+
+
+      end
+
+      context "スタッフが閲覧可能範囲でセルフケアコースを指定してブログを新規作成" do
+
+        before do
+
+          @staff = FactoryBot.create(:staff)
+          fill_in "Eメール", with: @staff.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title0"
+            fill_in "日時", with: DateTime.current
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            find("option[value='self_care']").select_option
+            click_button '作成する'
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          }.to change(@staff.blogs, :count).by(1)
+          click_link "ログアウト"
+          click_link "受講生の方はこちら"
+
+        end
+
+        context "セラピスト養成コースの受講生からは見える" do
+          scenario "therapist training course students can see staff blog" do
+            student = FactoryBot.create(:student)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+        context "セルフケアコースの受講生からは見える" do
+          scenario "self care course students can see staff blog" do
+            student = FactoryBot.create(:student, :self_care)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+
+
+
+
+
+
+
+      end
+
+
+      context "管理者が閲覧可能範囲で一般を指定してブログを新規作成" do
+
+        before do
+
+          admin = FactoryBot.create(:staff, :admin)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title0"
+            fill_in "日時", with: DateTime.current
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            find("option[value='general']").select_option
+            click_button '作成する'
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          }.to change(admin.blogs, :count).by(1)
+          click_link "ログアウト"
+          click_link "受講生の方はこちら"
+
+        end
+
+        context "セラピスト養成コースの受講生から見える" do
+          scenario "therapist training course students can see staff blog" do
+            student = FactoryBot.create(:student)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+        context "セルフケアコースの受講生からは見える" do
+          scenario "self care course students can see staff blog" do
+            student = FactoryBot.create(:student, :self_care)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+
+
+
+
+
+
+
+      end
+
+      context "スタッフが閲覧可能範囲で一般を指定してブログを新規作成" do
+
+        before do
+
+          @staff = FactoryBot.create(:staff)
+          fill_in "Eメール", with: @staff.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title0"
+            fill_in "日時", with: DateTime.current
+            attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            find("option[value='general']").select_option
+            click_button '作成する'
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          }.to change(@staff.blogs, :count).by(1)
+          click_link "ログアウト"
+          click_link "受講生の方はこちら"
+
+        end
+
+        context "セラピスト養成コースの受講生からは見える" do
+          scenario "therapist training course students can see staff blog" do
+            student = FactoryBot.create(:student)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+        context "セルフケアコースの受講生からは見える" do
+          scenario "self care course students can see staff blog" do
+            student = FactoryBot.create(:student, :self_care)
+            fill_in "Eメール", with: student.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+
+
+
+
+
+
+
+      end
+
+
+
+
+
+
+
+    end
+
+  end
+
 end

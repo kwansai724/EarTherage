@@ -19,6 +19,18 @@ class BlogsController < ApplicationController
       @blogs = Blog.where(share_with: 3)
     end
 
+    #if current_staff.present?
+    #  @blogs = Blog.all
+    #elsif current_student.present?
+    #  if current_student.course_type == "therapist_training"
+    #    @blogs = Blog.all
+    #  elsif current_student.course_type == "self_care"
+    #    @blogs = Blog.where(share_with: 1..2)
+    #  end
+    #else
+    #  @blogs = Blog.where(share_with: 2)
+    #end
+
     if current_staff.present?
       @staff = Staff.find(current_staff.id)
     else
