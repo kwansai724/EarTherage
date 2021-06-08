@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
   #rootを受講生ログイン画面に設定
   devise_scope :student do
     root "students/sessions#new"
@@ -25,6 +24,8 @@ Rails.application.routes.draw do
   resources :schedules#開講スケジュール
 
   resources :students#ユーザー管理
+
+  resources :uploads, only: [:create, :destroy]
 
   get 'serapoke' => 'serapoke#index', as: :serapoke#せらポケ
 

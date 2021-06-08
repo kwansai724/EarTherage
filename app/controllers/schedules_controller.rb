@@ -5,9 +5,22 @@ class SchedulesController < ApplicationController
   # スケジュール一覧
   def index
     @schedules = Schedule.all.order(created_at: "DESC")
-    if params[:search].present?
-      @schedules = Schedule.paginate(page: params[:page]).search(params[:search]) 
+    # if params[:search].present?
+    #   @schedules = Schedule.paginate(page: params[:page]).search(params[:search]) 
+    # end
+
+  #検索機能-------------------------------------------------------------------
+    if params[:area].present?
+      @schedules = @schedules.get_by_area params[:area]
+      # @schedules = Schedule.areas.key(params[:area].to_i)
     end
+    if params[:event_type].present?
+      @schedules = @schedules.get_by_event_type params[:event_type]
+    end
+    if params[:teacher].present?
+      @schedules = @schedules.get_by_teacher params[:teacher]
+    end
+  #--------------------------------------------------------------------------    
   end
 
   # スケジュール詳細
@@ -23,7 +36,7 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
     if @schedule.save
-      flash.now[:success] = 'スケジュールを作成しました。'
+      flash[:success] = '新規投稿しました。'
       redirect_to @schedule
     else
       render :new
@@ -37,7 +50,7 @@ class SchedulesController < ApplicationController
   # スケジュール更新
   def update
     if @schedule.update_attributes!(schedule_params)
-      flash.now[:success] = "スケジュールを更新しました。"
+      flash[:success] = "更新しました。"
       redirect_to @schedule
     else
       render :edit
@@ -47,7 +60,7 @@ class SchedulesController < ApplicationController
   # スケジュール削除
   def destroy
     @schedule.destroy
-    flash[:success] = "スケジュールのデータを削除しました。"
+    flash[:success] = "投稿を削除しました。"
     redirect_to schedules_url
   end
 

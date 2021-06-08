@@ -7,10 +7,10 @@ ja:
     attributes:
         schedule:
           date: 開催日
-          area: 地域
+          area: 開催エリア
           place: 場所
           teacher: セラピスト
-          event_type: 種類
+          event_type: 種別
           title: タイトル
           details: 詳細
           public_status: 公開状況

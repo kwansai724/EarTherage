@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_125633) do
+ActiveRecord::Schema.define(version: 2021_06_06_043756) do
 
   create_table "schedules", force: :cascade do |t|
     t.date "date"
-    t.string "area"
+    t.integer "area"
     t.string "place"
-    t.string "teacher"
-    t.string "event_type"
+    t.integer "teacher"
+    t.integer "event_type"
     t.string "title"
     t.text "details"
     t.string "image"
@@ -54,6 +54,12 @@ ActiveRecord::Schema.define(version: 2021_05_18_125633) do
     t.string "phone_number"
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
+  end
+
+  create_table "uploads", force: :cascade do |t|
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
