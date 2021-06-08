@@ -764,8 +764,39 @@ RSpec.feature "Blogs", type: :feature do
 
         end
 
+
+        context "管理者からは見える" do
+          scenario "admins can see blogs" do
+            admin = FactoryBot.create(:staff, :admin)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: admin.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+        context "スタッフからは見える" do
+          scenario "staffs can see blogs" do
+            staff = FactoryBot.create(:staff)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: staff.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+
+
         context "セラピスト養成コースの受講生からは見えない" do
-          scenario "therapist training course students can't see staff blog" do
+          scenario "therapist training course students can't see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -778,7 +809,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見えない" do
-          scenario "self care course students can't see staff blog" do
+          scenario "self care course students can't see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -824,8 +855,38 @@ RSpec.feature "Blogs", type: :feature do
 
         end
 
+        context "管理者からは見える" do
+          scenario "admins can see blogs" do
+            admin = FactoryBot.create(:staff, :admin)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: admin.email
+            click_button "ログイン"
+            click_link "スタッフブログ投稿"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+        context "スタッフからは見える" do
+          scenario "staffs can see blogs" do
+            staff = FactoryBot.create(:staff)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: staff.email
+            click_button "ログイン"
+            click_link "スタッフブログ投稿"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+
+
         context "セラピスト養成コースの受講生からは見えない" do
-          scenario "therapist training course students can't see staff blog" do
+          scenario "therapist training course students can't see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -838,7 +899,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見えない" do
-          scenario "self care course students can't see staff blog" do
+          scenario "self care course students can't see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -884,8 +945,39 @@ RSpec.feature "Blogs", type: :feature do
 
         end
 
+        context "管理者からは見える" do
+          scenario "admins can see blogs" do
+            admin = FactoryBot.create(:staff, :admin)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: admin.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+        context "スタッフからは見える" do
+          scenario "staffs can see blogs" do
+            staff = FactoryBot.create(:staff)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: staff.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+
+
+
         context "セラピスト養成コースの受講生から見える" do
-          scenario "therapist training course students can see staff blog" do
+          scenario "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -898,7 +990,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見えない" do
-          scenario "self care course students can't see staff blog" do
+          scenario "self care course students can't see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -944,8 +1036,38 @@ RSpec.feature "Blogs", type: :feature do
 
         end
 
+        context "管理者からは見える" do
+          scenario "admins can see blogs" do
+            admin = FactoryBot.create(:staff, :admin)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: admin.email
+            click_button "ログイン"
+            click_link "スタッフブログ投稿"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+        context "スタッフからは見える" do
+          scenario "staffs can see blogs" do
+            staff = FactoryBot.create(:staff)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: staff.email
+            click_button "ログイン"
+            click_link "スタッフブログ投稿"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+
+
         context "セラピスト養成コースの受講生からは見える" do
-          scenario "therapist training course students can see staff blog" do
+          scenario "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -958,7 +1080,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見えない" do
-          scenario "self care course students can't see staff blog" do
+          scenario "self care course students can't see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1005,8 +1127,38 @@ RSpec.feature "Blogs", type: :feature do
 
         end
 
+        context "管理者からは見える" do
+          scenario "admins can see blogs" do
+            admin = FactoryBot.create(:staff, :admin)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: admin.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+        context "スタッフからは見える" do
+          scenario "staffs can see blogs" do
+            staff = FactoryBot.create(:staff)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: staff.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+
+
         context "セラピスト養成コースの受講生から見える" do
-          scenario "therapist training course students can see staff blog" do
+          scenario "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1019,7 +1171,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見える" do
-          scenario "self care course students can see staff blog" do
+          scenario "self care course students can see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1065,8 +1217,38 @@ RSpec.feature "Blogs", type: :feature do
 
         end
 
+        context "管理者からは見える" do
+          scenario "admins can see blogs" do
+            admin = FactoryBot.create(:staff, :admin)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: admin.email
+            click_button "ログイン"
+            click_link "スタッフブログ投稿"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+        context "スタッフからは見える" do
+          scenario "staffs can see blogs" do
+            staff = FactoryBot.create(:staff)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: staff.email
+            click_button "ログイン"
+            click_link "スタッフブログ投稿"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+
+
         context "セラピスト養成コースの受講生からは見える" do
-          scenario "therapist training course students can see staff blog" do
+          scenario "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1079,7 +1261,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見える" do
-          scenario "self care course students can see staff blog" do
+          scenario "self care course students can see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1126,8 +1308,38 @@ RSpec.feature "Blogs", type: :feature do
 
         end
 
+        context "管理者からは見える" do
+          scenario "admins can see blogs" do
+            admin = FactoryBot.create(:staff, :admin)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: admin.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+        context "スタッフからは見える" do
+          scenario "staffs can see blogs" do
+            staff = FactoryBot.create(:staff)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: staff.email
+            click_button "ログイン"
+            click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content "管理者"
+          end
+        end
+
+
+
         context "セラピスト養成コースの受講生から見える" do
-          scenario "therapist training course students can see staff blog" do
+          scenario "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1140,7 +1352,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見える" do
-          scenario "self care course students can see staff blog" do
+          scenario "self care course students can see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1186,8 +1398,38 @@ RSpec.feature "Blogs", type: :feature do
 
         end
 
+        context "管理者からは見える" do
+          scenario "admins can see blogs" do
+            admin = FactoryBot.create(:staff, :admin)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: admin.email
+            click_button "ログイン"
+            click_link "スタッフブログ投稿"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+        context "スタッフからは見える" do
+          scenario "staffs can see blogs" do
+            staff = FactoryBot.create(:staff)
+            click_link "管理者・スタッフはこちら"
+            fill_in "Eメール", with: staff.email
+            click_button "ログイン"
+            click_link "スタッフブログ投稿"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content Date.today
+            expect(page).to have_content @staff.name
+          end
+        end
+
+
+
         context "セラピスト養成コースの受講生からは見える" do
-          scenario "therapist training course students can see staff blog" do
+          scenario "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1200,7 +1442,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見える" do
-          scenario "self care course students can see staff blog" do
+          scenario "self care course students can see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1219,6 +1461,162 @@ RSpec.feature "Blogs", type: :feature do
 
 
 
+      end
+
+
+
+
+
+
+
+    end
+
+    context "詳細表示系" do
+
+      before do
+        @blog = []
+        @blog[0] = FactoryBot.create(:blog, :admin)
+        @blog[1] = FactoryBot.create(:blog)
+        @blog[2] = FactoryBot.create(:blog, :therapist_training)
+        @blog[3] = FactoryBot.create(:blog, :self_care)
+        @blog[4] = FactoryBot.create(:blog, :general)
+        @blog[5] = FactoryBot.create(:blog, :admin)
+        @blog[6] = FactoryBot.create(:blog)
+        @blog[7] = FactoryBot.create(:blog, :therapist_training)
+        @blog[8] = FactoryBot.create(:blog, :self_care)
+        @blog[9] = FactoryBot.create(:blog, :general)
+
+      end
+
+      context "管理者から見る"do
+
+        scenario "admins can see all blogs" do
+          admin = FactoryBot.create(:staff, :admin)
+          fill_in "Eメール", with: admin.email
+          click_button "ログイン"
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to have_content @blog[0].title
+          expect(page).to have_content Date.today
+          expect(page).to have_content "管理者"
+          expect(page).to have_content @blog[1].title
+          expect(page).to have_content "#{Staff.find(@blog[1].staff_id).name}"
+          expect(page).to have_content @blog[2].title
+          expect(page).to have_content "#{Staff.find(@blog[2].staff_id).name}"
+          expect(page).to have_content @blog[3].title
+          expect(page).to have_content "#{Staff.find(@blog[3].staff_id).name}"
+          expect(page).to have_content @blog[4].title
+          expect(page).to have_content "#{Staff.find(@blog[4].staff_id).name}"
+          expect(page).to have_content @blog[5].title
+          expect(page).to have_content "#{Staff.find(@blog[5].staff_id).name}"
+          expect(page).to have_content @blog[6].title
+          expect(page).to have_content "#{Staff.find(@blog[6].staff_id).name}"
+          expect(page).to have_content @blog[7].title
+          expect(page).to have_content "#{Staff.find(@blog[7].staff_id).name}"
+          expect(page).to have_content @blog[8].title
+          expect(page).to have_content "#{Staff.find(@blog[8].staff_id).name}"
+          expect(page).to have_content @blog[9].title
+          expect(page).to have_content "#{Staff.find(@blog[9].staff_id).name}"
+        end
+      end
+
+      context "スタッフから見る"do
+
+        scenario "staffs can see all blogs" do
+          staff = FactoryBot.create(:staff)
+          fill_in "Eメール", with: staff.email
+          click_button "ログイン"
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to have_content @blog[0].title
+          expect(page).to have_content Date.today
+          expect(page).to have_content "管理者"
+          expect(page).to have_content @blog[1].title
+          expect(page).to have_content "#{Staff.find(@blog[1].staff_id).name}"
+          expect(page).to have_content @blog[2].title
+          expect(page).to have_content "#{Staff.find(@blog[2].staff_id).name}"
+          expect(page).to have_content @blog[3].title
+          expect(page).to have_content "#{Staff.find(@blog[3].staff_id).name}"
+          expect(page).to have_content @blog[4].title
+          expect(page).to have_content "#{Staff.find(@blog[4].staff_id).name}"
+          expect(page).to have_content @blog[5].title
+          expect(page).to have_content "#{Staff.find(@blog[5].staff_id).name}"
+          expect(page).to have_content @blog[6].title
+          expect(page).to have_content "#{Staff.find(@blog[6].staff_id).name}"
+          expect(page).to have_content @blog[7].title
+          expect(page).to have_content "#{Staff.find(@blog[7].staff_id).name}"
+          expect(page).to have_content @blog[8].title
+          expect(page).to have_content "#{Staff.find(@blog[8].staff_id).name}"
+          expect(page).to have_content @blog[9].title
+          expect(page).to have_content "#{Staff.find(@blog[9].staff_id).name}"
+        end
+      end
+
+
+      context "セラピスト養成コース受講生から見る"do
+
+        scenario "therapist training course students can see therapist_training course blogs" do
+          student = FactoryBot.create(:student)
+          click_link "受講生の方はこちら"
+          fill_in "Eメール", with: student.email
+          click_button "ログイン"
+          click_link "スタッフブログ"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to_not have_content @blog[0].title
+          expect(page).to have_content Date.today
+          expect(page).to_not have_content "管理者"
+          expect(page).to_not have_content @blog[1].title
+          expect(page).to_not have_content "#{Staff.find(@blog[1].staff_id).name}"
+          expect(page).to have_content @blog[2].title
+          expect(page).to have_content "#{Staff.find(@blog[2].staff_id).name}"
+          expect(page).to have_content @blog[3].title
+          expect(page).to have_content "#{Staff.find(@blog[3].staff_id).name}"
+          expect(page).to have_content @blog[4].title
+          expect(page).to have_content "#{Staff.find(@blog[4].staff_id).name}"
+          expect(page).to_not have_content @blog[5].title
+          expect(page).to_not have_content "#{Staff.find(@blog[5].staff_id).name}"
+          expect(page).to_not have_content @blog[6].title
+          expect(page).to_not have_content "#{Staff.find(@blog[6].staff_id).name}"
+          expect(page).to have_content @blog[7].title
+          expect(page).to have_content "#{Staff.find(@blog[7].staff_id).name}"
+          expect(page).to have_content @blog[8].title
+          expect(page).to have_content "#{Staff.find(@blog[8].staff_id).name}"
+          expect(page).to have_content @blog[9].title
+          expect(page).to have_content "#{Staff.find(@blog[9].staff_id).name}"
+        end
+      end
+
+      context "セルフケアコース受講生から見る"do
+
+        scenario "self care course students can see self_care course blogs" do
+          student = FactoryBot.create(:student, :self_care)
+          click_link "受講生の方はこちら"
+          fill_in "Eメール", with: student.email
+          click_button "ログイン"
+          click_link "スタッフブログ"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to_not have_content @blog[0].title
+          expect(page).to have_content Date.today
+          expect(page).to_not have_content "管理者"
+          expect(page).to_not have_content @blog[1].title
+          expect(page).to_not have_content "#{Staff.find(@blog[1].staff_id).name}"
+          expect(page).to_not have_content @blog[2].title
+          expect(page).to_not have_content "#{Staff.find(@blog[2].staff_id).name}"
+          expect(page).to have_content @blog[3].title
+          expect(page).to have_content "#{Staff.find(@blog[3].staff_id).name}"
+          expect(page).to have_content @blog[4].title
+          expect(page).to have_content "#{Staff.find(@blog[4].staff_id).name}"
+          expect(page).to_not have_content @blog[5].title
+          expect(page).to_not have_content "#{Staff.find(@blog[5].staff_id).name}"
+          expect(page).to_not have_content @blog[6].title
+          expect(page).to_not have_content "#{Staff.find(@blog[6].staff_id).name}"
+          expect(page).to_not have_content @blog[7].title
+          expect(page).to_not have_content "#{Staff.find(@blog[7].staff_id).name}"
+          expect(page).to have_content @blog[8].title
+          expect(page).to have_content "#{Staff.find(@blog[8].staff_id).name}"
+          expect(page).to have_content @blog[9].title
+          expect(page).to have_content "#{Staff.find(@blog[9].staff_id).name}"
+        end
       end
 
 
