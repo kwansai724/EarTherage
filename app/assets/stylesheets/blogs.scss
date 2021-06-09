@@ -1,0 +1,92 @@
+//main div {
+//  margin: 0; /* 要素の外側の余白を0に定義 */
+//  padding: 0; /* 要素の内側の余白を0に定義 */
+//}
+.pyramid_parent_1 {
+  //border :solid;         /* 子要素を左右中央揃えにする */
+}
+
+.pyramid_box_1 {
+    border: solid;
+    border-color: red;
+    height: 200px;
+    width: 200px;               /* 幅指定 */
+    display:  inline-block;     /* インラインブロック要素にする */
+    background-color:  #ccc;    /* 背景色指定 */
+    padding-top: 50px;
+    margin-left: 100px;
+    margin-bottom: 5px;         /* 要素同士の隙間調整 */
+    padding: 38px 30px 30px 30px;              /* 余白指定 */
+    //padding-top: 100px;
+    box-sizing: border-box;     /* 崩れ防止 */
+    vertical-align:  top;
+}
+
+.pyramid_box_2 {
+    height: 200px;
+    width: 700px;               /* 幅指定 */
+    display:  inline-block;     /* インラインブロック要素にする */
+    background-color:  #ddd;    /* 背景色指定 */
+    margin-bottom: 5px;         /* 要素同士の隙間調整 */
+    padding: 30px;              /* 余白指定 */
+    box-sizing: border-box;     /* 崩れ防止 */
+    vertical-align:  top;
+}
+
+.pyramid_parent_2 {
+
+}
+
+.pyramid_box_3 {
+    height: 50px;
+    width: 200px;               /* 幅指定 */
+    display:  inline-block;     /* インラインブロック要素にする */
+    background-color:  #00e;    /* 背景色指定 */
+    margin-top: 30px;
+    //margin-left: 100px;
+    //margin-bottom: 5px;         /* 要素同士の隙間調整 */
+    //padding: 30px;              /* 余白指定 */
+    box-sizing: border-box;     /* 崩れ防止 */
+    //vertical-align:  top;
+}
+.pyramid_box_4 {
+    height: 50px;
+    width: 200px;               /* 幅指定 */
+    display:  inline-block;     /* インラインブロック要素にする */
+    background-color:  #e00;    /* 背景色指定 */
+    margin-top: 30px;
+    //margin-bottom: 5px;         /* 要素同士の隙間調整 */
+    //padding: 30px;              /* 余白指定 */
+    box-sizing: border-box;     /* 崩れ防止 */
+    //vertical-align:  top;
+}
+
+.pyramid_parent_3 {
+
+}
+
+.pyramid_box_5 {
+  height: 20px;
+  width: 60px;
+  display: inline-block;
+  background-color: #050;
+  margin-top: 10px;
+  margin-left: 500px;
+  box-sizing: border-box;
+}
+
+.pyramid_box_6 {
+  height: 20px;
+  width: 60px;
+  display: inline-block;
+  background-color: #390;
+  margin-top: 10px;
+  margin-left: 10px;
+  box-sizing: border-box;
+}
+
+
+.blog_title {
+  font-size: x-large;
+}
+
