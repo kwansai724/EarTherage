@@ -1,8 +1,14 @@
 FactoryBot.define do
   factory :student do
-    name        { "Aaron" }
-    course_type { "therapist_training" }
-    email       { "sample-1@email.com" }
-    password    { "password" }
+    sequence(:name)  { |n| "student#{n}" }
+    course_type      { "therapist_training" }
+    sequence(:email) { |n| "sample-#{n}@email.com" }
+    password         { "password" }
   end
+
+  # セルフケアコース
+    trait :self_care do
+      course_type      { "self_care" }
+   end
+
 end

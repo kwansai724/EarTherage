@@ -13,10 +13,10 @@
 ActiveRecord::Schema.define(version: 2021_06_06_043756) do
 
   create_table "blogs", force: :cascade do |t|
-    t.string "title"
-    t.datetime "datetime"
+    t.string "title", default: "", null: false
+    t.datetime "datetime", default: "2021-06-08 13:15:36", null: false
     t.string "image"
-    t.string "share_with"
+    t.integer "share_with", default: 0, null: false
     t.integer "staff_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
