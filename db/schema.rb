@@ -12,6 +12,17 @@
 
 ActiveRecord::Schema.define(version: 2021_06_06_043756) do
 
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.datetime "datetime"
+    t.string "image"
+    t.string "share_with"
+    t.integer "staff_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["staff_id"], name: "index_blogs_on_staff_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.date "date"
     t.integer "area"

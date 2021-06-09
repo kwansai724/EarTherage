@@ -63,6 +63,8 @@ gem 'roo'
 gem 'active_decorator'
 
 group :development, :test do
+  gem 'rspec-rails', '~> 3.6.0'
+  gem 'factory_bot_rails', '~> 4.10.0'
   gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -72,12 +74,15 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-commands-rspec'
 end
 
 group :test do
   gem 'capybara', '>= 2.15'
+  #gem 'launchy', '~> 2.4.3'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
+  #gem 'chromedriver-helper'
+  gem 'webdrivers', '~> 3.0'
 end
 
 group :production do
