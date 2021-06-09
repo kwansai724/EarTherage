@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   get 'admin_screen' => 'admin_screen#index', as: :admin_screen#管理者画面
   get 'staffs_screen' => 'staffs_screen#index', as: :staffs_screen#スタッフ画面
 
-  resources :staff_blogs#スタッフブログ
+  resources :staff do
+    resources :blogs #スタッフブログ
+  end
 
   resources :schedules#開講スケジュール
 

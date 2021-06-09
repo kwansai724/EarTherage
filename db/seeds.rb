@@ -73,3 +73,16 @@ puts "Staff Created"
 #               )
 # end
 # puts 'スケジュール作成'
+
+5.times do |n|
+  datetime = DateTime.current
+  title = Faker::Educator.degree
+  Blog.create!(datetime: datetime,
+               title: title,
+               image: File.open("public/uploads/blog/image/1/something.jpg"),
+               staff_id: n+1,
+               share_with: n%4
+              )
+end
+
+puts "ブログ作成"

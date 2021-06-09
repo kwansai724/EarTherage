@@ -1,0 +1,19 @@
+<%= form_with model: [@staff,@blog], local: true do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  <%= f.hidden_field :staff_id, :value => @staff.id %>
+
+  <%= f.label :title, class: "label-#{yield(:class_text)}" %>
+  <%= f.text_field :title, class: "form-control" %>
+
+  <%= f.label :datetime, class: "label-#{yield(:class_text)}" %>
+  <%= f.datetime_field :datetime, class: "form-control" %>
+
+  <%= f.label "画像をアップロード", class: "label-#{yield(:class_text)}" %><br>
+    <%= image_tag @blog.image.url(:thumb), id: :img_prev if @blog.image? %>
+  <%= f.file_field :image, id: "blog_image", class: "form-control" %>
+
+  <%= f.label :share_with, class: "label-#{yield(:class_text)}" %>
+  <%= f.select :share_with, [['スタッフ', 'staff'],['セラピスト養成コース','therapist_training'],['セルフケアコース','self_care'],['一般','general']], class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-outline-primary btn-block btn-#{yield(:class_text)}" %>
+<% end %>
