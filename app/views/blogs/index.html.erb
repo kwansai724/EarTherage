@@ -1,5 +1,4 @@
 <h1>スタッフブログ一覧</h1>
-<%= render 'layouts/flash_messages' %>
 <% if @staff.present? %>
   <div>
     <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info" %>
