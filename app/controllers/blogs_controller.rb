@@ -1,17 +1,49 @@
 class BlogsController < ApplicationController
+# オブジェクトの準備
+  before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :set_staff, only: [:new, :create, :show]
+  before_action :set_staff_by_blog_object, only: [:edit, :update, :destroy]
+  # アクセス制限
+  before_action :correct_staff_only, only: [:edit, :update, :destroy]
+
   def index
-    @blogs = Blog.all
-    @staff = Staff.find(current_staff.id)
+    if current_staff.present?
+      @blogs = Blog.all
+    elsif current_student.present?
+      if current_student.course_type == "therapist_training"
+        @blogs = Blog.where(share_with: 1..3)
+      elsif current_student.course_type == "self_care"
+        @blogs = Blog.where(share_with: 2..3)
+      end
+    else
+      @blogs = Blog.where(share_with: 3)
+    end
+
+    #if current_staff.present?
+    #  @blogs = Blog.all
+    #elsif current_student.present?
+    #  if current_student.course_type == "therapist_training"
+    #    @blogs = Blog.all
+    #  elsif current_student.course_type == "self_care"
+    #    @blogs = Blog.where(share_with: 1..2)
+    #  end
+    #else
+    #  @blogs = Blog.where(share_with: 2)
+    #end
+
+    if current_staff.present?
+      @staff = Staff.find(current_staff.id)
+    else
+      @staff = nil
+    end
   end
 
   def new
     @blog = Blog.new
-    @staff = Staff.find(params[:staff_id])
   end
 
   def create
     @blog = Blog.new(blog_params)
-    @staff = Staff.find(params[:staff_id])
     if @blog.save
       flash.now[:success] = "ブログを作成しました。"
       redirect_to staff_blogs_url(@staff)
@@ -22,18 +54,12 @@ class BlogsController < ApplicationController
   end
 
   def show
-    @blog = Blog.find(params[:id])
-    @staff = Staff.find(params[:staff_id])
   end
 
   def edit
-    @blog = Blog.find(params[:id])
-    @staff = Staff.find(@blog.staff_id)
   end
 
   def update
-    @blog = Blog.find(params[:id])
-    @staff = Staff.find(@blog.staff_id)
     if @blog.update_attributes(blog_params)
       flash[:success] = "ブログを更新しました。"
       redirect_to staff_blogs_url(@staff)
@@ -44,8 +70,6 @@ class BlogsController < ApplicationController
   end
 
   def destroy
-    @blog = Blog.find(params[:id])
-    @staff = Staff.find(@blog.staff_id)
     @blog.destroy
     flash[:success] = "ブログのデータを削除しました。"
     redirect_to staff_blogs_url(@staff)
@@ -55,5 +79,25 @@ class BlogsController < ApplicationController
 
     def blog_params
       params.require(:blog).permit(:title, :datetime, :image, :share_with, :staff_id)
+    end
+
+    # 管理者かログインしているスタッフが自身のブログである場合のみアクセス可
+    def correct_staff_only
+      unless current_staff.present? && (current_staff.admin == true || current_staff.id == @staff.id)
+        flash[:notice] = "許可されていない操作でです。"
+        redirect_to root_url
+      end
+    end
+
+    def set_staff
+      @staff = Staff.find(params[:staff_id])
+    end
+
+    def set_blog
+      @blog = Blog.find(params[:id])
+    end
+
+    def set_staff_by_blog_object
+      @staff = Staff.find(@blog.staff_id)
     end
 end

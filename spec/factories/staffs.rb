@@ -9,7 +9,7 @@ FactoryBot.define do
   # 管理者
   trait :admin do
     name             { "管理者" }
-    email            { "sample0@email.com" }
+    sequence(:email) { |n| "sample0-#{n}@email.com" }
     admin            { true }
   end
 end
