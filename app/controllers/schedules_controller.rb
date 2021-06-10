@@ -56,7 +56,6 @@ class SchedulesController < ApplicationController
 
       def schedule_params
         params.require(:schedule).permit(:date, :area, :place, :teacher, :event_type, :title, :details, :image, :public_status, :judgment_of_menbers)
-        # params.require(:schedule).permit(:details, :image)
       end
 
 end
