@@ -10,7 +10,7 @@ class CreateSchedules < ActiveRecord::Migration[5.2]
       t.text :details # 詳細
       t.string :image # 画像
       t.integer :public_status, default: false, null: false # 公開状況
-      t.boolean :judgment_of_menbers # 会員・非会員の判定
+      t.boolean :judgement_of_members # 会員・非会員の判定
 
       t.timestamps
     end

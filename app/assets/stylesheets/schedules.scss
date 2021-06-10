@@ -62,15 +62,15 @@ h1 {
   transform: translate(-50%,-50%);
   margin:0;
   padding:0;
-  color: black;
+  color: red;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 3em;
   font-family :Quicksand, sans-serif;
 }
 
 .thumb-image-cancel{
   pointer-events: none;
-  
+  opacity: 0.4;
 }
 
 
