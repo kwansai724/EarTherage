@@ -1,12 +1,13 @@
 <h1>スタッフブログ一覧</h1>
-<%= render 'layouts/flash_messages' %>
-<div>
-  <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info" %>
-</div>
+<% if @staff.present? %>
+  <div>
+    <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info" %>
+  </div>
+<% end %>
 <% @blogs.each_with_index do |blog, n| %>
   <div>
     <!-- blogインスタンスの画像ファイルのURLを取得し表示 -->
-    <p><%= link_to (image_tag(blog.image.thumb.to_s, alt: "show#{n}") if blog.image?), staff_blog_url(@staff, blog) %></p>
+    <p><%= link_to (image_tag(blog.image.thumb.to_s, alt: "show#{n}") if blog.image?), staff_blog_url(Staff.find(blog.staff_id), blog) %></p>
   </div>
   <div>
     <%= blog.title %>
@@ -18,8 +19,10 @@
   <div>
     <%= staff.name %>
   </div>
-  <%= link_to "編集", edit_staff_blog_path(staff, blog), class: "btn btn-primary edit#{n}" %>
-  <%= link_to "削除", staff_blog_path(staff, blog), method: :delete,
+  <% if current_staff.present? && (current_staff.admin == true || current_staff.id == blog.staff_id) %>
+    <%= link_to "編集", edit_staff_blog_path(staff, blog), class: "btn btn-primary edit#{n}" %>
+    <%= link_to "削除", staff_blog_path(staff, blog), method: :delete,
                                         data: {confirm: "削除してよろしいですか？" },
                                         class: "btn btn-danger delete#{n}" %>
+  <% end %>
 <% end %>

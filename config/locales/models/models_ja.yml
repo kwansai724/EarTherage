@@ -8,10 +8,10 @@ ja:
     attributes:
         schedule:
           date: 開催日
-          area: 地域
+          area: 開催エリア
           place: 場所
           teacher: セラピスト
-          event_type: 種類
+          event_type: 種別
           title: タイトル
           details: 詳細
           public_status: 公開状況
@@ -38,7 +38,7 @@ ja:
           title: タイトル
           datetime: 日時
           image: 画像
-          share_with: アクセス制限
+          share_with: 閲覧可能範囲
           staff_id: スタッフID
           created_at: 作成日
           updated_at: 更新日

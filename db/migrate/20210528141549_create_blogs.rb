@@ -1,10 +1,10 @@
 class CreateBlogs < ActiveRecord::Migration[5.2]
   def change
     create_table :blogs do |t|
-      t.string :title
-      t.datetime :datetime
+      t.string :title , null: false, default: ""
+      t.datetime :datetime, null: false, default: DateTime.current
       t.string :image
-      t.string :share_with
+      t.integer :share_with, null: false, default: 0
       t.references :staff, index: true, foreign_key: true
 
       t.timestamps

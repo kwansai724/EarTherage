@@ -1,19 +1,44 @@
-<% if params[:search].present?%>
+<% if params[:area].present? || params[:event_type].present? || params[:teacher].present? %>
   <h1>検索結果</h1>
-<% elsif params[:search].blank? %>
-  <h1>開講スケジュール一覧</h1>
+<% else %>
+  <h1>イベント/講座一覧</h1>
 <% end %>
 
-<div class="col-md-4 offset-md-8">
+<!--<div class="col-md-4 offset-md-8">
   <%= form_tag(schedules_path, :method => 'get') do %>
     <%= text_field_tag :search %>
     <%= submit_tag '項目検索' %>
   <% end %>
-</div>
+</div>-->
 
 
 <!--開講スケジュール一覧テーブル-->
 <div class="col-md-10 offset-md-1">
+
+  <!--検索フォーム------------------------------------------------------------------------------------------------>
+  <div class="col-md-4 offset-md-8 row">
+    <% if params[:area].present? || params[:event_type].present? || params[:teacher].present? %>
+      <p>検索条件：</p>
+    <% end %>
+    <% if params[:area].present? %>
+      <p>【<%= Schedule.areas.key(params[:area].to_i) %>】</p>
+    <% end %>
+    <% if params[:event_type].present? %>
+      <p>【<%= Schedule.event_types.key(params[:event_type].to_i) %>】</p>
+    <% end %>
+    <% if params[:teacher].present? %>
+      <p>【<%= Schedule.teachers.key(params[:teacher].to_i) %>】</p>
+    <% end %>
+
+    <%= form_tag(schedules_path, method: "get") do %>
+      <%= select_tag :area, options_for_select(Schedule.areas), prompt: "＜開催エリア＞", class: 'form-control' %>
+      <%= select_tag :event_type, options_for_select(Schedule.event_types), prompt: "＜種別＞", class: 'form-control' %>
+      <%= select_tag :teacher, options_for_select(Schedule.teachers), prompt: "＜セラピスト＞", class: 'form-control' %>
+      <%= submit_tag "検索", class: "btn btn-info" %>
+    <% end %>
+  </div>
+  <!-------------------------------------------------------------------------------------------------------->
+
   <div class="btn-schedule-new">
     <%= link_to "新規追加", new_schedule_path(@schedule), class: "btn btn-info" %>
   </div>
@@ -55,7 +80,7 @@
     <% end %>
   </div>
   <div class="center">
-    <% if params[:search].present? %>
+    <% if params[:area].present? || params[:event_type].present? || params[:teacher].present? %>
       <%= link_to "<　一覧へ戻る", schedules_path, class: "btn btn-outline-secondary" %>
     <% else %>
       <!-- 「staff_toppage_routes」はstaffs_helper.rbに記載 -->
