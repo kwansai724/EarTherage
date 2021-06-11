@@ -15,16 +15,16 @@ h1 {
 }
 
 /* スケジュール一覧 */
-#index-schedule {
-  th {
-    vertical-align: middle;
-    text-align: center;
-  }
-  td {
-    vertical-align: middle;
-    text-align: center;
-  }
-}
+// #index-schedule {
+//   th {
+//     vertical-align: middle;
+//     text-align: center;
+//   }
+//   td {
+//     vertical-align: middle;
+//     text-align: center;
+//   }
+// }
 
 .contents-wrap{
   // display: -webkit-box;
@@ -32,19 +32,47 @@ h1 {
 	display: flex; /* 横並びにする */
   flex-wrap: wrap; /* 折り返し表示 */
   // justify-content: space-between;
+  text-align: center;
 }
 
 .contents-box{
-  margin-bottom: 3rem;
-	padding: 3rem;
+  margin-bottom: 2rem;
+	padding: 2rem;
   flex-basis: 32%;
 	// width: 32%;
 	background-color: #f0f0f0;
+  margin-right: 1%;
 }
 
-.contents-box:not(:nth-child(3n)){
-  margin-right: 2%;
+// .contents-box:not(:nth-child(3n)){
+//   margin-right: 2%;
+// }
+
+
+.thumbnail{
+  position: relative;
 }
+
+.thumbnail p{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  color: red;
+  font-weight: bold;
+  font-size: 3em;
+  font-family :Quicksand, sans-serif;
+}
+
+.thumb-image-cancel{
+  pointer-events: none;
+  opacity: 0.4;
+}
+
 
 // .contents-box .thumb-image{
 //   display: block;
@@ -82,7 +110,8 @@ h1 {
 
 /* ラジオボタン（丸）の非表示 */
 .radio_view{
-  appearance: none;
+  // appearance: none;
+  display: none;
   position: absolute;
 }
 
