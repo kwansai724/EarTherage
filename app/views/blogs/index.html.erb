@@ -1,4 +1,6 @@
-<h1>スタッフブログ一覧</h1>
+<div class="blog--title">
+  <h1>スタッフブログ一覧</h1>
+</div>
 <%= render 'layouts/flash_messages' %>
 <% if @staff.present? %>
   <div>
@@ -17,7 +19,7 @@
       </div>
       <div class="pyramid_parent_2">
         <div class="pyramid_box_3">
-          <%= blog.datetime %>
+          <%= l(blog.datetime, format: :longdatetime) %>
         </div>
         <% staff = Staff.find(blog.staff_id) %>
         <div class="pyramid_box_4">
@@ -27,12 +29,12 @@
       <div class="pyramid_parent_3">
         <% if current_staff.present? && (current_staff.admin == true || current_staff.id == blog.staff_id) %>
           <div class="pyramid_box_5">
-            <%= link_to "編集", edit_staff_blog_path(staff, blog), class: "btn btn-primary edit#{n}" %>
+            <%= link_to "編集", edit_staff_blog_path(staff, blog), class: "btn btn-primary btn-sm edit#{n} font-edit" %>
           </div>
           <div class="pyramid_box_6">
             <%= link_to "削除", staff_blog_path(staff, blog), method: :delete,
                                         data: {confirm: "削除してよろしいですか？" },
-                                        class: "btn btn-danger delete#{n}" %>
+                                        class: "btn btn-danger btn-sm delete#{n} font-delete" %>
           </div>
         <% end %>
       </div>
