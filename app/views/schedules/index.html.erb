@@ -53,11 +53,18 @@
             <% end %>
           </p>
           <div class="thumbnail">
-            <% if s.public_status == '中止' %>
-              <%= link_to (image_tag s.image.thumb.to_s if s.image?), s, class: "thumb-image-cancel" %>
+            <% if s.image? %>
+              <% if s.public_status == '中止' %>
+                <%= link_to (image_tag s.image.thumb.to_s), s, class: "thumb-image-cancel" %>
+                <p>中止</p>
+              <% else %>
+                <%= link_to (image_tag s.image.thumb.to_s), s, class: "thumb-image" %>
+              <% end %>
+            <% elsif s.public_status == '中止' %>
+              <image src="/assets/default.jpg" width="200" height="200" class="thumb-image-cancel">
               <p>中止</p>
             <% else %>
-              <%= link_to (image_tag s.image.thumb.to_s if s.image?), s, class: "thumb-image" %>
+              <image src="/assets/default.jpg" width="200" height="200">
             <% end %>
           </div>
           <label><%= link_to (s.title), s %></label><br>
