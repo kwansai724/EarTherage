@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2021_06_06_043756) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "title", default: "", null: false
-    t.datetime "datetime", default: "2021-06-08 13:15:36", null: false
+    t.datetime "datetime", default: "2021-06-10 15:32:43", null: false
     t.string "image"
     t.integer "share_with", default: 0, null: false
     t.integer "staff_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_06_06_043756) do
     t.text "details"
     t.string "image"
     t.integer "public_status", default: 0, null: false
-    t.boolean "judgment_of_menbers"
+    t.boolean "judgement_of_members"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

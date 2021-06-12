@@ -1,10 +1,9 @@
 <div class="container col-10 col-md-10 col-lg-10">
   <h3><%= @schedule.title %></h3>
   <h6><%= l(@schedule.created_at, format: :long) %></h6>
-  <%= image_tag @schedule.image.url if @schedule.image? %>
+  <!-- %= image_tag @schedule.image.url if @schedule.image? % -->
 
   <p><%== @schedule.details %></p>
-
 
   <div>
     <%= link_to "戻る", schedules_path, class: "btn btn-outline-secondary" %>

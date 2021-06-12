@@ -4,13 +4,6 @@
   <h1>イベント/講座一覧</h1>
 <% end %>
 
-<!--<div class="col-md-4 offset-md-8">
-  <%= form_tag(schedules_path, :method => 'get') do %>
-    <%= text_field_tag :search %>
-    <%= submit_tag '項目検索' %>
-  <% end %>
-</div>-->
-
 
 <!--開講スケジュール一覧テーブル-->
 <div class="col-md-10 offset-md-1">
@@ -46,28 +39,51 @@
   <div class="contents-wrap">
     <% @schedules.each do |s| %>
       <div class="contents-box">
-        <p>
-          <%= l(s.created_at, format: :long) %>
-          <% if s.event_type == "イベント" %>
-            <button type="button" class="btn btn-outline-success btn-sm">イベント</button>
+        <div class="contents">
+          <p>
+            <%= l(s.created_at, format: :long) %>
+            <% if s.event_type == "イベント" %>
+              <button type="button" class="btn btn-outline-success btn-sm">イベント</button>
+            <% else %>
+              <button type="button" class="btn btn-outline-primary btn-sm">講座</button>
+            <% end %>
+          </p>
+          <p>
+            <% if s.judgement_of_members == true %>
+              <button type="button" class="btn btn-outline-danger btn-sm">会員限定</button>
+            <% end %>
+          </p>
+          <div class="thumbnail">
+            <% if s.image? %>
+              <% if s.public_status == '中止' %>
+                <%= link_to (image_tag s.image.thumb.to_s), s, class: "thumb-image-cancel" %>
+                <p>中止</p>
+              <% else %>
+                <%= link_to (image_tag s.image.thumb.to_s), s, class: "thumb-image" %>
+              <% end %>
+            <% elsif s.public_status == '中止' %>
+              <image src="/assets/default.jpg" width="200" height="200" class="thumb-image-cancel">
+              <p>中止</p>
+            <% else %>
+              <image src="/assets/default.jpg" width="200" height="200">
+            <% end %>
+          </div>
+          <label><%= link_to (s.title), s %></label><br>
+          <label>開催エリア：<%= s.area %></label><br>
+          <% if s.date != nil %>
+            <label>開催日：<%= l(s.date, format: :default) %></label><br>
           <% else %>
-            <button type="button" class="btn btn-outline-primary btn-sm">講座</button>
+            <p></p>
           <% end %>
-         </p>
-        <p><%= link_to (image_tag s.image.thumb.to_s if s.image?), s, class: "thumb-image" %></p>
-        <label><%= link_to (s.title), s %></label><br>
-        <label>開催エリア：<%= s.area %></label><br>
-        <% if s.date != nil %>
-          <label>開催日：<%= l(s.date, format: :default) %></label><br>
-        <% else %>
-          <p></p>
-        <% end %>
-        <label>セラピスト名：<%= s.teacher %></label><br>
+          <label>セラピスト名：<%= s.teacher %></label><br>
 
-        <%= link_to "編集", edit_schedule_path(s), class: "btn btn-primary" %>
-        <%= link_to "削除", schedule_path(s), method: :delete,
-              data: {confirm: "削除してよろしいですか？" },
-              class: "btn btn-danger" %>
+          <% if current_staff.present? %>
+            <%= link_to "編集", edit_schedule_path(s), class: "btn btn-primary" %>
+            <%= link_to "削除", schedule_path(s), method: :delete,
+                  data: {confirm: "削除してよろしいですか？" },
+                  class: "btn btn-danger" %>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>
@@ -76,7 +92,11 @@
       <%= link_to "<　一覧へ戻る", schedules_path, class: "btn btn-outline-secondary" %>
     <% else %>
       <!-- 「staff_toppage_routes」はstaffs_helper.rbに記載 -->
-      <%= link_to "<　戻る", staff_toppage_routes(current_staff), class: "btn btn-outline-secondary" %>
+      <% if current_staff.present? %>
+        <%= link_to "<　戻る", staff_toppage_routes(current_staff), class: "btn btn-outline-secondary" %>
+      <% else %>
+        <%= link_to "<　戻る", therapist_training_course_path, class: "btn btn-outline-secondary" %>
+      <% end %>
     <% end %>
   </div>
 </div>
