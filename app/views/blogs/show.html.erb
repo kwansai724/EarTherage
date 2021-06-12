@@ -3,7 +3,7 @@
     <h1>スタッフブログ詳細表示</h1>
   </div>
   <h3><%= @blog.title %></h3>
-  <h6><%= @blog.datetime %></h6>
+  <h6><%= l(@blog.datetime, format: :longdatetime) %></h6>
   <%= image_tag @blog.image.url if @blog.image? %>
   <% staff = Staff.find(@blog.staff_id) %>
   <h6><%= staff.name %></h6>

@@ -25,7 +25,7 @@ RSpec.feature "Blogs", type: :feature do
             attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
             click_button '作成する'
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           }.to change(admin.blogs, :count).by(1)
         end
@@ -45,7 +45,7 @@ RSpec.feature "Blogs", type: :feature do
             attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
             click_button '作成する'
             expect(page).to have_content "title1"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content staff.name
           }.to change(staff.blogs, :count).by(1)
         end
@@ -189,7 +189,7 @@ RSpec.feature "Blogs", type: :feature do
         click_link "スタッフブログ投稿"
         expect(page).to have_content "スタッフブログ一覧"
         expect(page).to have_content admin_blog.title
-        expect(page).to have_content Date.today
+        expect(page).to have_content I18n.l(Date.today, format: :longdate)
         expect(page).to have_content "管理者"
         expect(page).to have_content blog[1].title
         expect(page).to have_content "#{Staff.find(blog[1].staff_id).name}"
@@ -215,7 +215,7 @@ RSpec.feature "Blogs", type: :feature do
         click_link "スタッフブログ投稿"
         expect(page).to have_content "スタッフブログ一覧"
         expect(page).to have_content admin_blog.title
-        expect(page).to have_content Date.today
+        expect(page).to have_content I18n.l(Date.today, format: :longdate)
         expect(page).to have_content "管理者"
         expect(page).to have_content blog[1].title
         expect(page).to have_content "#{Staff.find(blog[1].staff_id).name}"
@@ -351,7 +351,7 @@ RSpec.feature "Blogs", type: :feature do
           expect(page).to have_content "ブログを更新しました。"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to have_content admin_blog.title + "-updated"
-          expect(page).to have_content Date.today + 1
+          expect(page).to have_content I18n.l(Date.today + 1, format: :longdate)
           expect(page).to have_content "管理者"
         end
       end
@@ -377,7 +377,7 @@ RSpec.feature "Blogs", type: :feature do
           expect(page).to have_content "ブログを更新しました。"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to have_content blog[2].title + "-updated" # edit -1
-          expect(page).to have_content Date.today + 1
+          expect(page).to have_content I18n.l(Date.today + 1, format: :longdate)
           expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}" # edit + 17
         end
       end
@@ -403,7 +403,7 @@ RSpec.feature "Blogs", type: :feature do
           expect(page).to have_content "ブログを更新しました。"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to have_content blog[2].title + "-updated" # edit -1
-          expect(page).to have_content Date.today + 1
+          expect(page).to have_content I18n.l(Date.today + 1, format: :longdate)
           expect(page).to have_content "#{staff.name}"
         end
       end
@@ -756,7 +756,7 @@ RSpec.feature "Blogs", type: :feature do
             find("option[value='staff']").select_option
             click_button '作成する'
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           }.to change(admin.blogs, :count).by(1)
           click_link "ログアウト"
@@ -774,7 +774,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -788,7 +788,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -803,7 +803,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
-            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
             expect(page).to_not have_content "管理者"
           end
         end
@@ -816,7 +816,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
-            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
             expect(page).to_not have_content "管理者"
           end
         end
@@ -847,7 +847,7 @@ RSpec.feature "Blogs", type: :feature do
             find("option[value='staff']").select_option
             click_button '作成する'
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           }.to change(@staff.blogs, :count).by(1)
           click_link "ログアウト"
@@ -864,7 +864,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ投稿"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -878,7 +878,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ投稿"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -893,7 +893,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
-            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
             expect(page).to_not have_content @staff.name
           end
         end
@@ -906,7 +906,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
-            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
             expect(page).to_not have_content @staff.name
           end
         end
@@ -937,7 +937,7 @@ RSpec.feature "Blogs", type: :feature do
             find("option[value='therapist_training']").select_option
             click_button '作成する'
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           }.to change(admin.blogs, :count).by(1)
           click_link "ログアウト"
@@ -954,7 +954,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -968,7 +968,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -984,7 +984,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -997,7 +997,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
-            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
             expect(page).to_not have_content "管理者"
           end
         end
@@ -1028,7 +1028,7 @@ RSpec.feature "Blogs", type: :feature do
             find("option[value='therapist_training']").select_option
             click_button '作成する'
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           }.to change(@staff.blogs, :count).by(1)
           click_link "ログアウト"
@@ -1045,7 +1045,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ投稿"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -1059,7 +1059,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ投稿"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -1074,7 +1074,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -1087,7 +1087,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
-            expect(page).to_not have_content Date.today
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
             expect(page).to_not have_content @staff.name
           end
         end
@@ -1119,7 +1119,7 @@ RSpec.feature "Blogs", type: :feature do
             find("option[value='self_care']").select_option
             click_button '作成する'
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           }.to change(admin.blogs, :count).by(1)
           click_link "ログアウト"
@@ -1136,7 +1136,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -1150,7 +1150,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -1165,7 +1165,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -1178,7 +1178,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -1209,7 +1209,7 @@ RSpec.feature "Blogs", type: :feature do
             find("option[value='self_care']").select_option
             click_button '作成する'
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           }.to change(@staff.blogs, :count).by(1)
           click_link "ログアウト"
@@ -1226,7 +1226,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ投稿"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -1240,7 +1240,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ投稿"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -1255,7 +1255,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -1268,7 +1268,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -1300,7 +1300,7 @@ RSpec.feature "Blogs", type: :feature do
             find("option[value='general']").select_option
             click_button '作成する'
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           }.to change(admin.blogs, :count).by(1)
           click_link "ログアウト"
@@ -1317,7 +1317,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -1331,7 +1331,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -1346,7 +1346,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -1359,7 +1359,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
           end
         end
@@ -1390,7 +1390,7 @@ RSpec.feature "Blogs", type: :feature do
             find("option[value='general']").select_option
             click_button '作成する'
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           }.to change(@staff.blogs, :count).by(1)
           click_link "ログアウト"
@@ -1407,7 +1407,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ投稿"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -1421,7 +1421,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ投稿"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -1436,7 +1436,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -1449,7 +1449,7 @@ RSpec.feature "Blogs", type: :feature do
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
-            expect(page).to have_content Date.today
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
           end
         end
@@ -1497,7 +1497,7 @@ RSpec.feature "Blogs", type: :feature do
           click_link "スタッフブログ投稿"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to have_content @blog[0].title
-          expect(page).to have_content Date.today
+          expect(page).to have_content I18n.l(Date.today, format: :longdate)
           expect(page).to have_content "管理者"
           expect(page).to have_content @blog[1].title
           expect(page).to have_content "#{Staff.find(@blog[1].staff_id).name}"
@@ -1529,7 +1529,7 @@ RSpec.feature "Blogs", type: :feature do
           click_link "スタッフブログ投稿"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to have_content @blog[0].title
-          expect(page).to have_content Date.today
+          expect(page).to have_content I18n.l(Date.today, format: :longdate)
           expect(page).to have_content "管理者"
           expect(page).to have_content @blog[1].title
           expect(page).to have_content "#{Staff.find(@blog[1].staff_id).name}"
@@ -1563,7 +1563,7 @@ RSpec.feature "Blogs", type: :feature do
           click_link "スタッフブログ"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to_not have_content @blog[0].title
-          expect(page).to have_content Date.today
+          expect(page).to have_content I18n.l(Date.today, format: :longdate)
           expect(page).to_not have_content "管理者"
           expect(page).to_not have_content @blog[1].title
           expect(page).to_not have_content "#{Staff.find(@blog[1].staff_id).name}"
@@ -1596,7 +1596,7 @@ RSpec.feature "Blogs", type: :feature do
           click_link "スタッフブログ"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to_not have_content @blog[0].title
-          expect(page).to have_content Date.today
+          expect(page).to have_content I18n.l(Date.today, format: :longdate)
           expect(page).to_not have_content "管理者"
           expect(page).to_not have_content @blog[1].title
           expect(page).to_not have_content "#{Staff.find(@blog[1].staff_id).name}"

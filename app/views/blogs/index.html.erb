@@ -41,6 +41,8 @@
     </div>
   </div>
 <% end %>
+<br>
+<%= will_paginate(@pblogs, :previous_label => ' &lt 前へ', :next_label => '次へ &gt', class: "pagination justify-content-center mt-6 mb-7 btn--resize", renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 <% if current_staff.present? && current_staff.admin == true %>
   <%= link_to "戻る", admin_screen_path, class: "btn btn-outline-secondary btn--resize blog-index-return" %>
 <% elsif current_staff.present? && current_staff.admin == false %>
