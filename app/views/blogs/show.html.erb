@@ -1,5 +1,7 @@
 <div class="container col-10 col-md-10 col-lg-10">
-  <h1>スタッフブログ詳細表示</h1>
+  <div class="blog-title">
+    <h1>スタッフブログ詳細表示</h1>
+  </div>
   <h3><%= @blog.title %></h3>
   <h6><%= @blog.datetime %></h6>
   <%= image_tag @blog.image.url if @blog.image? %>
