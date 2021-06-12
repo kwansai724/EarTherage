@@ -31,6 +31,23 @@ RSpec.feature "Blogs", type: :feature do
         end
       end
 
+      context "管理者はブログ作成画面から戻るボタンでスタッフブログ一覧画面に戻る" do
+        scenario "admin returns to staff blogs screen from staff blog new screen" do
+          admin = FactoryBot.create(:staff, :admin)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          click_link "新規作成"
+          click_link "戻る"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to have_content "新規作成"
+          expect(page).to have_content "戻る"
+        end
+      end
+
+
+
       context "スタッフは新しいブログを作成する" do 
         scenario "a staff creates new blog" do
           staff = FactoryBot.create(:staff)
@@ -50,7 +67,25 @@ RSpec.feature "Blogs", type: :feature do
           }.to change(staff.blogs, :count).by(1)
         end
       end
+
+      context "スタッフはブログ作成画面から戻るボタンでスタッフブログ一覧画面に戻る" do
+        scenario "staff returns to staff blogs screen from staff blog new screen" do
+          staff = FactoryBot.create(:staff)
+          fill_in "Eメール", with: staff.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          click_link "新規作成"
+          click_link "戻る"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to have_content "新規作成"
+          expect(page).to have_content "戻る"
+        end
+      end
+
+
     end
+
 
     context "異常系" do
 
@@ -202,6 +237,28 @@ RSpec.feature "Blogs", type: :feature do
       end
     end
 
+    context "管理者はプログ一覧画面から戻るリンクで管理者画面に戻る" do
+      scenario "admin returns to admin screen from staff blogs screen" do
+        admin_blog = FactoryBot.create(:blog, :admin)
+        blog = []
+        1.upto 4 do |n|
+          blog[n] = FactoryBot.create(:blog)
+        end
+        admin = Staff.find(admin_blog.staff_id)
+        fill_in "Eメール", with: admin.email
+        click_button 'ログイン'
+        click_link "スタッフブログ投稿"
+        expect(page).to have_content "スタッフブログ一覧"
+        click_link "戻る"
+        expect(page).to have_content "管理者画面"
+        expect(page).to have_content "スタッフブログ投稿"
+        expect(page).to have_content "開講スケジュール投稿"
+        expect(page).to have_content "受講生管理"
+      end
+    end
+
+
+
     context "スタッフはブログを一覧表示する" do
       scenario "a staff lists blogs" do
         admin_blog = FactoryBot.create(:blog, :admin)
@@ -228,6 +285,28 @@ RSpec.feature "Blogs", type: :feature do
       end
     end
 
+    context "スタッフはプログ一覧画面から戻るリンクでスタッフ画面に戻る" do
+      scenario "staff returns to staffs screen from staff blogs screen" do
+        admin_blog = FactoryBot.create(:blog, :admin)
+        blog = []
+        1.upto 4 do |n|
+          blog[n] = FactoryBot.create(:blog)
+        end
+        staff = Staff.find(blog[1].staff_id)
+        fill_in "Eメール", with: staff.email
+        click_button 'ログイン'
+        click_link "スタッフブログ投稿"
+        expect(page).to have_content "スタッフブログ一覧"
+        click_link "戻る"
+        expect(page).to have_content "スタッフ画面"
+        expect(page).to have_content "スタッフブログ投稿"
+        expect(page).to have_content "開講スケジュール投稿"
+      end
+    end
+
+ 
+
+
   end
 
   describe "詳細表示機能" do
@@ -250,6 +329,29 @@ RSpec.feature "Blogs", type: :feature do
       end
     end
 
+    context "管理者は管理者自身のブログを詳細表示画面から戻るボタンでブログ一覧画面に戻る" do
+      scenario "admin returns to staff blogs screen from his own blog detail screen" do
+        admin_blog = FactoryBot.create(:blog, :admin)
+        blog = []
+        1.upto 4 do |n|
+          blog[n] = FactoryBot.create(:blog)
+        end
+        admin = Staff.find(admin_blog.staff_id)
+        fill_in "Eメール", with: admin.email
+        click_button 'ログイン'
+        click_link "スタッフブログ投稿"
+        click_link "show0"
+        click_link "戻る"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page).to have_content "新規作成"
+        expect(page).to have_content admin_blog.title # = show - 1
+        expect(page).to have_content "管理者"
+        expect(page).to have_content "戻る"
+      end
+    end
+
+
+
     context "管理者はスタッフのブログを詳細表示する" do
       scenario "admin views staff's blog in detail" do
         admin_blog = FactoryBot.create(:blog, :admin)
@@ -269,6 +371,31 @@ RSpec.feature "Blogs", type: :feature do
       end
     end
 
+    context "管理者はスタッフのブログを詳細表示画面から戻るボタンでブログ一覧画面に戻る" do
+      scenario "admin returns to staff blogs screen from staff blog detail screen" do
+        admin_blog = FactoryBot.create(:blog, :admin)
+        blog = []
+        1.upto 4 do |n|
+          blog[n] = FactoryBot.create(:blog)
+        end
+        admin = Staff.find(admin_blog.staff_id)
+        staff = Staff.find(blog[1].staff_id)
+        fill_in "Eメール", with: admin.email
+        click_button 'ログイン'
+        click_link "スタッフブログ投稿"
+        click_link "show1"
+        click_link "戻る"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page).to have_content "新規作成"
+        expect(page).to have_content blog[1].title # = show - 1
+        expect(page).to have_content staff.name
+        expect(page).to have_content "戻る"
+      end
+    end
+
+
+
+
     context "スタッフは管理者のブログを詳細表示する" do
       scenario "a staff views admin's blog details" do
         admin_blog = FactoryBot.create(:blog, :admin)
@@ -287,6 +414,30 @@ RSpec.feature "Blogs", type: :feature do
       end
     end
 
+    context "スタッフは管理者のブログを詳細表示画面から戻るボタンでブログ一覧画面に戻る" do
+      scenario "a staff returns to staff blogs screen from admin's blog detail screen" do
+        admin_blog = FactoryBot.create(:blog, :admin)
+        blog = []
+        1.upto 4 do |n|
+          blog[n] = FactoryBot.create(:blog)
+        end
+        log_in_staff = Staff.find(blog[2].staff_id)
+        fill_in "Eメール", with: log_in_staff.email
+        click_button 'ログイン'
+        click_link "スタッフブログ投稿"
+        click_link "show0"
+        click_link "戻る"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page).to have_content "新規作成"
+        expect(page).to have_content admin_blog.title # = show - 1
+        expect(page).to have_content "管理者"
+        expect(page).to have_content "戻る"
+      end
+    end
+
+
+
+
     context "スタッフは自身のブログを詳細表示する" do
       scenario "a staff views his own blog details" do
         admin_blog = FactoryBot.create(:blog, :admin)
@@ -302,8 +453,32 @@ RSpec.feature "Blogs", type: :feature do
         expect(page).to have_content "スタッフブログ詳細表示"
         expect(page).to have_content blog[3].title
         expect(page).to have_content staff.name
+        expect(page).to have_content "戻る"
       end
     end
+
+    context "スタッフは自身のブログを詳細表示画面から戻るボタンでブログ一覧画面に戻る" do
+      scenario "a staff returns to staff blogs screen from his own blog detail screen" do
+        admin_blog = FactoryBot.create(:blog, :admin)
+        blog = []
+        1.upto 4 do |n|
+          blog[n] = FactoryBot.create(:blog)
+        end
+        staff = Staff.find(blog[3].staff_id)
+        fill_in "Eメール", with: staff.email
+        click_button 'ログイン'
+        click_link "スタッフブログ投稿"
+        click_link "show3"
+        click_link "戻る"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page).to have_content "新規作成"
+        expect(page).to have_content blog[3].title
+        expect(page).to have_content staff.name
+        expect(page).to have_content "戻る"
+      end
+    end
+
+
 
     context "スタッフは別スタッフのブログを詳細表示する" do
       scenario "a staff views another staff's blog details" do
@@ -323,6 +498,30 @@ RSpec.feature "Blogs", type: :feature do
         expect(page).to have_content staff.name
       end
     end
+
+    context "スタッフは別のスタッフのブログを詳細表示画面から戻るボタンでブログ一覧画面に戻る" do
+      scenario "a staff returns to staff blogs screen from another staff's blog detail screen" do
+        admin_blog = FactoryBot.create(:blog, :admin)
+        blog = []
+        1.upto 4 do |n|
+          blog[n] = FactoryBot.create(:blog)
+        end
+        log_in_staff = Staff.find(blog[2].staff_id)
+        staff = Staff.find(blog[3].staff_id) # = show -1
+        fill_in "Eメール", with: log_in_staff.email
+        click_button 'ログイン'
+        click_link "スタッフブログ投稿"
+        click_link "show3"
+        click_link "戻る"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page).to have_content "新規作成"
+        expect(page).to have_content blog[3].title
+        expect(page).to have_content staff.name
+        expect(page).to have_content "戻る"
+      end
+    end
+
+
 
   end
 
@@ -356,6 +555,30 @@ RSpec.feature "Blogs", type: :feature do
         end
       end
 
+      context "管理者は管理者のブログ編集画面から戻るボタンでスタッフブログ一覧画面に戻る" do
+        scenario "admin returns to staff blogs screen from his own blog edit screen" do
+          admin_blog = FactoryBot.create(:blog, :admin)
+          blog = []
+          1.upto 4 do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          admin = Staff.find(admin_blog.staff_id)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          find(".edit2").click
+          click_link "戻る"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to have_content "新規作成"
+          expect(page).to have_content admin_blog.title
+          expect(page).to have_content "管理者"
+          expect(page).to have_content "戻る"
+        end
+      end
+
+
+
+
       context "管理者はスタッフのブログを編集する" do
         scenario "admin edits staff's blog" do
           admin_blog = FactoryBot.create(:blog, :admin)
@@ -381,6 +604,29 @@ RSpec.feature "Blogs", type: :feature do
           expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}" # edit + 17
         end
       end
+
+      context "管理者はスタッフのブログ編集画面から戻るボタンでスタッフブログ一覧画面に戻る" do
+        scenario "admin returns to staff blogs screen from staff blog edit screen" do
+          admin_blog = FactoryBot.create(:blog, :admin)
+          blog = []
+          1.upto 4 do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          admin = Staff.find(admin_blog.staff_id)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          find(".edit2").click
+          click_link "戻る"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to have_content "新規作成"
+          expect(page).to have_content blog[2].title
+          expect(page).to have_content "#{Staff.find(blog[2].staff_id).name}"
+          expect(page).to have_content "戻る"
+        end
+      end
+
+
 
       context "スタッフは自分自身のブログを編集する" do
         scenario "admin edits his own blog" do
@@ -426,6 +672,28 @@ RSpec.feature "Blogs", type: :feature do
           expect(page.all(".edit4").empty?).to eq true
         end
       end
+
+      context "スタッフはスタッフ自身のブログ編集画面から戻るボタンでスタッフブログ一覧画面に戻る" do
+        scenario "staff returns to staff blogs screen from his own blog edit screen" do
+          admin_blog = FactoryBot.create(:blog, :admin)
+          blog = []
+          1.upto 4 do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          staff = Staff.find(blog[2].staff_id)
+          fill_in "Eメール", with: staff.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          find(".edit2").click
+          click_link "戻る"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to have_content blog[2].title
+          expect(page).to have_content staff.name
+          expect(page).to have_content "新規作成"
+          expect(page).to have_content "戻る"
+        end
+      end
+
 
     end
 
