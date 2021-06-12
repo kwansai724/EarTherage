@@ -2,6 +2,11 @@
 //  margin: 0; /* 要素の外側の余白を0に定義 */
 //  padding: 0; /* 要素の内側の余白を0に定義 */
 //}
+
+.new_blog {
+  margin-left: 105px;
+}
+
 .pyramid_parent_1 {
   //border :solid;         /* 子要素を左右中央揃えにする */
 }
@@ -12,38 +17,59 @@
     height: 200px;
     width: 200px;               /* 幅指定 */
     display:  inline-block;     /* インラインブロック要素にする */
-    background-color:  #eee;    /* 背景色指定 */
-    padding-top: 50px;
+    background-color:  #fff;    /* 背景色指定 */
+    //padding-top: 50px;
     margin-left: 100px;
     margin-bottom: 5px;         /* 要素同士の隙間調整 */
-    padding: 38px 30px 30px 30px;              /* 余白指定 */
-    //padding-top: 100px;
+    padding: 5px 5px 5px 5px;              /* 余白指定 */
     box-sizing: border-box;     /* 崩れ防止 */
-    vertical-align:  top;
+    vertical-align: top;
+    text-align: center;
+}
+
+.pyramid_box_1 img{
+  width :100%;
 }
 
 .pyramid_box_2 {
-    height: 200px;
-    width: 700px;               /* 幅指定 */
+    //border: solid;
+    //border-color: blue;
+    height: 190px;
+    width: 690px;               /* 幅指定 */
     display:  inline-block;     /* インラインブロック要素にする */
-    background-color:  #eee;    /* 背景色指定 */
+    background-color:  #f8f8f8;    /* 背景色指定 */
+    margin-top: 5px;
     margin-bottom: 5px;         /* 要素同士の隙間調整 */
-    padding: 30px;              /* 余白指定 */
+    padding: 30px;    /* 余白指定 */
+    //padding-top: 10px;
     box-sizing: border-box;     /* 崩れ防止 */
     vertical-align:  top;
 }
 
+.blog_title {
+  //border: solid;
+  //border-color: red;
+  height: 80px;
+  font-size: large;
+  word-break: break-word;
+}
+
+
+
 .pyramid_parent_2 {
-  border: solid;
-  border-color: yellow;
+  //border: solid;
+  //border-color: yellow;
+  height: 25px;
+  color: #707070;
+  //color: #6f6f6f;
 }
 
 .pyramid_box_3 {
-    height: 50px;
+    height: 25px;
     width: 200px;               /* 幅指定 */
     display:  inline-block;     /* インラインブロック要素にする */
-    background-color:  #00e;    /* 背景色指定 */
-    margin-top: 30px;
+    //background-color:  #00e;    /* 背景色指定 */
+    margin-top: 0px;
     //margin-left: 100px;
     //margin-bottom: 5px;         /* 要素同士の隙間調整 */
     //padding: 30px;              /* 余白指定 */
@@ -51,11 +77,11 @@
     //vertical-align:  top;
 }
 .pyramid_box_4 {
-    height: 50px;
-    width: 200px;               /* 幅指定 */
+    height: 25px;
+    width: 400px;               /* 幅指定 */
     display:  inline-block;     /* インラインブロック要素にする */
-    background-color:  #e00;    /* 背景色指定 */
-    margin-top: 30px;
+    //background-color:  #e00;    /* 背景色指定 */
+    margin-top: 0px;
     //margin-bottom: 5px;         /* 要素同士の隙間調整 */
     //padding: 30px;              /* 余白指定 */
     box-sizing: border-box;     /* 崩れ防止 */
@@ -70,9 +96,9 @@
   height: 20px;
   width: 60px;
   display: inline-block;
-  background-color: #050;
-  margin-top: 10px;
-  margin-left: 500px;
+  //background-color: #050;
+  margin-top: 13px;
+  margin-left: 490px;
   box-sizing: border-box;
 }
 
@@ -80,19 +106,29 @@
   height: 20px;
   width: 60px;
   display: inline-block;
-  background-color: #390;
+  //background-color: #390;
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 5px;
   box-sizing: border-box;
 }
 
 
-.blog_title {
-  font-size: x-large;
-}
-
 //スマホ用
 @media screen and (max-width:480px) {
+
+  .new_blog {
+    margin-left: -12px;
+  }
+
+  a.btn.btn-info.btn-sm.font-new {
+    height: 25px;
+    width: 60px;
+    font-size: 5px;
+    margin: 0px 0px 0px 0px;
+    text-align: top;
+  }
+
+
 
   .blog--title h1 {
     font-size : 20px;
@@ -122,8 +158,9 @@
   }
 
   .blog_title {
+    height: 35px;
     margin-top: 10px;
-    font-size: small;
+    font-size: 10px;
   }
 
   .pyramid_box_3 {
@@ -159,21 +196,21 @@
   .pyramid_box_5 {
     //border: solid;
     //border-color: red;
-    height: 25px;
+    height: 10px;
     width: 40px;
     margin: 0px 0px 0px 124px;
     //font-size: 10px;
-    background-color: yellow;
+    //background-color: yellow;
   }
 
   .pyramid_box_6 {
     //border: solid;
     //border-color: blue;
-    height: 25px;
+    height: 10px;
     width: 40px;
     margin: 0px 0px 0px 0px;
     //font-size: 5px;
-    background-color: yellow;
+    //background-color: yellow;
   }
 
 

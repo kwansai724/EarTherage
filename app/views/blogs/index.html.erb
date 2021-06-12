@@ -3,8 +3,8 @@
 </div>
 <%= render 'layouts/flash_messages' %>
 <% if @staff.present? %>
-  <div>
-    <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info" %>
+  <div class="new_blog">
+    <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info btn-sm font-new" %>
   </div>
 <% end %>
 <% @blogs.each_with_index do |blog, n| %>
