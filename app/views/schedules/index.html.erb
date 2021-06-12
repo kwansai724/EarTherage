@@ -37,7 +37,11 @@
   </div>
   <div class="contents-wrap">
     <% @schedules.each do |s| %>
-      <div class="contents-box">
+      <% if s.public_status == '非公開' %>
+        <div class="contents-box-opacity">
+      <% else %>
+        <div class="contents-box">
+      <% end %>
         <div class="contents">
           <p>
             <%= l(s.created_at, format: :long) %>

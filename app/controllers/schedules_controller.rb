@@ -4,7 +4,11 @@ class SchedulesController < ApplicationController
 
   # スケジュール一覧
   def index
-    @schedules = Schedule.all.order(created_at: "DESC")
+    if current_staff.present?
+      @schedules = Schedule.all.order(created_at: "DESC")
+    elsif current_student.present?
+      @schedules = Schedule.where.not(public_status: "非公開").order(created_at: "DESC")
+    end
     # if params[:search].present?
     #   @schedules = Schedule.paginate(page: params[:page]).search(params[:search]) 
     # end
