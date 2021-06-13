@@ -11,7 +11,11 @@
   <div class="pyramid_parent_1">
     <div class="pyramid_box_1">
       <!-- blogインスタンスの画像ファイルのURLを取得し表示 -->
-      <p><%= link_to (image_tag(blog.image.thumb.to_s, alt: "show#{n}") if blog.image?), staff_blog_url(Staff.find(blog.staff_id), blog) %></p>
+      <% if blog.image? %>
+        <p><%= link_to (image_tag(blog.image.thumb.to_s, alt: "show#{n}")), staff_blog_url(Staff.find(blog.staff_id), blog) %></p>
+      <% else %>
+        <p><%= link_to (image_tag("/assets/default.jpg", alt: "show#{n}")), staff_blog_url(Staff.find(blog.staff_id), blog) %></p>
+      <% end %>
     </div>
     <div class="pyramid_box_2">
       <div class="blog_title">
