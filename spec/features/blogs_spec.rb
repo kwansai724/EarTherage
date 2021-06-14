@@ -31,6 +31,32 @@ RSpec.feature "Blogs", type: :feature do
         end
       end
 
+      context "管理者は画像の無い新しいブログを作成する" do
+        scenario "admin creates new blog without picture" do
+          admin = FactoryBot.create(:staff, :admin)
+          fill_in "Eメール", with: admin.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title0"
+            fill_in "日時", with: DateTime.current
+            #attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
+            click_button '作成する'
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
+            expect(page).to have_content "管理者"
+            expect(page).to have_selector("img[src$='default.jpg']")
+           }.to change(admin.blogs, :count).by(1)
+        end
+      end
+
+
+
+
+
       context "管理者はブログ作成画面から戻るボタンでスタッフブログ一覧画面に戻る" do
         scenario "admin returns to staff blogs screen from staff blog new screen" do
           admin = FactoryBot.create(:staff, :admin)
@@ -67,6 +93,29 @@ RSpec.feature "Blogs", type: :feature do
           }.to change(staff.blogs, :count).by(1)
         end
       end
+
+      context "スタッフは画像の無い新しいブログを作成する" do
+        scenario "staff creates new blog without picture" do
+          staff = FactoryBot.create(:staff)
+          fill_in "Eメール", with: staff.email
+          click_button 'ログイン'
+          click_link "スタッフブログ投稿"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect {
+            click_link "新規作成"
+            fill_in "タイトル", with: "title1"
+            fill_in "日時", with: DateTime.current
+            #attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/2.jpg"
+            click_button '作成する'
+            expect(page).to have_content "title1"
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
+            expect(page).to have_content staff.name
+            expect(page).to have_selector("img[src$='default.jpg']")
+          }.to change(staff.blogs, :count).by(1)
+        end
+      end
+
+
 
       context "スタッフはブログ作成画面から戻るボタンでスタッフブログ一覧画面に戻る" do
         scenario "staff returns to staff blogs screen from staff blog new screen" do
@@ -146,6 +195,7 @@ RSpec.feature "Blogs", type: :feature do
           }.to change(admin.blogs, :count).by(0)
         end
       end
+
 
       context "スタッフはタイトルの無い新しいブログを作成する" do 
         scenario "a staff creates new blog without a title" do
