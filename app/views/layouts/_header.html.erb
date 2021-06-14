@@ -27,7 +27,7 @@
               <!--「mypage_routes」はstudent_helper.rbに記載-->
               <li><%= link_to 'マイページ', mypage_routes(current_student), class: 'nav-link' %></li>
               <li><%= link_to "スタッフブログ", staff_blogs_path(current_student), class: 'nav-link' %></li>
-              <li><%= link_to "イベント/セミナー", "#", class: 'nav-link' %></li>
+              <li><%= link_to "イベント/セミナー", schedules_path, class: 'nav-link' %></li>
               <li><%= link_to "せらぽけ", "#", class: 'nav-link' %></li>
               <div class="dropdown-divider"></div>
               <li>

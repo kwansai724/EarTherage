@@ -12,24 +12,24 @@
   <%= f.select :area, ['関東', '関西', '中国・四国', '九州', 'オンライン'], {include_blank: false}, class: "form-control" %>
 
   <%= f.label :teacher, class: "label-#{yield(:class_text)}" %>
-  <%= f.select :teacher, ['田中', '山本', '井上'], {include_blank: false}, class: "form-control" %>
+  <%= f.select :teacher, ['山本', '田中', '井上'], {include_blank: false}, class: "form-control" %>
 
   <%= f.label :details, class: "label-#{yield(:class_text)}" %>
   <%= f.text_area :details, 'data-provider': :summernote %>
 
-  <%= f.label "画像をアップロード", class: "label-#{yield(:class_text)}" %><br>
+  <%= f.label "サムネイル画像を選択", class: "label-#{yield(:class_text)}" %><br>
     <%= image_tag @schedule.image.url(:thumb), id: :img_prev if @schedule.image? %>
   <%= f.file_field :image, id: "schedule_image", class: "form-control" %>
 
   <%= f.label :public_status, class: "label-#{yield(:class_text)}" %><br>
   <div class="col-sm-10 btn-group" data-toggle="buttons">
-    <label class="btn btn-outline-secondary active" style="width:50%">
-      <%= f.radio_button :public_status, '公開', {checked: true, class: "radio_view"} %> 公開
+    <label class="btn btn-outline-secondary <%= "active" if @schedule.public_status == '公開' %>" style="width:50%">
+      <%= f.radio_button :public_status, '公開', {class: "radio_view"} %> 公開
     </label>
-    <label class="btn btn-outline-secondary" style="width:50%">
+    <label class="btn btn-outline-secondary <%= "active" if @schedule.public_status == '非公開' %>" style="width:50%">
       <%= f.radio_button :public_status, '非公開', {class: "radio_view"} %> 非公開
     </label>
-    <label class="btn btn-outline-secondary" style="width:50%">
+    <label class="btn btn-outline-secondary <%= "active" if @schedule.public_status == '中止' %>" style="width:50%">
       <%= f.radio_button :public_status, '中止', {class: "radio_view"} %> 中止
     </label>
   </div><br>

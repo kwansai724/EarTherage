@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_124454) do
+ActiveRecord::Schema.define(version: 2021_06_06_043756) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "title", default: "", null: false
@@ -25,15 +25,15 @@ ActiveRecord::Schema.define(version: 2021_06_03_124454) do
 
   create_table "schedules", force: :cascade do |t|
     t.date "date"
-    t.string "area"
+    t.integer "area"
     t.string "place"
-    t.string "teacher"
-    t.string "event_type"
+    t.integer "teacher"
+    t.integer "event_type"
     t.string "title"
     t.text "details"
     t.string "image"
     t.integer "public_status", default: 0, null: false
-    t.boolean "judgment_of_menbers"
+    t.boolean "judgement_of_members"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
