@@ -3,7 +3,7 @@ class CreateBlogs < ActiveRecord::Migration[5.2]
     create_table :blogs do |t|
       t.string :title , null: false, default: ""
       t.datetime :datetime, null: false, default: DateTime.current
-      t.text :content
+      t.text :content, limit: 4294967295
       t.string :image
       t.integer :share_with, null: false, default: 0
       t.references :staff, index: true, foreign_key: true
