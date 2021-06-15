@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_06_043756) do
+ActiveRecord::Schema.define(version: 2021_06_15_130226) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "title", default: "", null: false
-    t.datetime "datetime", default: "2021-06-14 13:54:07", null: false
-    t.text "content"
+    t.datetime "datetime", default: "2021-06-15 13:40:36", null: false
+    t.text "content", limit: 10485760
     t.string "image"
     t.integer "share_with", default: 0, null: false
     t.integer "staff_id"
