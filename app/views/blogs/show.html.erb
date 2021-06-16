@@ -4,7 +4,7 @@
   </div>
   <h3><%= @blog.title %></h3>
   <h6><%= l(@blog.datetime, format: :longdatetime) %></h6>
-  <p><%== @blog.content %></p>
+  <p><%== Rinku.auto_link(@blog.content, :all, 'target="_blank"').html_safe %></p>
   <%= image_tag @blog.image.url if @blog.image? %>
   <% staff = Staff.find(@blog.staff_id) %>
   <h6><%= staff.name %></h6>
