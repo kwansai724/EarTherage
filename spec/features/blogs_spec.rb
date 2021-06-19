@@ -274,7 +274,7 @@ RSpec.feature "Blogs", type: :feature do
         click_link "スタッフブログ投稿"
         expect(page).to have_content "スタッフブログ一覧"
         expect(page).to have_content admin_blog.title
-        expect(page).to have_content I18n.l(Date.today, format: :longdate)
+        expect(page).to have_content I18n.l(Date.today + 1.day, format: :longdate)
         expect(page).to have_content "管理者"
         expect(page).to have_content blog[1].title
         expect(page).to have_content "#{Staff.find(blog[1].staff_id).name}"
@@ -322,7 +322,7 @@ RSpec.feature "Blogs", type: :feature do
         click_link "スタッフブログ投稿"
         expect(page).to have_content "スタッフブログ一覧"
         expect(page).to have_content admin_blog.title
-        expect(page).to have_content I18n.l(Date.today, format: :longdate)
+        expect(page).to have_content I18n.l(Date.today + 1.day, format: :longdate)
         expect(page).to have_content "管理者"
         expect(page).to have_content blog[1].title
         expect(page).to have_content "#{Staff.find(blog[1].staff_id).name}"
@@ -372,10 +372,9 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: admin.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "show0"
+        click_link "show4"
         expect(page).to have_content "スタッフブログ詳細表示"
         expect(page).to have_content admin_blog.title
-        expect(page).to have_content "管理者"
       end
     end
 
@@ -390,7 +389,7 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: admin.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "show0"
+        click_link "show4"
         click_link "戻る"
         expect(page).to have_content "スタッフブログ一覧"
         expect(page).to have_content "新規作成"
@@ -414,10 +413,9 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: admin.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "show1"
+        click_link "show3"
         expect(page).to have_content "スタッフブログ詳細表示"
         expect(page).to have_content blog[1].title # = show - 1
-        expect(page).to have_content staff.name
       end
     end
 
@@ -433,7 +431,7 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: admin.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "show1"
+        click_link "show3"
         click_link "戻る"
         expect(page).to have_content "スタッフブログ一覧"
         expect(page).to have_content "新規作成"
@@ -457,10 +455,9 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: log_in_staff.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "show0"
+        click_link "show4"
         expect(page).to have_content "スタッフブログ詳細表示"
         expect(page).to have_content admin_blog.title
-        expect(page).to have_content "管理者"
       end
     end
 
@@ -475,7 +472,7 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: log_in_staff.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "show0"
+        click_link "show4"
         click_link "戻る"
         expect(page).to have_content "スタッフブログ一覧"
         expect(page).to have_content "新規作成"
@@ -499,10 +496,9 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: staff.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "show3"
+        click_link "show1"
         expect(page).to have_content "スタッフブログ詳細表示"
         expect(page).to have_content blog[3].title
-        expect(page).to have_content staff.name
         expect(page).to have_content "戻る"
       end
     end
@@ -518,7 +514,7 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: staff.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "show3"
+        click_link "show1"
         click_link "戻る"
         expect(page).to have_content "スタッフブログ一覧"
         expect(page).to have_content "新規作成"
@@ -542,10 +538,9 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: log_in_staff.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "show3"
+        click_link "show1"
         expect(page).to have_content "スタッフブログ詳細表示"
         expect(page).to have_content blog[3].title # = show -1
-        expect(page).to have_content staff.name
       end
     end
 
@@ -561,7 +556,7 @@ RSpec.feature "Blogs", type: :feature do
         fill_in "Eメール", with: log_in_staff.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
-        click_link "show3"
+        click_link "show1"
         click_link "戻る"
         expect(page).to have_content "スタッフブログ一覧"
         expect(page).to have_content "新規作成"
@@ -590,7 +585,7 @@ RSpec.feature "Blogs", type: :feature do
           fill_in "Eメール", with: admin.email
           click_button 'ログイン'
           click_link "スタッフブログ投稿"
-          find(".edit0").click
+          find(".edit4").click
           expect(page).to have_content "管理者のブログ編集"
           expect(page).to have_field("タイトル", with: admin_blog.title)
           fill_in "タイトル", with: admin_blog.title + "-updated"
@@ -716,9 +711,9 @@ RSpec.feature "Blogs", type: :feature do
           click_button 'ログイン'
           click_link "スタッフブログ投稿"
           expect(page.all(".edit0").empty?).to eq true
-          expect(page.all(".edit1").empty?).to eq false
+          expect(page.all(".edit1").empty?).to eq true
           expect(page.all(".edit2").empty?).to eq true
-          expect(page.all(".edit3").empty?).to eq true
+          expect(page.all(".edit3").empty?).to eq false
           expect(page.all(".edit4").empty?).to eq true
         end
       end
@@ -760,7 +755,7 @@ RSpec.feature "Blogs", type: :feature do
           fill_in "Eメール", with: admin.email
           click_button 'ログイン'
           click_link "スタッフブログ投稿"
-          find(".edit0").click
+          find(".edit4").click
           expect(page).to have_content "管理者のブログ編集"
           expect(page).to have_field("タイトル", with: admin_blog.title)
           fill_in "タイトル", with: ""
@@ -783,7 +778,7 @@ RSpec.feature "Blogs", type: :feature do
           fill_in "Eメール", with: admin.email
           click_button 'ログイン'
           click_link "スタッフブログ投稿"
-          find(".edit0").click
+          find(".edit4").click
           expect(page).to have_content "管理者のブログ編集"
           expect(page).to have_field("タイトル", with: admin_blog.title)
           fill_in "タイトル", with: admin_blog.title + "-updated"
@@ -806,7 +801,7 @@ RSpec.feature "Blogs", type: :feature do
           fill_in "Eメール", with: admin.email
           click_button 'ログイン'
           click_link "スタッフブログ投稿"
-          find(".edit0").click
+          find(".edit4").click
           expect(page).to have_content "管理者のブログ編集"
           expect(page).to have_field("タイトル", with: admin_blog.title)
           fill_in "タイトル", with: ""
@@ -900,7 +895,7 @@ RSpec.feature "Blogs", type: :feature do
           fill_in "Eメール", with: staff.email
           click_button 'ログイン'
           click_link "スタッフブログ投稿"
-          find(".edit1").click
+          find(".edit3").click
           expect(page).to have_content "#{staff.name}のブログ編集" # edit -1
           expect(page).to have_field("タイトル", with: blog[1].title) # edit -1
           fill_in "タイトル", with: ""
@@ -946,7 +941,7 @@ RSpec.feature "Blogs", type: :feature do
           fill_in "Eメール", with: staff.email
           click_button 'ログイン'
           click_link "スタッフブログ投稿"
-          find(".edit4").click
+          find(".edit0").click
           expect(page).to have_content "#{staff.name}のブログ編集" # edit -1
           expect(page).to have_field("タイトル", with: blog[4].title) # edit -1
           fill_in "タイトル", with: ""
@@ -977,7 +972,7 @@ RSpec.feature "Blogs", type: :feature do
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
         expect {
-          find(".delete0").click
+          find(".delete4").click
           expect(page).to have_content "ブログのデータを削除しました。"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to_not have_content admin_blog.title
@@ -988,19 +983,19 @@ RSpec.feature "Blogs", type: :feature do
 
     context "管理者はスタッフのブログを削除する" do
       scenario "admin deletes staff's blog" do
-        #admin_blog = FactoryBot.create(:blog, :admin)
-        admin = FactoryBot.create(:staff, :admin)
+        admin_blog = FactoryBot.create(:blog, :admin)
+        #admin = FactoryBot.create(:staff, :admin)
         blog = []
         1.upto 4 do |n|
           blog[n] = FactoryBot.create(:blog)
         end
-        #admin = Staff.find(admin_blog.staff_id)
+        admin = Staff.find(admin_blog.staff_id)
         staff = Staff.find(blog[3].staff_id)
         fill_in "Eメール", with: admin.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
         expect {
-          find(".delete2").click
+          find(".delete1").click
           expect(page).to have_content "ブログのデータを削除しました。"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to_not have_content blog[3].title
@@ -1011,19 +1006,19 @@ RSpec.feature "Blogs", type: :feature do
 
     context "スタッフは自分自身のブログを削除する" do
       scenario "staff deletes his own blog" do
-        #admin_blog = FactoryBot.create(:blog, :admin)
-        admin = FactoryBot.create(:staff, :admin)
+        admin_blog = FactoryBot.create(:blog, :admin)
+        #admin = FactoryBot.create(:staff, :admin)
         blog = []
         1.upto 4 do |n|
           blog[n] = FactoryBot.create(:blog)
         end
-        #admin = Staff.find(admin_blog.staff_id)
+        admin = Staff.find(admin_blog.staff_id)
         staff = Staff.find(blog[2].staff_id)
-        fill_in "Eメール", with: admin.email
+        fill_in "Eメール", with: staff.email
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
         expect {
-          find(".delete1").click
+          find(".delete2").click
           expect(page).to have_content "ブログのデータを削除しました。"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to_not have_content blog[2].title
@@ -1044,9 +1039,9 @@ RSpec.feature "Blogs", type: :feature do
         click_button 'ログイン'
         click_link "スタッフブログ投稿"
         expect(page.all(".delete0").empty?).to eq true
-        expect(page.all(".delete1").empty?).to eq false
+        expect(page.all(".delete1").empty?).to eq true
         expect(page.all(".delete2").empty?).to eq true
-        expect(page.all(".delete3").empty?).to eq true
+        expect(page.all(".delete3").empty?).to eq false
         expect(page.all(".delete4").empty?).to eq true
       end
     end
@@ -1881,7 +1876,7 @@ RSpec.feature "Blogs", type: :feature do
           click_link "スタッフブログ"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to_not have_content @blog[0].title
-          expect(page).to have_content I18n.l(Date.today, format: :longdate)
+          expect(page).to have_content I18n.l(Date.today + 2.day, format: :longdate)
           expect(page).to_not have_content "管理者"
           expect(page).to_not have_content @blog[1].title
           expect(page).to_not have_content "#{Staff.find(@blog[1].staff_id).name}"
@@ -1914,7 +1909,7 @@ RSpec.feature "Blogs", type: :feature do
           click_link "スタッフブログ"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to_not have_content @blog[0].title
-          expect(page).to have_content I18n.l(Date.today, format: :longdate)
+          expect(page).to have_content I18n.l(Date.today + 3.day, format: :longdate)
           expect(page).to_not have_content "管理者"
           expect(page).to_not have_content @blog[1].title
           expect(page).to_not have_content "#{Staff.find(@blog[1].staff_id).name}"
@@ -1946,5 +1941,90 @@ RSpec.feature "Blogs", type: :feature do
     end
 
   end
+
+  describe "ブログの表示順序" do
+    before do
+      @blog = []
+      @blog[0] = FactoryBot.create(:blog, :admin)
+      @blog[1] = FactoryBot.create(:blog)
+      @blog[2] = FactoryBot.create(:blog, :therapist_training)
+      @blog[3] = FactoryBot.create(:blog, :self_care)
+      @blog[4] = FactoryBot.create(:blog, :general)
+      @blog[5] = FactoryBot.create(:blog, :admin)
+      @blog[6] = FactoryBot.create(:blog)
+      @blog[7] = FactoryBot.create(:blog, :therapist_training)
+      @blog[8] = FactoryBot.create(:blog, :self_care)
+      @blog[9] = FactoryBot.create(:blog, :general)
+    end
+
+    context "管理者が見た順序" do
+      scenario "admins can see all blogs in correct order"  do
+        admin = FactoryBot.create(:staff, :admin)
+        fill_in "Eメール", with: admin.email
+        click_button "ログイン"
+        click_link "スタッフブログ投稿"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page.body.index(@blog[0].title)).to be > page.body.index(@blog[1].title)
+        expect(page.body.index(@blog[1].title)).to be > page.body.index(@blog[2].title)
+        expect(page.body.index(@blog[2].title)).to be > page.body.index(@blog[3].title)
+        expect(page.body.index(@blog[3].title)).to be > page.body.index(@blog[4].title)
+        expect(page.body.index(@blog[5].title)).to be > page.body.index(@blog[6].title)
+        expect(page.body.index(@blog[6].title)).to be > page.body.index(@blog[7].title)
+        expect(page.body.index(@blog[7].title)).to be > page.body.index(@blog[8].title)
+        expect(page.body.index(@blog[8].title)).to be > page.body.index(@blog[9].title)
+      end
+    end
+
+    context "スタッフが見た順序" do
+      scenario "staff can see all blogs in correct order"  do
+        staff = FactoryBot.create(:staff)
+        fill_in "Eメール", with: staff.email
+        click_button "ログイン"
+        click_link "スタッフブログ投稿"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page.body.index(@blog[0].title)).to be > page.body.index(@blog[1].title)
+        expect(page.body.index(@blog[1].title)).to be > page.body.index(@blog[2].title)
+        expect(page.body.index(@blog[2].title)).to be > page.body.index(@blog[3].title)
+        expect(page.body.index(@blog[3].title)).to be > page.body.index(@blog[4].title)
+        expect(page.body.index(@blog[5].title)).to be > page.body.index(@blog[6].title)
+        expect(page.body.index(@blog[6].title)).to be > page.body.index(@blog[7].title)
+        expect(page.body.index(@blog[7].title)).to be > page.body.index(@blog[8].title)
+        expect(page.body.index(@blog[8].title)).to be > page.body.index(@blog[9].title)
+      end
+    end
+
+    context "セラピスト養成コース受講生から見る"do
+      scenario "therapist training course students can see therapist_training course blogs in correct order" do
+        student = FactoryBot.create(:student)
+        click_link "受講生の方はこちら"
+        fill_in "Eメール", with: student.email
+        click_button "ログイン"
+        click_link "スタッフブログ"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page.body.index(@blog[2].title)).to be > page.body.index(@blog[3].title)
+        expect(page.body.index(@blog[3].title)).to be > page.body.index(@blog[4].title)
+        expect(page.body.index(@blog[7].title)).to be > page.body.index(@blog[8].title)
+        expect(page.body.index(@blog[8].title)).to be > page.body.index(@blog[9].title)
+      end
+    end
+
+    context "セルフケアコース受講生から見る"do
+      scenario "self care course students can see self_care course blogs in correct order " do
+        student = FactoryBot.create(:student, :self_care)
+        click_link "受講生の方はこちら"
+        fill_in "Eメール", with: student.email
+        click_button "ログイン"
+        click_link "スタッフブログ"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page.body.index(@blog[3].title)).to be > page.body.index(@blog[4].title)
+        expect(page.body.index(@blog[8].title)).to be > page.body.index(@blog[9].title)
+      end
+    end
+
+
+
+  end
+
+
 
 end
