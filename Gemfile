@@ -66,7 +66,7 @@ gem 'active_decorator'
 gem 'rinku'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.6.0'
+  gem 'rspec-rails', '~> 3.8.0'
   gem 'factory_bot_rails', '~> 4.10.0'
   gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
