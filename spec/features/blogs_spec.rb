@@ -197,7 +197,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
 
-      context "スタッフはタイトルの無い新しいブログを作成する" do 
+      context "スタッフはタイトルの無い新しいブログを作成する" do
         scenario "a staff creates new blog without a title" do
           staff = FactoryBot.create(:staff)
           fill_in "Eメール", with: staff.email
@@ -1113,6 +1113,7 @@ RSpec.feature "Blogs", type: :feature do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
+            # 一覧表示テスト
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
@@ -1134,7 +1135,15 @@ RSpec.feature "Blogs", type: :feature do
           end
         end
 
-
+        context "一般からは見えない" do
+          scenario "general can't see blogs" do
+            click_link "スタッフブログはこちら（一般向け）,（仮）"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
+            expect(page).to_not have_content "管理者"
+          end
+        end
 
 
 
@@ -1224,6 +1233,16 @@ RSpec.feature "Blogs", type: :feature do
           end
         end
 
+        context "一般からは見えない" do
+          scenario "general can't see blogs" do
+            click_link "スタッフブログはこちら（一般向け）,（仮）"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
+            expect(page).to_not have_content @staff.name
+          end
+        end
+
 
 
 
@@ -1294,11 +1313,16 @@ RSpec.feature "Blogs", type: :feature do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
+            # 一覧表示テスト
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
           end
         end
 
@@ -1308,6 +1332,16 @@ RSpec.feature "Blogs", type: :feature do
             fill_in "Eメール", with: student.email
             click_button "ログイン"
             click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
+            expect(page).to_not have_content "管理者"
+          end
+        end
+
+        context "一般からは見えない" do
+          scenario "general can't see blogs" do
+            click_link "スタッフブログはこちら（一般向け）,（仮）"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
             expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
@@ -1384,11 +1418,16 @@ RSpec.feature "Blogs", type: :feature do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
+            # 一覧表示テスト
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
           end
         end
 
@@ -1398,6 +1437,16 @@ RSpec.feature "Blogs", type: :feature do
             fill_in "Eメール", with: student.email
             click_button "ログイン"
             click_link "スタッフブログ"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
+            expect(page).to_not have_content @staff.name
+          end
+        end
+
+        context "一般からは見えない" do
+          scenario "general can't see blogs" do
+            click_link "スタッフブログはこちら（一般向け）,（仮）"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
             expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
@@ -1475,11 +1524,16 @@ RSpec.feature "Blogs", type: :feature do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
+            # 一覧表示テスト
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
           end
         end
 
@@ -1488,11 +1542,26 @@ RSpec.feature "Blogs", type: :feature do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
+            # 一覧表示テスト
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
+          end
+        end
+
+        context "一般からは見えない" do
+          scenario "general can't see blogs" do
+            click_link "スタッフブログはこちら（一般向け）,（仮）"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
+            expect(page).to_not have_content "管理者"
           end
         end
 
@@ -1565,11 +1634,16 @@ RSpec.feature "Blogs", type: :feature do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
+            # 一覧表示テスト
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
           end
         end
 
@@ -1578,11 +1652,26 @@ RSpec.feature "Blogs", type: :feature do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
+            # 一覧表示テスト
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
+          end
+        end
+
+        context "一般からは見えない" do
+          scenario "general can't see blogs" do
+            click_link "スタッフブログはこちら（一般向け）,（仮）"
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to_not have_content "title0"
+            expect(page).to_not have_content I18n.l(Date.today, format: :longdate)
+            expect(page).to_not have_content @staff.name
           end
         end
 
@@ -1656,11 +1745,16 @@ RSpec.feature "Blogs", type: :feature do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
+            # 一覧表示テスト
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
           end
         end
 
@@ -1669,11 +1763,31 @@ RSpec.feature "Blogs", type: :feature do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
+            # 一覧表示テスト
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content "管理者"
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
+          end
+        end
+
+        context "一般からは見える" do
+          scenario "general can't see blogs" do
+            click_link "スタッフブログはこちら（一般向け）,（仮）"
+            # 一覧表示テスト
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
+            expect(page).to have_content "管理者"
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
           end
         end
 
@@ -1746,11 +1860,16 @@ RSpec.feature "Blogs", type: :feature do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
+            # 一覧表示テスト
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
           end
         end
 
@@ -1759,11 +1878,31 @@ RSpec.feature "Blogs", type: :feature do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
+            # 一覧表示テスト
             click_link "スタッフブログ"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
             expect(page).to have_content @staff.name
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
+          end
+        end
+
+        context "一般からは見える" do
+          scenario "general can't see blogs" do
+            click_link "スタッフブログはこちら（一般向け）,（仮）"
+            # 一覧表示テスト
+            expect(page).to have_content "スタッフブログ一覧"
+            expect(page).to have_content "title0"
+            expect(page).to have_content I18n.l(Date.today, format: :longdate)
+            expect(page).to have_content @staff.name
+            # 詳細表示テスト
+            click_link "show0"
+            expect(page).to have_content "スタッフブログ詳細表示"
+            expect(page).to have_content "title0"
           end
         end
 
@@ -1932,6 +2071,35 @@ RSpec.feature "Blogs", type: :feature do
         end
       end
 
+      context "一般から見る"do
+
+        scenario "self care course students can see self_care course blogs" do
+          click_link "スタッフブログはこちら（一般向け）,（仮）"
+          expect(page).to have_content "スタッフブログ一覧"
+          expect(page).to_not have_content @blog[0].title
+          expect(page).to have_content I18n.l(Date.today + 4.day, format: :longdate)
+          expect(page).to_not have_content "管理者"
+          expect(page).to_not have_content @blog[1].title
+          expect(page).to_not have_content "#{Staff.find(@blog[1].staff_id).name}"
+          expect(page).to_not have_content @blog[2].title
+          expect(page).to_not have_content "#{Staff.find(@blog[2].staff_id).name}"
+          expect(page).to_not have_content @blog[3].title
+          expect(page).to_not have_content "#{Staff.find(@blog[3].staff_id).name}"
+          expect(page).to have_content @blog[4].title
+          expect(page).to have_content "#{Staff.find(@blog[4].staff_id).name}"
+          expect(page).to_not have_content @blog[5].title
+          expect(page).to_not have_content "#{Staff.find(@blog[5].staff_id).name}"
+          expect(page).to_not have_content @blog[6].title
+          expect(page).to_not have_content "#{Staff.find(@blog[6].staff_id).name}"
+          expect(page).to_not have_content @blog[7].title
+          expect(page).to_not have_content "#{Staff.find(@blog[7].staff_id).name}"
+          expect(page).to_not have_content @blog[8].title
+          expect(page).to_not have_content "#{Staff.find(@blog[8].staff_id).name}"
+          expect(page).to have_content @blog[9].title
+          expect(page).to have_content "#{Staff.find(@blog[9].staff_id).name}"
+        end
+      end
+
 
 
 
@@ -1955,6 +2123,11 @@ RSpec.feature "Blogs", type: :feature do
       @blog[7] = FactoryBot.create(:blog, :therapist_training)
       @blog[8] = FactoryBot.create(:blog, :self_care)
       @blog[9] = FactoryBot.create(:blog, :general)
+      @blog[10] = FactoryBot.create(:blog, :general)
+      @blog[11] = FactoryBot.create(:blog, :general)
+      @blog[12] = FactoryBot.create(:blog, :general)
+      @blog[13] = FactoryBot.create(:blog, :general)
+      @blog[14] = FactoryBot.create(:blog, :general)
     end
 
     context "管理者が見た順序" do
@@ -1972,6 +2145,11 @@ RSpec.feature "Blogs", type: :feature do
         expect(page.body.index(@blog[6].title)).to be > page.body.index(@blog[7].title)
         expect(page.body.index(@blog[7].title)).to be > page.body.index(@blog[8].title)
         expect(page.body.index(@blog[8].title)).to be > page.body.index(@blog[9].title)
+
+
+
+
+
       end
     end
 
@@ -1990,6 +2168,8 @@ RSpec.feature "Blogs", type: :feature do
         expect(page.body.index(@blog[6].title)).to be > page.body.index(@blog[7].title)
         expect(page.body.index(@blog[7].title)).to be > page.body.index(@blog[8].title)
         expect(page.body.index(@blog[8].title)).to be > page.body.index(@blog[9].title)
+
+
       end
     end
 
@@ -2005,6 +2185,8 @@ RSpec.feature "Blogs", type: :feature do
         expect(page.body.index(@blog[3].title)).to be > page.body.index(@blog[4].title)
         expect(page.body.index(@blog[7].title)).to be > page.body.index(@blog[8].title)
         expect(page.body.index(@blog[8].title)).to be > page.body.index(@blog[9].title)
+
+
       end
     end
 
@@ -2018,6 +2200,21 @@ RSpec.feature "Blogs", type: :feature do
         expect(page).to have_content "スタッフブログ一覧"
         expect(page.body.index(@blog[3].title)).to be > page.body.index(@blog[4].title)
         expect(page.body.index(@blog[8].title)).to be > page.body.index(@blog[9].title)
+      end
+    end
+
+    context "一般から見る"do
+      scenario "general can see general blogs in correct order " do
+        student = FactoryBot.create(:student, :self_care)
+        click_link "受講生の方はこちら"
+        fill_in "Eメール", with: student.email
+        click_button "ログイン"
+        click_link "スタッフブログ"
+        expect(page).to have_content "スタッフブログ一覧"
+        expect(page.body.index(@blog[10].title)).to be > page.body.index(@blog[11].title)
+        expect(page.body.index(@blog[11].title)).to be > page.body.index(@blog[12].title)
+        expect(page.body.index(@blog[12].title)).to be > page.body.index(@blog[13].title)
+        expect(page.body.index(@blog[13].title)).to be > page.body.index(@blog[14].title)
       end
     end
 
