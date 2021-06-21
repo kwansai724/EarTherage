@@ -45,10 +45,12 @@ class BlogsController < ApplicationController
   def create
     @blog = Blog.new(blog_params)
     if @blog.save
-      flash.now[:success] = "ブログを作成しました。"
-      redirect_to staff_blogs_url(@staff)
+      # flash.now[:success] = "ブログを作成しました。"
+      # redirect_to staff_blogs_url(@staff)
+      flash[:success] = "ブログを作成しました。"
+      redirect_to staff_blog_url(@staff, @blog)
     else
-      flash.now[:danger] = "#{@blog.errors.full_messages}" if @blog.errors.present?
+      # flash.now[:danger] = "#{@blog.errors.full_messages}" if @blog.errors.present?
       render :new
     end
   end
@@ -62,7 +64,8 @@ class BlogsController < ApplicationController
   def update
     if @blog.update_attributes(blog_params)
       flash[:success] = "ブログを更新しました。"
-      redirect_to staff_blogs_url(@staff)
+      # redirect_to staff_blogs_url(@staff)
+      redirect_to staff_blog_url(@staff, @blog)
     else
       flash.now[:danger] = "#{@blog.errors.full_messages}" if @blog.errors.present?
       render :edit

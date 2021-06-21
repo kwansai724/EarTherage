@@ -1,7 +1,8 @@
+<%= render 'layouts/flash_messages' %>
 <% if params[:area].present? || params[:event_type].present? || params[:teacher].present? %>
   <h1>検索結果</h1>
 <% else %>
-  <h1>イベント/講座一覧</h1>
+  <h1>イベント / 講座一覧</h1>
 <% end %>
 
 
@@ -31,6 +32,10 @@
       <%= submit_tag "検索", class: "btn btn-info" %>
     <% end %>
   </div>
+  <form class="js-filter-form :checkbox">
+    <label><input class="checkbox" type="checkbox" name="judgement_of_members" value="members" > 会員限定</label>
+  </form>
+
   <!-------------------------------------------------------------------------------------------------------->
 
   <div class="btn-schedule-new">
@@ -100,3 +105,24 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  $(".js-filter-form :checkbox").on("click", function(){
+    var checked = [];
+    console.log(test);
+    $(".js-filter-form :checked").each(function(){
+      // チェックボックスにチェックした値を配列に追加
+      checked.push($(this).val());
+      });
+      // 全てのtrを取得
+      $('#list contents-wrap p').each(function(){
+        var txt = $(this).find("p:eq(1)").html();
+        // ①と②にチェックが入ると表示、チェックを外すと非表示できるよう条件分岐
+        if(txt.match(checked[1])){
+          $(this).show();
+        }else{
+          $(this).hide();
+        }
+      });
+  });
+</script>
