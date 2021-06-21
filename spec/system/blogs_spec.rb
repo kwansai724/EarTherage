@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Blogs", type: :feature do
+RSpec.describe "Blogs", type: :system do
 
   before do
     visit root_path
@@ -12,7 +12,7 @@ RSpec.feature "Blogs", type: :feature do
     context "正常系" do
 
       context "管理者は新しいブログを作成する" do
-        scenario "admin creates new blog" do
+        it "admin creates new blog" do
           admin = FactoryBot.create(:staff, :admin)
           fill_in "Eメール", with: admin.email
           click_button 'ログイン'
@@ -32,7 +32,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "管理者は画像の無い新しいブログを作成する" do
-        scenario "admin creates new blog without picture" do
+        it "admin creates new blog without picture" do
           admin = FactoryBot.create(:staff, :admin)
           fill_in "Eメール", with: admin.email
           click_button 'ログイン'
@@ -58,7 +58,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
       context "管理者はブログ作成画面から戻るボタンでスタッフブログ一覧画面に戻る" do
-        scenario "admin returns to staff blogs screen from staff blog new screen" do
+        it "admin returns to staff blogs screen from staff blog new screen" do
           admin = FactoryBot.create(:staff, :admin)
           fill_in "Eメール", with: admin.email
           click_button 'ログイン'
@@ -75,7 +75,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
       context "スタッフは新しいブログを作成する" do 
-        scenario "a staff creates new blog" do
+        it "a staff creates new blog" do
           staff = FactoryBot.create(:staff)
           fill_in "Eメール", with: staff.email
           click_button 'ログイン'
@@ -95,7 +95,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "スタッフは画像の無い新しいブログを作成する" do
-        scenario "staff creates new blog without picture" do
+        it "staff creates new blog without picture" do
           staff = FactoryBot.create(:staff)
           fill_in "Eメール", with: staff.email
           click_button 'ログイン'
@@ -118,7 +118,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
       context "スタッフはブログ作成画面から戻るボタンでスタッフブログ一覧画面に戻る" do
-        scenario "staff returns to staff blogs screen from staff blog new screen" do
+        it "staff returns to staff blogs screen from staff blog new screen" do
           staff = FactoryBot.create(:staff)
           fill_in "Eメール", with: staff.email
           click_button 'ログイン'
@@ -139,7 +139,7 @@ RSpec.feature "Blogs", type: :feature do
     context "異常系" do
 
       context "管理者はタイトルの無い新しいブログを作成する" do
-        scenario "admin creates new blog without a title" do
+        it "admin creates new blog without a title" do
           admin = FactoryBot.create(:staff, :admin)
           fill_in "Eメール", with: admin.email
           click_button 'ログイン'
@@ -158,7 +158,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "管理者は日時の無い新しいブログを作成する" do
-        scenario "admin creates new blog without datetime" do
+        it "admin creates new blog without datetime" do
           admin = FactoryBot.create(:staff, :admin)
           fill_in "Eメール", with: admin.email
           click_button 'ログイン'
@@ -177,7 +177,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "管理者はタイトルと日時の無い新しいブログを作成する" do
-        scenario "admin creates new blog without a title and datetime" do
+        it "admin creates new blog without a title and datetime" do
           admin = FactoryBot.create(:staff, :admin)
           fill_in "Eメール", with: admin.email
           click_button 'ログイン'
@@ -198,7 +198,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
       context "スタッフはタイトルの無い新しいブログを作成する" do
-        scenario "a staff creates new blog without a title" do
+        it "a staff creates new blog without a title" do
           staff = FactoryBot.create(:staff)
           fill_in "Eメール", with: staff.email
           click_button 'ログイン'
@@ -217,7 +217,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "スタッフは日時の無い新しいブログを作成する" do 
-        scenario "a staff creates new blog without datetime" do
+        it "a staff creates new blog without datetime" do
           staff = FactoryBot.create(:staff)
           fill_in "Eメール", with: staff.email
           click_button 'ログイン'
@@ -236,7 +236,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "スタッフはタイトルと日時の無い新しいブログを作成する" do 
-        scenario "a staff creates new blog without a title and datetime" do
+        it "a staff creates new blog without a title and datetime" do
           staff = FactoryBot.create(:staff)
           fill_in "Eメール", with: staff.email
           click_button 'ログイン'
@@ -262,7 +262,7 @@ RSpec.feature "Blogs", type: :feature do
   describe "一覧表示機能" do
 
     context "管理者はブログを一覧表示する" do
-      scenario "admin lists blogs" do
+      it "admin lists blogs" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -288,7 +288,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "管理者はプログ一覧画面から戻るリンクで管理者画面に戻る" do
-      scenario "admin returns to admin screen from staff blogs screen" do
+      it "admin returns to admin screen from staff blogs screen" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -310,7 +310,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
     context "スタッフはブログを一覧表示する" do
-      scenario "a staff lists blogs" do
+      it "a staff lists blogs" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -336,7 +336,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "スタッフはプログ一覧画面から戻るリンクでスタッフ画面に戻る" do
-      scenario "staff returns to staffs screen from staff blogs screen" do
+      it "staff returns to staffs screen from staff blogs screen" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -362,7 +362,7 @@ RSpec.feature "Blogs", type: :feature do
   describe "詳細表示機能" do
 
     context "管理者は管理者自身のブログを詳細表示する" do
-      scenario "admin views admin's own blog in detail" do
+      it "admin views admin's own blog in detail" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -379,7 +379,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "管理者は管理者自身のブログを詳細表示画面から戻るボタンでブログ一覧画面に戻る" do
-      scenario "admin returns to staff blogs screen from his own blog detail screen" do
+      it "admin returns to staff blogs screen from his own blog detail screen" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -402,7 +402,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
     context "管理者はスタッフのブログを詳細表示する" do
-      scenario "admin views staff's blog in detail" do
+      it "admin views staff's blog in detail" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -420,7 +420,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "管理者はスタッフのブログを詳細表示画面から戻るボタンでブログ一覧画面に戻る" do
-      scenario "admin returns to staff blogs screen from staff blog detail screen" do
+      it "admin returns to staff blogs screen from staff blog detail screen" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -445,7 +445,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
     context "スタッフは管理者のブログを詳細表示する" do
-      scenario "a staff views admin's blog details" do
+      it "a staff views admin's blog details" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -462,7 +462,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "スタッフは管理者のブログを詳細表示画面から戻るボタンでブログ一覧画面に戻る" do
-      scenario "a staff returns to staff blogs screen from admin's blog detail screen" do
+      it "a staff returns to staff blogs screen from admin's blog detail screen" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -486,7 +486,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
     context "スタッフは自身のブログを詳細表示する" do
-      scenario "a staff views his own blog details" do
+      it "a staff views his own blog details" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -504,7 +504,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "スタッフは自身のブログを詳細表示画面から戻るボタンでブログ一覧画面に戻る" do
-      scenario "a staff returns to staff blogs screen from his own blog detail screen" do
+      it "a staff returns to staff blogs screen from his own blog detail screen" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -527,7 +527,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
     context "スタッフは別スタッフのブログを詳細表示する" do
-      scenario "a staff views another staff's blog details" do
+      it "a staff views another staff's blog details" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -545,7 +545,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "スタッフは別のスタッフのブログを詳細表示画面から戻るボタンでブログ一覧画面に戻る" do
-      scenario "a staff returns to staff blogs screen from another staff's blog detail screen" do
+      it "a staff returns to staff blogs screen from another staff's blog detail screen" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -575,7 +575,7 @@ RSpec.feature "Blogs", type: :feature do
     context "正常系" do
 
       context "管理者は管理者自身のブログを編集する" do
-        scenario "admin edits his own blog" do
+        it "admin edits his own blog" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -601,7 +601,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "管理者は管理者のブログ編集画面から戻るボタンでスタッフブログ一覧画面に戻る" do
-        scenario "admin returns to staff blogs screen from his own blog edit screen" do
+        it "admin returns to staff blogs screen from his own blog edit screen" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -625,7 +625,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
       context "管理者はスタッフのブログを編集する" do
-        scenario "admin edits staff's blog" do
+        it "admin edits staff's blog" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -651,7 +651,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "管理者はスタッフのブログ編集画面から戻るボタンでスタッフブログ一覧画面に戻る" do
-        scenario "admin returns to staff blogs screen from staff blog edit screen" do
+        it "admin returns to staff blogs screen from staff blog edit screen" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -674,7 +674,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
       context "スタッフは自分自身のブログを編集する" do
-        scenario "admin edits his own blog" do
+        it "admin edits his own blog" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -700,7 +700,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "スタッフ自身の編集ボタンのみ表示される" do
-        scenario "staff finds his own edit button" do
+        it "staff finds his own edit button" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -719,7 +719,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "スタッフはスタッフ自身のブログ編集画面から戻るボタンでスタッフブログ一覧画面に戻る" do
-        scenario "staff returns to staff blogs screen from his own blog edit screen" do
+        it "staff returns to staff blogs screen from his own blog edit screen" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -745,7 +745,7 @@ RSpec.feature "Blogs", type: :feature do
     context "異常系" do
 
       context "管理者はタイトルの無い管理者自身のブログを編集する" do
-        scenario "admin edits admin's own blog without a title" do
+        it "admin edits admin's own blog without a title" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -768,7 +768,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "管理者は日時の無い管理者自身のブログを編集する" do
-        scenario "admin edits admin's own blog without datetime" do
+        it "admin edits admin's own blog without datetime" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -791,7 +791,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "管理者はタイトルと日時の無い管理者自身のブログを編集する" do
-        scenario "admin edits admin's own blog without a title and datetime" do
+        it "admin edits admin's own blog without a title and datetime" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -815,7 +815,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "管理者はタイトルの無いスタッフのブログを編集する" do
-        scenario "admin edits staff's blog without a title" do
+        it "admin edits staff's blog without a title" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -838,7 +838,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "管理者は日時の無いスタッフのブログを編集する" do
-        scenario "admin edits staff's blog without datetime" do
+        it "admin edits staff's blog without datetime" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -861,7 +861,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "管理者はタイトルと日時の無いスタッフのブログを編集する" do
-        scenario "admin edits staff's blog without a title and datetime" do
+        it "admin edits staff's blog without a title and datetime" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -885,7 +885,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "スタッフはタイトルの無い自分自身のブログを編集する" do
-        scenario "staff edits staff's blog without a title" do
+        it "staff edits staff's blog without a title" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -908,7 +908,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "スタッフは日時の無い自分自身のブログを編集する" do
-        scenario "staff edits staff's blog without datetime" do
+        it "staff edits staff's blog without datetime" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -931,7 +931,7 @@ RSpec.feature "Blogs", type: :feature do
       end
 
       context "管理者はタイトルと日時の無い自分自身のブログを編集する" do
-        scenario "staff edits staff's blog without a title and datetime" do
+        it "staff edits staff's blog without a title and datetime" do
           admin_blog = FactoryBot.create(:blog, :admin)
           blog = []
           1.upto 4 do |n|
@@ -961,7 +961,7 @@ RSpec.feature "Blogs", type: :feature do
   describe "削除機能" do
 
     context "管理者は管理者自身のブログを削除する" do
-      scenario "admin deteles admin's own blog" do
+      it "admin deteles admin's own blog" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -982,7 +982,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "管理者はスタッフのブログを削除する" do
-      scenario "admin deletes staff's blog" do
+      it "admin deletes staff's blog" do
         admin_blog = FactoryBot.create(:blog, :admin)
         #admin = FactoryBot.create(:staff, :admin)
         blog = []
@@ -1005,7 +1005,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "スタッフは自分自身のブログを削除する" do
-      scenario "staff deletes his own blog" do
+      it "staff deletes his own blog" do
         admin_blog = FactoryBot.create(:blog, :admin)
         #admin = FactoryBot.create(:staff, :admin)
         blog = []
@@ -1028,7 +1028,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "スタッフ自身の削除ボタンのみ表示される" do
-      scenario "staff finds his own delete button" do
+      it "staff finds his own delete button" do
         admin_blog = FactoryBot.create(:blog, :admin)
         blog = []
         1.upto 4 do |n|
@@ -1079,7 +1079,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
         context "管理者からは見える" do
-          scenario "admins can see blogs" do
+          it "admins can see blogs" do
             admin = FactoryBot.create(:staff, :admin)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: admin.email
@@ -1093,7 +1093,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "スタッフからは見える" do
-          scenario "staffs can see blogs" do
+          it "staffs can see blogs" do
             staff = FactoryBot.create(:staff)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: staff.email
@@ -1109,7 +1109,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
         context "セラピスト養成コースの受講生からは見えない" do
-          scenario "therapist training course students can't see blogs" do
+          it "therapist training course students can't see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1123,7 +1123,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見えない" do
-          scenario "self care course students can't see blogs" do
+          it "self care course students can't see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1136,7 +1136,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "一般からは見えない" do
-          scenario "general can't see blogs" do
+          it "general can't see blogs" do
             click_link "スタッフブログはこちら（一般向け）,（仮）"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
@@ -1178,7 +1178,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "管理者からは見える" do
-          scenario "admins can see blogs" do
+          it "admins can see blogs" do
             admin = FactoryBot.create(:staff, :admin)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: admin.email
@@ -1192,7 +1192,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "スタッフからは見える" do
-          scenario "staffs can see blogs" do
+          it "staffs can see blogs" do
             staff = FactoryBot.create(:staff)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: staff.email
@@ -1208,7 +1208,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
         context "セラピスト養成コースの受講生からは見えない" do
-          scenario "therapist training course students can't see blogs" do
+          it "therapist training course students can't see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1221,7 +1221,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見えない" do
-          scenario "self care course students can't see blogs" do
+          it "self care course students can't see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1234,7 +1234,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "一般からは見えない" do
-          scenario "general can't see blogs" do
+          it "general can't see blogs" do
             click_link "スタッフブログはこちら（一般向け）,（仮）"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
@@ -1278,7 +1278,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "管理者からは見える" do
-          scenario "admins can see blogs" do
+          it "admins can see blogs" do
             admin = FactoryBot.create(:staff, :admin)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: admin.email
@@ -1292,7 +1292,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "スタッフからは見える" do
-          scenario "staffs can see blogs" do
+          it "staffs can see blogs" do
             staff = FactoryBot.create(:staff)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: staff.email
@@ -1309,7 +1309,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
         context "セラピスト養成コースの受講生から見える" do
-          scenario "therapist training course students can see blogs" do
+          it "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1327,7 +1327,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見えない" do
-          scenario "self care course students can't see blogs" do
+          it "self care course students can't see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1340,7 +1340,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "一般からは見えない" do
-          scenario "general can't see blogs" do
+          it "general can't see blogs" do
             click_link "スタッフブログはこちら（一般向け）,（仮）"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
@@ -1384,7 +1384,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "管理者からは見える" do
-          scenario "admins can see blogs" do
+          it "admins can see blogs" do
             admin = FactoryBot.create(:staff, :admin)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: admin.email
@@ -1398,7 +1398,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "スタッフからは見える" do
-          scenario "staffs can see blogs" do
+          it "staffs can see blogs" do
             staff = FactoryBot.create(:staff)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: staff.email
@@ -1414,7 +1414,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
         context "セラピスト養成コースの受講生からは見える" do
-          scenario "therapist training course students can see blogs" do
+          it "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1432,7 +1432,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見えない" do
-          scenario "self care course students can't see blogs" do
+          it "self care course students can't see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1445,7 +1445,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "一般からは見えない" do
-          scenario "general can't see blogs" do
+          it "general can't see blogs" do
             click_link "スタッフブログはこちら（一般向け）,（仮）"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
@@ -1490,7 +1490,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "管理者からは見える" do
-          scenario "admins can see blogs" do
+          it "admins can see blogs" do
             admin = FactoryBot.create(:staff, :admin)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: admin.email
@@ -1504,7 +1504,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "スタッフからは見える" do
-          scenario "staffs can see blogs" do
+          it "staffs can see blogs" do
             staff = FactoryBot.create(:staff)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: staff.email
@@ -1520,7 +1520,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
         context "セラピスト養成コースの受講生から見える" do
-          scenario "therapist training course students can see blogs" do
+          it "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1538,7 +1538,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見える" do
-          scenario "self care course students can see blogs" do
+          it "self care course students can see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1556,7 +1556,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "一般からは見えない" do
-          scenario "general can't see blogs" do
+          it "general can't see blogs" do
             click_link "スタッフブログはこちら（一般向け）,（仮）"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
@@ -1600,7 +1600,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "管理者からは見える" do
-          scenario "admins can see blogs" do
+          it "admins can see blogs" do
             admin = FactoryBot.create(:staff, :admin)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: admin.email
@@ -1614,7 +1614,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "スタッフからは見える" do
-          scenario "staffs can see blogs" do
+          it "staffs can see blogs" do
             staff = FactoryBot.create(:staff)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: staff.email
@@ -1630,7 +1630,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
         context "セラピスト養成コースの受講生からは見える" do
-          scenario "therapist training course students can see blogs" do
+          it "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1648,7 +1648,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見える" do
-          scenario "self care course students can see blogs" do
+          it "self care course students can see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1666,7 +1666,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "一般からは見えない" do
-          scenario "general can't see blogs" do
+          it "general can't see blogs" do
             click_link "スタッフブログはこちら（一般向け）,（仮）"
             expect(page).to have_content "スタッフブログ一覧"
             expect(page).to_not have_content "title0"
@@ -1711,7 +1711,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "管理者からは見える" do
-          scenario "admins can see blogs" do
+          it "admins can see blogs" do
             admin = FactoryBot.create(:staff, :admin)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: admin.email
@@ -1725,7 +1725,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "スタッフからは見える" do
-          scenario "staffs can see blogs" do
+          it "staffs can see blogs" do
             staff = FactoryBot.create(:staff)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: staff.email
@@ -1741,7 +1741,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
         context "セラピスト養成コースの受講生から見える" do
-          scenario "therapist training course students can see blogs" do
+          it "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1759,7 +1759,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見える" do
-          scenario "self care course students can see blogs" do
+          it "self care course students can see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1777,7 +1777,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "一般からは見える" do
-          scenario "general can't see blogs" do
+          it "general can't see blogs" do
             click_link "スタッフブログはこちら（一般向け）,（仮）"
             # 一覧表示テスト
             expect(page).to have_content "スタッフブログ一覧"
@@ -1826,7 +1826,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "管理者からは見える" do
-          scenario "admins can see blogs" do
+          it "admins can see blogs" do
             admin = FactoryBot.create(:staff, :admin)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: admin.email
@@ -1840,7 +1840,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "スタッフからは見える" do
-          scenario "staffs can see blogs" do
+          it "staffs can see blogs" do
             staff = FactoryBot.create(:staff)
             click_link "管理者・スタッフはこちら"
             fill_in "Eメール", with: staff.email
@@ -1856,7 +1856,7 @@ RSpec.feature "Blogs", type: :feature do
 
 
         context "セラピスト養成コースの受講生からは見える" do
-          scenario "therapist training course students can see blogs" do
+          it "therapist training course students can see blogs" do
             student = FactoryBot.create(:student)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1874,7 +1874,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "セルフケアコースの受講生からは見える" do
-          scenario "self care course students can see blogs" do
+          it "self care course students can see blogs" do
             student = FactoryBot.create(:student, :self_care)
             fill_in "Eメール", with: student.email
             click_button "ログイン"
@@ -1892,7 +1892,7 @@ RSpec.feature "Blogs", type: :feature do
         end
 
         context "一般からは見える" do
-          scenario "general can't see blogs" do
+          it "general can't see blogs" do
             click_link "スタッフブログはこちら（一般向け）,（仮）"
             # 一覧表示テスト
             expect(page).to have_content "スタッフブログ一覧"
@@ -1942,7 +1942,7 @@ RSpec.feature "Blogs", type: :feature do
 
       context "管理者から見る"do
 
-        scenario "admins can see all blogs" do
+        it "admins can see all blogs" do
           admin = FactoryBot.create(:staff, :admin)
           fill_in "Eメール", with: admin.email
           click_button "ログイン"
@@ -1974,7 +1974,7 @@ RSpec.feature "Blogs", type: :feature do
 
       context "スタッフから見る"do
 
-        scenario "staffs can see all blogs" do
+        it "staffs can see all blogs" do
           staff = FactoryBot.create(:staff)
           fill_in "Eメール", with: staff.email
           click_button "ログイン"
@@ -2007,7 +2007,7 @@ RSpec.feature "Blogs", type: :feature do
 
       context "セラピスト養成コース受講生から見る"do
 
-        scenario "therapist training course students can see therapist_training course blogs" do
+        it "therapist training course students can see therapist_training course blogs" do
           student = FactoryBot.create(:student)
           click_link "受講生の方はこちら"
           fill_in "Eメール", with: student.email
@@ -2040,7 +2040,7 @@ RSpec.feature "Blogs", type: :feature do
 
       context "セルフケアコース受講生から見る"do
 
-        scenario "self care course students can see self_care course blogs" do
+        it "self care course students can see self_care course blogs" do
           student = FactoryBot.create(:student, :self_care)
           click_link "受講生の方はこちら"
           fill_in "Eメール", with: student.email
@@ -2073,7 +2073,7 @@ RSpec.feature "Blogs", type: :feature do
 
       context "一般から見る"do
 
-        scenario "self care course students can see self_care course blogs" do
+        it "self care course students can see self_care course blogs" do
           click_link "スタッフブログはこちら（一般向け）,（仮）"
           expect(page).to have_content "スタッフブログ一覧"
           expect(page).to_not have_content @blog[0].title
@@ -2131,7 +2131,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "管理者が見た順序" do
-      scenario "admins can see all blogs in correct order"  do
+      it "admins can see all blogs in correct order"  do
         admin = FactoryBot.create(:staff, :admin)
         fill_in "Eメール", with: admin.email
         click_button "ログイン"
@@ -2154,7 +2154,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "スタッフが見た順序" do
-      scenario "staff can see all blogs in correct order"  do
+      it "staff can see all blogs in correct order"  do
         staff = FactoryBot.create(:staff)
         fill_in "Eメール", with: staff.email
         click_button "ログイン"
@@ -2174,7 +2174,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "セラピスト養成コース受講生から見る"do
-      scenario "therapist training course students can see therapist_training course blogs in correct order" do
+      it "therapist training course students can see therapist_training course blogs in correct order" do
         student = FactoryBot.create(:student)
         click_link "受講生の方はこちら"
         fill_in "Eメール", with: student.email
@@ -2191,7 +2191,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "セルフケアコース受講生から見る"do
-      scenario "self care course students can see self_care course blogs in correct order " do
+      it "self care course students can see self_care course blogs in correct order " do
         student = FactoryBot.create(:student, :self_care)
         click_link "受講生の方はこちら"
         fill_in "Eメール", with: student.email
@@ -2204,7 +2204,7 @@ RSpec.feature "Blogs", type: :feature do
     end
 
     context "一般から見る"do
-      scenario "general can see general blogs in correct order " do
+      it "general can see general blogs in correct order " do
         student = FactoryBot.create(:student, :self_care)
         click_link "受講生の方はこちら"
         fill_in "Eメール", with: student.email

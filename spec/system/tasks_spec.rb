@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Tasks", type: :feature do
+RSpec.describe "Tasks", type: :system do
   before do
     visit root_path
     click_link "管理者・スタッフはこちら"
@@ -11,7 +11,7 @@ RSpec.feature "Tasks", type: :feature do
     context "正常系" do
 
       context "管理者は新しいブログを作成する" do
-        scenario "admin creates new blog", js: true do
+        it "admin creates new blog", js: true do
           admin = FactoryBot.create(:staff, :admin)
           fill_in "Eメール", with: admin.email
           click_button 'ログイン'
