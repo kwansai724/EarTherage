@@ -9,7 +9,7 @@
 
 
 <div class="container">
-  <% @students.each do |student| %>
+  <% @students.each_with_index do |student, n| %>
     <div class="row">
       <div class="d-flex align-items-center border-top border-dark  student--index col-3">
         ID:
@@ -19,12 +19,12 @@
       </div>
       <% if current_staff.present? && current_staff.admin == true %>
         <div class="border-top d-flex align-items-center border-dark student--index col-2">
-          <%= link_to "詳細", student_path(student), class: "btn btn-info btn--resize" %>
+          <%= link_to "詳細", student_path(student), class: "btn btn-info btn--resize show#{n}" %>
         </div>
         <div class="border-top d-flex align-items-center border-dark student--index col-2">
           <%= link_to "削除", student, method: :delete,
               data: { confirm: "削除してよろしいですか？" },
-              class: "btn btn-danger btn--resize" %>
+              class: "btn btn-danger btn--resize delete#{n}" %>
         </div>
       <% end %>
     </div>
@@ -33,7 +33,7 @@
         名前:
       </div>
       <div class="border-top d-flex align-items-center student--index col-9">
-        <%= link_to student.name, student_edit_admin_path(student_id: student.id) %>
+        <%= link_to student.name, student_edit_admin_path(student_id: student.id), class: "edit#{n}" %>
       </div>
     </div>
     <div class="row">
