@@ -74,77 +74,218 @@ RSpec.describe "Students", type: :system do
   end
 
   describe "編集機能" do
-    context "管理者は受講生を編集する" do
-      context "セラピスト養成コースの受講生を編集する" do
-        it "admins edit therapist training course student" do
-          expect(page).to have_content "受講生一覧"
-          10.times do |n|
-            find(".edit#{n}").click
-            expect(page).to have_content "アカウント情報の更新"
-            fill_in "名前", with: "student-#{n+1}"
-            fill_in "Eメール", with: "sample--#{n+1}@email.com"
-            fill_in "電話番号", with: "0000#{n+1}"
-            if n%2 == 0
-              find("option[value='self_care']").select_option
-            else
-              find("option[value='therapist_training']").select_option
-            end
-            click_button "編集"
-            expect(page).to have_content "受講生詳細"
-            expect(page).to have_content "ID:"
-            expect(page).to have_content "#{n+1}"
-            expect(page).to have_content "名前:"
-            expect(page).to have_content "student-#{n+1}"
-            expect(page).to have_content "Eメール:"
-            expect(page).to have_content "sample--#{n+1}@email.com"
-            expect(page).to have_content "電話番号"
-            expect(page).to have_content "0000#{n+1}"
-            expect(page).to have_content "コース:"
-            if n%2 == 0
-              expect(page).to have_content "セルフケアコース"
-            else
-              expect(page).to have_content "セラピスト養成コース"
-            end
-            click_link "戻る"
-          end
-        end
-      end
+    context "正常系"
 
-      context "セルフケアコースの受講生を編集する" do
-        it "admin edits sefl care course student" do
-          expect(page).to have_content "受講生一覧"
-          10.times do |n|
-            find(".edit#{n}").click
-            expect(page).to have_content "アカウント情報の更新"
-            fill_in "名前", with: "student-#{(n+11)%20}"
-            fill_in "Eメール", with: "sample--#{(n+11)%20}@email.com"
-            fill_in "電話番号", with: "0000#{(n+11)%20}"
-            if n%2 == 1
-              find("option[value='self_care']").select_option
-            else
-              find("option[value='therapist_training']").select_option
+      context "管理者は受講生を編集する" do
+        context "セラピスト養成コースの受講生を編集する" do
+          it "admins edit therapist training course student" do
+            expect(page).to have_content "受講生一覧"
+            10.times do |n|
+              find(".edit#{n}").click
+              expect(page).to have_content "アカウント情報の更新"
+              fill_in "名前", with: "student-#{n+1}"
+              fill_in "Eメール", with: "sample--#{n+1}@email.com"
+              fill_in "電話番号", with: "0000#{n+1}"
+              if n%2 == 0
+                find("option[value='self_care']").select_option
+              else
+                find("option[value='therapist_training']").select_option
+              end
+              click_button "編集"
+              expect(page).to have_content "受講生詳細"
+              expect(page).to have_content "ID:"
+              expect(page).to have_content "#{n+1}"
+              expect(page).to have_content "名前:"
+              expect(page).to have_content "student-#{n+1}"
+              expect(page).to have_content "Eメール:"
+              expect(page).to have_content "sample--#{n+1}@email.com"
+              expect(page).to have_content "電話番号"
+              expect(page).to have_content "0000#{n+1}"
+              expect(page).to have_content "コース:"
+              if n%2 == 0
+                expect(page).to have_content "セルフケアコース"
+              else
+                expect(page).to have_content "セラピスト養成コース"
+              end
+              click_link "戻る"
             end
-            click_button "編集"
-            expect(page).to have_content "受講生詳細"
-            expect(page).to have_content "ID:"
-            expect(page).to have_content "#{(n+11)%20}"
-            expect(page).to have_content "名前:"
-            expect(page).to have_content "student-#{(n+11)%20}"
-            expect(page).to have_content "Eメール:"
-            expect(page).to have_content "sample--#{(n+11)%20}@email.com"
-            expect(page).to have_content "電話番号"
-            expect(page).to have_content "0000#{(n+11)%20}"
-            expect(page).to have_content "コース:"
-            if n%2 == 1
-              expect(page).to have_content "セルフケアコース"
-            else
-              expect(page).to have_content "セラピスト養成コース"
-            end
-            click_link "戻る"
           end
         end
-      end
-    end
+
+        context "セルフケアコースの受講生を編集する" do
+          it "admin edits sefl care course student" do
+            expect(page).to have_content "受講生一覧"
+            10.times do |n|
+              find(".edit#{n}").click
+              expect(page).to have_content "アカウント情報の更新"
+              fill_in "名前", with: "student-#{(n+11)%20}"
+              fill_in "Eメール", with: "sample--#{(n+11)%20}@email.com"
+              fill_in "電話番号", with: "0000#{(n+11)%20}"
+              if n%2 == 1
+                find("option[value='self_care']").select_option
+              else
+                find("option[value='therapist_training']").select_option
+              end
+              click_button "編集"
+              expect(page).to have_content "受講生詳細"
+              expect(page).to have_content "ID:"
+              expect(page).to have_content "#{(n+11)%20}"
+              expect(page).to have_content "名前:"
+              expect(page).to have_content "student-#{(n+11)%20}"
+              expect(page).to have_content "Eメール:"
+              expect(page).to have_content "sample--#{(n+11)%20}@email.com"
+              expect(page).to have_content "電話番号"
+              expect(page).to have_content "0000#{(n+11)%20}"
+              expect(page).to have_content "コース:"
+              if n%2 == 1
+                expect(page).to have_content "セルフケアコース"
+              else
+                expect(page).to have_content "セラピスト養成コース"
+              end
+              click_link "戻る"
+            end
+          end
+        end
+     end
+
+     context "異常系" do
+       context "管理者は受講生を編集する" do
+         context "セラピスト養成コースの受講生を編集する" do
+           context "管理者は名前の無い受講生を編集する" do
+             it "admin edits therapist training course student without name" do
+               expect(page).to have_content "受講生一覧"
+               10.times do |n|
+                 find(".edit#{n}").click
+                 expect(page).to have_content "アカウント情報の更新"
+                 fill_in "名前", with: ""
+                 fill_in "Eメール", with: "sample--#{n+1}@email.com"
+                 fill_in "電話番号", with: "0000#{n+1}"
+                 if n%2 == 0
+                   find("option[value='self_care']").select_option
+                 else
+                   find("option[value='therapist_training']").select_option
+                 end
+                 click_button "編集"
+                 expect(page).to have_content "名前を入力してください"
+                 expect(page).to have_content "アカウント情報の更新"
+                 click_link "戻る"
+               end
+             end
+           end
+
+           context "管理者はEメールの無い受講生を編集する" do
+             it "admin edits therapist training course student without email" do
+               expect(page).to have_content "受講生一覧"
+               10.times do |n|
+                 find(".edit#{n}").click
+                 expect(page).to have_content "アカウント情報の更新"
+                 fill_in "名前", with: "student-#{n+1}"
+                 fill_in "Eメール", with: ""
+                 fill_in "電話番号", with: "0000#{n+1}"
+                 if n%2 == 0
+                   find("option[value='self_care']").select_option
+                 else
+                   find("option[value='therapist_training']").select_option
+                 end
+                 click_button "編集"
+                 expect(page).to have_content "Eメールを入力してください"
+                 expect(page).to have_content "アカウント情報の更新"
+                 click_link "戻る"
+               end
+             end
+           end
+           context "管理者は名前とEメールの無い受講生を編集する" do
+             it "admin edits therapist training course student without name and email" do
+               expect(page).to have_content "受講生一覧"
+               10.times do |n|
+                 find(".edit#{n}").click
+                 expect(page).to have_content "アカウント情報の更新"
+                 fill_in "名前", with: ""
+                 fill_in "Eメール", with: ""
+                 fill_in "電話番号", with: "0000#{n+1}"
+                 if n%2 == 0
+                   find("option[value='self_care']").select_option
+                 else
+                   find("option[value='therapist_training']").select_option
+                 end
+                 click_button "編集"
+                 expect(page).to have_content "名前を入力してください"
+                 expect(page).to have_content "Eメールを入力してください"
+                 expect(page).to have_content "アカウント情報の更新"
+                 click_link "戻る"
+               end
+             end
+           end
+         end
+         context "セルフケアコースの受講生を編集する" do
+           context "管理者は名前の無い受講生を編集する" do
+             it "admin edits self care course student without name" do
+               expect(page).to have_content "受講生一覧"
+               10.times do |n|
+                 find(".edit#{n}").click
+                 expect(page).to have_content "アカウント情報の更新"
+                 fill_in "名前", with: ""
+                 fill_in "Eメール", with: "sample--#{(n+11)%20}@email.com"
+                 fill_in "電話番号", with: "0000#{(n+11)%20}"
+                 if n%2 == 1
+                   find("option[value='self_care']").select_option
+                 else
+                   find("option[value='therapist_training']").select_option
+                 end
+                 click_button "編集"
+                 expect(page).to have_content "名前を入力してください"
+                 expect(page).to have_content "アカウント情報の更新"
+                 click_link "戻る"
+               end
+             end
+           end
+           context "管理者はEメールの無い受講生を編集する" do
+             it "admin edits self care course student without email" do
+               expect(page).to have_content "受講生一覧"
+               10.times do |n|
+                 find(".edit#{n}").click
+                 expect(page).to have_content "アカウント情報の更新"
+                 fill_in "名前", with: "student-#{(n+11)%20}"
+                 fill_in "Eメール", with: ""
+                 fill_in "電話番号", with: "0000#{(n+11)%20}"
+                 if n%2 == 1
+                   find("option[value='self_care']").select_option
+                 else
+                   find("option[value='therapist_training']").select_option
+                 end
+                 click_button "編集"
+                 expect(page).to have_content "Eメールを入力してください"
+                 expect(page).to have_content "アカウント情報の更新"
+                 click_link "戻る"
+               end
+             end
+           end
+           context "管理者は名前とEメールの無い受講生を編集する" do
+             it "admin edits self care course student without name and email" do
+               expect(page).to have_content "受講生一覧"
+               10.times do |n|
+                 find(".edit#{n}").click
+                 expect(page).to have_content "アカウント情報の更新"
+                 fill_in "名前", with: ""
+                 fill_in "Eメール", with: ""
+                 fill_in "電話番号", with: "0000#{(n+11)%20}"
+                 if n%2 == 1
+                   find("option[value='self_care']").select_option
+                 else
+                   find("option[value='therapist_training']").select_option
+                 end
+                 click_button "編集"
+                 expect(page).to have_content "名前を入力してください"
+                 expect(page).to have_content "Eメールを入力してください"
+                 expect(page).to have_content "アカウント情報の更新"
+                 click_link "戻る"
+               end
+             end
+           end
+ 
+         end
+       end
+     end
 
 
 
