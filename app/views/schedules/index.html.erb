@@ -32,11 +32,17 @@
       <%= submit_tag "検索", class: "btn btn-info" %>
     <% end %>
   </div>
-  <form class="js-filter-form :checkbox">
-    <label><input class="checkbox" type="checkbox" name="judgement_of_members" value="members" > 会員限定</label>
-  </form>
+  <!--会員限定のみチェックボックス---------------------------------------------->
+  <label><input id="judgement_of_members" type="checkbox">会員限定のみ</label>
 
-  <!-------------------------------------------------------------------------------------------------------->
+  <script>
+    $(function(){
+      $('#judgement_of_members').change(function(){
+        $('.contents-box').toggle();
+      })
+    })
+  </script>
+  <!-------------------------------------------------------------------------->    
 
   <div class="btn-schedule-new">
     <%= link_to "新規追加", new_schedule_path(@schedule), class: "btn btn-info" %>
@@ -53,7 +59,7 @@
               <button type="button" class="btn btn-outline-primary btn-sm">講座</button>
             <% end %>
           </p>
-          <p>
+          <p class="only-members">
             <% if s.judgement_of_members == true %>
               <button type="button" class="btn btn-outline-danger btn-sm">会員限定</button>
             <% end %>
@@ -105,24 +111,3 @@
     <% end %>
   </div>
 </div>
-
-<script>
-  $(".js-filter-form :checkbox").on("click", function(){
-    var checked = [];
-    console.log(test);
-    $(".js-filter-form :checked").each(function(){
-      // チェックボックスにチェックした値を配列に追加
-      checked.push($(this).val());
-      });
-      // 全てのtrを取得
-      $('#list contents-wrap p').each(function(){
-        var txt = $(this).find("p:eq(1)").html();
-        // ①と②にチェックが入ると表示、チェックを外すと非表示できるよう条件分岐
-        if(txt.match(checked[1])){
-          $(this).show();
-        }else{
-          $(this).hide();
-        }
-      });
-  });
-</script>
