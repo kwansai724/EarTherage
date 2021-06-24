@@ -1,7 +1,8 @@
+<%= render 'layouts/flash_messages' %>
 <% if params[:area].present? || params[:event_type].present? || params[:teacher].present? %>
   <h1>検索結果</h1>
 <% else %>
-  <h1>イベント/講座一覧</h1>
+  <h1>イベント / 講座一覧</h1>
 <% end %>
 
 
@@ -31,7 +32,17 @@
       <%= submit_tag "検索", class: "btn btn-info" %>
     <% end %>
   </div>
-  <!-------------------------------------------------------------------------------------------------------->
+  <!--会員限定のみチェックボックス---------------------------------------------->
+  <label><input id="judgement_of_members" type="checkbox">会員限定のみ</label>
+
+  <script>
+    $(function(){
+      $('#judgement_of_members').change(function(){
+        $('.contents-box').toggle();
+      })
+    })
+  </script>
+  <!-------------------------------------------------------------------------->    
 
   <div class="btn-schedule-new">
     <%= link_to "新規追加", new_schedule_path(@schedule), class: "btn btn-info" %>
@@ -48,7 +59,7 @@
               <button type="button" class="btn btn-outline-primary btn-sm">講座</button>
             <% end %>
           </p>
-          <p>
+          <p class="only-members">
             <% if s.judgement_of_members == true %>
               <button type="button" class="btn btn-outline-danger btn-sm">会員限定</button>
             <% end %>
