@@ -1,4 +1,5 @@
 <div class="admin_screen--title">
+<%= render 'layouts/flash_messages' %>
   <h1>管理者画面</h1>
 </div>
 <ul class="list-group-flush">
@@ -11,10 +12,10 @@
   <li class="list-group-item">
     <%= link_to '受講生管理', students_path, class: "btn btn-outline-info" %>
   </li>
-  <li class="list-group-item">
+  <!--<li class="list-group-item">
     <%= link_to 'せらポケ管理', serapoke_path, class: "btn btn-outline-info" %>
   </li>
   <li class="list-group-item">
     <%= link_to 'ディプロマ作成', diploma_path, class: "btn btn-outline-info" %>
-  </li>
+  </li>-->
 </ul>

@@ -4,6 +4,11 @@ class Schedule < ApplicationRecord
   validates :title, presence: true
 
 
+  #仮--------------------------------
+  validates :title, presence: true
+  validates :date, presence: true
+  #------------------------------------
+
 #検索機能--------------------------------------------------------------------
   enum area: {関東: 0, 関西: 1, 中国・四国: 2, 九州: 3, オンライン: 4}
   enum event_type: {イベント: 1, 講座: 2}

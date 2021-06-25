@@ -54,10 +54,12 @@ class SchedulesController < ApplicationController
 
   # スケジュール更新
   def update
+    # if @schedule.update_attributes!(schedule_params)
     if @schedule.update_attributes(schedule_params)
       flash[:success] = "更新しました。"
       redirect_to @schedule
     else
+      flash.now[:danger] = "#{@schedule.errors.full_messages}" if @schedule.errors.present?
       render :edit
     end
   end
