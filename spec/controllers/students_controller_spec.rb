@@ -2,106 +2,348 @@ require 'rails_helper'
 
 RSpec.describe StudentsController, type: :controller do
   describe "#index" do
+    context "正常系" do
+      context "管理者としてログインしたとき" do
+        context "as admin" do
+          before do
+            admin = FactoryBot.create(:staff, :admin)
+            sign_in admin
+            get :index
+          end
 
-    # 管理者としてログインしたとき
-    context "as admin" do
-      before do
-        @admin = FactoryBot.create(:staff, :admin)
-      end
-
-      # 正常にレスポンスを返すこと
-      it "responds successfully" do
-        sign_in @admin
-        get :index
-        expect(response).to be_successful
-      end
-
-      # 200レスポンスを返すこと
-      it "returns a 200 response" do
-        sign_in @admin
-        get :index
-        expect(response).to have_http_status "200"
-      end
-    end
-
-    # スタッフとしてログインしたとき
-    context "as a staff" do
-      before do
-        @staff = FactoryBot.create(:staff)
-      end
-
-      # 正常にレスポンスを返さないこと
-      it "responds not successfully" do
-        sign_in @staff
-        get :index
-        expect(response).not_to be_successful
-      end
-
-      # 302レスポンスを返すこと
-      it "returns a 302 response" do
-        sign_in @staff
-        get :index
-        expect(response).to have_http_status "302"
-      end
-
-      #ルート画面にリダイレクトすること
-      it "redirects to the root page" do
-        sign_in @staff
-        get :index
-        expect(response).to redirect_to "/"
-      end
-
-    end
-
-    # 受講生としてログインしたとき
-    context "as a student" do
-      before do
-        @student = FactoryBot.create(:student)
-      end
-
-      # 正常にレスポンスを返さないこと
-      it "responds not successfully" do
-        sign_in @student
-        get :index
-        expect(response).not_to be_successful
-      end
-
-      # 302レスポンスを返すこと
-      it "returns a 302 response" do
-        sign_in @student
-        get :index
-        expect(response).to have_http_status "302"
-      end
-
-      #ルート画面にリダイレクトすること
-      it "redirects to the root page" do
-        sign_in @student
-        get :index
-        expect(response).to redirect_to root_path
+          context "正常にレスポンスを返すこと" do
+            it "responds successfully" do
+              expect(response).to be_successful
+            end
+          end
+          context "200レスポンスを返すこと" do
+            it "returns a 200 response" do
+              expect(response).to have_http_status "200"
+            end
+          end
+        end
       end
     end
 
-    # ゲストとして
-    context "as a guest" do
+    context "異常系" do
+      context "スタッフとしてログインしたとき" do
+        context "as a staff" do
+          before do
+            staff = FactoryBot.create(:staff)
+            sign_in staff
+            get :index
+          end
 
-      # 正常にレスポンスを返さないこと
-      it "responds not successfully" do
-        get :index
-        expect(response).not_to be_successful
+          context "正常にレスポンスを返さないこと" do
+            it "responds not successfully" do
+              expect(response).not_to be_successful
+            end
+          end
+
+          context "302レスポンスを返すこと" do
+            it "returns a 302 response" do
+              expect(response).to have_http_status "302"
+            end
+          end
+
+          context "ルート画面にリダイレクトすること" do
+            it "redirects to the root page" do
+              expect(response).to redirect_to "/"
+            end
+          end
+        end
       end
 
-      # 302レスポンスを返すこと
-      it "returns a 302 response" do
-        get :index
-        expect(response).to have_http_status "302"
+      context "受講生としてログインしたとき" do
+        context "as a student" do
+          before do
+            student = FactoryBot.create(:student)
+            sign_in student
+            get :index
+          end
+
+          context "正常にレスポンスを返さないこと" do
+            it "responds not successfully" do
+              expect(response).not_to be_successful
+            end
+          end
+
+          context "302レスポンスを返すこと" do
+            it "returns a 302 response" do
+              expect(response).to have_http_status "302"
+            end
+          end
+
+          context "ルート画面にリダイレクトすること" do
+            it "redirects to the root page" do
+              expect(response).to redirect_to root_path
+            end
+          end
+        end
       end
 
-      #ルート画面にリダイレクトすること
-      it "redirects to the root page" do
-        get :index
-        expect(response).to redirect_to root_path
+      context "ゲストとして" do
+        context "as a guest" do
+          before do
+            get :index
+          end
+          context "正常にレスポンスを返さないこと" do
+            it "responds not successfully" do
+              expect(response).not_to be_successful
+            end
+          end
+
+          context "302レスポンスを返すこと" do
+            it "returns a 302 response" do
+              expect(response).to have_http_status "302"
+            end
+          end
+
+          context "ルート画面にリダイレクトすること" do
+            it "redirects to the root page" do
+              expect(response).to redirect_to root_path
+            end
+          end
+        end
+      end
+    end
+  end
+  describe "#show" do
+    context "正常系" do
+      context "管理者としてログインしたとき" do
+        context "as admin" do
+          before do
+            admin = FactoryBot.create(:staff, :admin)
+            sign_in admin
+            student = FactoryBot.create(:student)
+            get :show, params: { id: student.id }
+          end
+
+          context "正常にレスポンスを返すこと" do
+            it "responds successfully" do
+              expect(response).to be_successful
+            end
+          end
+          context "200レスポンスを返すこと" do
+            it "returns a 200 response" do
+              expect(response).to have_http_status "200"
+            end
+          end
+        end
+      end
+    end
+
+    context "異常系" do
+      context "スタッフとしてログインしたとき" do
+        context "as a staff" do
+          before do
+            staff = FactoryBot.create(:staff)
+            sign_in staff
+            student = FactoryBot.create(:student)
+            get :show, params: { id: student.id }
+          end
+
+          context "正常にレスポンスを返さないこと" do
+            it "responds not successfully" do
+              expect(response).not_to be_successful
+            end
+          end
+
+          context "302レスポンスを返すこと" do
+            it "returns a 302 response" do
+              expect(response).to have_http_status "302"
+            end
+          end
+
+          context "ルート画面にリダイレクトすること" do
+            it "redirects to the root page" do
+              expect(response).to redirect_to "/"
+            end
+          end
+        end
       end
 
+      context "受講生としてログインしたとき" do
+        context "as a student" do
+          before do
+            student = FactoryBot.create(:student)
+            sign_in student
+            another_student = FactoryBot.create(:student)
+            get :show, params: { id: another_student.id }
+          end
+
+          context "正常にレスポンスを返さないこと" do
+            it "responds not successfully" do
+              expect(response).not_to be_successful
+            end
+          end
+
+          context "302レスポンスを返すこと" do
+            it "returns a 302 response" do
+              expect(response).to have_http_status "302"
+            end
+          end
+
+          context "ルート画面にリダイレクトすること" do
+            it "redirects to the root page" do
+              expect(response).to redirect_to root_path
+            end
+          end
+        end
+      end
+
+      context "ゲストとして" do
+        context "as a guest" do
+          before do
+            student = FactoryBot.create(:student)
+            get :show, params: { id: student.id }
+          end
+          context "正常にレスポンスを返さないこと" do
+            it "responds not successfully" do
+              expect(response).not_to be_successful
+            end
+          end
+
+          context "302レスポンスを返すこと" do
+            it "returns a 302 response" do
+              expect(response).to have_http_status "302"
+            end
+          end
+
+          context "ルート画面にリダイレクトすること" do
+            it "redirects to the root page" do
+              expect(response).to redirect_to root_path
+            end
+          end
+        end
+      end
+    end
+  end
+  describe "#update" do
+    context "正常系" do
+      context "管理者としてログインしたとき" do
+        context "as admin" do
+          before do
+            admin = FactoryBot.create(:staff, :admin)
+            sign_in admin
+            @student = FactoryBot.create(:student)
+            student_params = FactoryBot.attributes_for(:student, name: "abc")
+            patch :update, params: { id: @student.id, student: student_params }
+          end
+          context "abcに更新されること" do
+            it "responds successfully" do
+              expect(@student.reload.name).to eq "abc"
+            end
+          end
+          context "302レスポンスを返すこと" do
+            it "returns a 302 response" do
+              expect(response).to have_http_status "302"
+            end
+          end
+          context "ルート画面にリダイレクトされないこと" do
+            it "redirects to the root page" do
+              expect(response).to_not redirect_to "/"
+            end
+          end
+        end
+      end
+    end
+
+    context "異常系" do
+      context "スタッフとしてログインしたとき" do
+        context "as a staff" do
+          before do
+            @staff = FactoryBot.create(:staff)
+            sign_in @staff
+            @student = FactoryBot.create(:student)
+            student_params = FactoryBot.attributes_for(:student, name: "abc")
+            patch :update, params: { id: @student.id, student: student_params }
+          end
+          context "abcに更新されないこと" do
+            it "not updated to abc" do
+              expect(@student.reload.name).to_not eq "abc"
+            end
+          end
+          context "正常にレスポンスを返さないこと" do
+            it "responds not successfully" do
+              expect(response).to_not be_successful
+            end
+          end
+          context "302レスポンスを返すこと" do
+            it "returns a 302 response" do
+              expect(response).to have_http_status "302"
+            end
+          end
+          context "ルート画面にリダイレクトすること" do
+            it "redirects to the root page" do
+              expect(response).to redirect_to "/"
+            end
+          end
+        end
+      end
+
+      context "受講生としてログインしたとき" do
+        context "as a student" do
+          before do
+            student = FactoryBot.create(:student)
+            sign_in student
+            @another_student = FactoryBot.create(:student)
+            student_params = FactoryBot.attributes_for(:student, name: "abc")
+            patch :update, params: { id: @another_student.id, student: student_params }
+          end
+          context "abcに更新されないこと" do
+            it "not updated to abc" do
+              expect(@another_student.reload.name).to_not eq "abc"
+            end
+          end
+          context "正常にレスポンスを返さないこと" do
+            it "responds not successfully" do
+              expect(response).not_to be_successful
+            end
+          end
+          context "302レスポンスを返すこと" do
+            it "returns a 302 response" do
+              expect(response).to have_http_status "302"
+            end
+          end
+          context "ルート画面にリダイレクトすること" do
+            it "redirects to the root page" do
+              expect(response).to redirect_to root_path
+            end
+          end
+        end
+      end
+
+      context "ゲストとして" do
+        context "as a guest" do
+          before do
+            @student = FactoryBot.create(:student)
+            student_params = FactoryBot.attributes_for(:student, name: "abc")
+            patch :update, params: { id: @student.id, student: student_params }
+          end
+          context "abcに更新されないこと" do
+            it "not updated to abc" do
+              expect(@student.reload.name).to_not eq "abc"
+            end
+          end
+          context "正常にレスポンスを返さないこと" do
+            it "responds not successfully" do
+              expect(response).not_to be_successful
+            end
+          end
+          context "302レスポンスを返すこと" do
+            it "returns a 302 response" do
+              expect(response).to have_http_status "302"
+            end
+          end
+          context "ルート画面にリダイレクトすること" do
+            it "redirects to the root page" do
+              expect(response).to redirect_to root_path
+            end
+          end
+        end
+      end
     end
   end
 end
+

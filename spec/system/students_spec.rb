@@ -16,12 +16,12 @@ RSpec.describe "Students", type: :system do
     visit admin_screen_path
     expect(page).to have_content "管理者画面"
     click_link "受講生管理"
+    expect(page).to have_content "受講生一覧"
   end
 
   describe "一覧表示機能" do
     context "管理者は受講生を一覧表示する" do
       it "admin lists students" do
-        expect(page).to have_content "受講生一覧"
         1.upto 10 do |n|
           expect(page).to have_content "student#{n}"
           expect(page).to have_content "sample-#{n}@email.com"
@@ -40,7 +40,6 @@ RSpec.describe "Students", type: :system do
   describe "詳細表示機能" do
     context "管理者は受講生の詳細を表示する" do
       it "admin views students in detail" do
-        expect(page).to have_content "受講生一覧"
         10.times do |n|
           find(".show#{n}").click
           expect(page).to have_content "受講生詳細"
@@ -79,7 +78,6 @@ RSpec.describe "Students", type: :system do
       context "管理者は受講生を編集する" do
         context "セラピスト養成コースの受講生を編集する" do
           it "admins edit therapist training course student" do
-            expect(page).to have_content "受講生一覧"
             10.times do |n|
               find(".edit#{n}").click
               expect(page).to have_content "アカウント情報の更新"
@@ -113,8 +111,7 @@ RSpec.describe "Students", type: :system do
         end
 
         context "セルフケアコースの受講生を編集する" do
-          it "admin edits sefl care course student" do
-            expect(page).to have_content "受講生一覧"
+          it "admin edits self care course student" do
             10.times do |n|
               find(".edit#{n}").click
               expect(page).to have_content "アカウント情報の更新"
@@ -153,7 +150,6 @@ RSpec.describe "Students", type: :system do
          context "セラピスト養成コースの受講生を編集する" do
            context "管理者は名前の無い受講生を編集する" do
              it "admin edits therapist training course student without name" do
-               expect(page).to have_content "受講生一覧"
                10.times do |n|
                  find(".edit#{n}").click
                  expect(page).to have_content "アカウント情報の更新"
@@ -175,7 +171,6 @@ RSpec.describe "Students", type: :system do
 
            context "管理者はEメールの無い受講生を編集する" do
              it "admin edits therapist training course student without email" do
-               expect(page).to have_content "受講生一覧"
                10.times do |n|
                  find(".edit#{n}").click
                  expect(page).to have_content "アカウント情報の更新"
@@ -196,7 +191,6 @@ RSpec.describe "Students", type: :system do
            end
            context "管理者は名前とEメールの無い受講生を編集する" do
              it "admin edits therapist training course student without name and email" do
-               expect(page).to have_content "受講生一覧"
                10.times do |n|
                  find(".edit#{n}").click
                  expect(page).to have_content "アカウント情報の更新"
@@ -220,7 +214,6 @@ RSpec.describe "Students", type: :system do
          context "セルフケアコースの受講生を編集する" do
            context "管理者は名前の無い受講生を編集する" do
              it "admin edits self care course student without name" do
-               expect(page).to have_content "受講生一覧"
                10.times do |n|
                  find(".edit#{n}").click
                  expect(page).to have_content "アカウント情報の更新"
@@ -241,7 +234,6 @@ RSpec.describe "Students", type: :system do
            end
            context "管理者はEメールの無い受講生を編集する" do
              it "admin edits self care course student without email" do
-               expect(page).to have_content "受講生一覧"
                10.times do |n|
                  find(".edit#{n}").click
                  expect(page).to have_content "アカウント情報の更新"
@@ -262,7 +254,6 @@ RSpec.describe "Students", type: :system do
            end
            context "管理者は名前とEメールの無い受講生を編集する" do
              it "admin edits self care course student without name and email" do
-               expect(page).to have_content "受講生一覧"
                10.times do |n|
                  find(".edit#{n}").click
                  expect(page).to have_content "アカウント情報の更新"
@@ -295,7 +286,6 @@ RSpec.describe "Students", type: :system do
     context "管理者は受講生を削除する" do
       context "セラピスト養成コースの受講生を削除する" do
         it "admin deletes therapist training course student" do
-          expect(page).to have_content "受講生一覧"
           find(".delete0").click
           expect(page).to have_content "「student1」のデータを削除しました。"
           expect(page).to have_content "受講生一覧"
@@ -308,7 +298,6 @@ RSpec.describe "Students", type: :system do
       end
       context "セルフケアコースの受講生を削除する" do
         it "admin deletes self care course student" do
-          expect(page).to have_content "受講生一覧"
           click_link "次へ"
           find(".delete0").click
           click_link "次へ"
@@ -324,4 +313,49 @@ RSpec.describe "Students", type: :system do
 
     end
   end
+
+  describe "CSVファイルインポート機能" do
+    context "正常系" do
+      context "管理者はCSVファイルをインポートする" do
+        it "admin imports CSV file" do
+          attach_file "file", "/mnt/c/Users/ruffini47/Documents/セレブエンジニア/人工インターン_EarTherage/売上データ4.csv"
+          click_button "CSVをインポート"
+          expect(page).to have_content "CSVデータをインポートしました。"
+          expect(page).to have_content "山本裕子"
+          expect(page).to have_content "minny.yamamoto@o-anniversary.com"
+          expect(page).to have_content "1000000000"
+          expect(page).to have_content "岡本 颯"
+          expect(page).to have_content "minny.yamamoto2@o-anniversary.com"
+          expect(page).to have_content "2000000000"
+          expect(page).to have_content "竹内 優花"
+          expect(page).to have_content "minny.yamamoto3@o-anniversary.com"
+          expect(page).to have_content "3000000000"
+          expect(page).to have_content "宮崎 遼"
+          expect(page).to have_content "minny.yamamoto4@o-anniversary.com"
+          expect(page).to have_content "4000000000"
+          expect(page).to have_content "平野 悠斗"
+          expect(page).to have_content "minny.yamamoto5@o-anniversary.com"
+          expect(page).to have_content "5000000000"
+          expect(page).to have_content "清水 結"
+          expect(page).to have_content "minny.yamamoto6@o-anniversary.com"
+          expect(page).to have_content "6000000000"
+          expect(page).to have_content "山本裕子"
+          expect(page).to have_content "minny.yamamoto7@o-anniversary.com"
+          expect(page).to have_content "7000000000"
+          expect(page).to have_content "伊藤 翔"
+          expect(page).to have_content "minny.yamamoto8@o-anniversary.com"
+          expect(page).to have_content "8000000000"
+        end
+      end
+    end
+    context "異常系" do
+      context "管理者はCSVファイルを選択しないでCSVをインポートボタンを押す" do
+        it "admin presses CSV import button without selecting CSV file" do
+          click_button "CSVをインポート"
+          expect(page).to have_content "csvデータが選択されていません。"
+        end
+      end
+    end
+  end
 end
+
