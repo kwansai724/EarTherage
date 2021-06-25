@@ -235,6 +235,11 @@ RSpec.describe StudentsController, type: :controller do
               expect(@student.reload.name).to eq "abc"
             end
           end
+          context "詳細ページへリダイレクトされること" do
+            it "redirets to " do
+              expect(response).to redirect_to student_path
+            end
+          end
           context "302レスポンスを返すこと" do
             it "returns a 302 response" do
               expect(response).to have_http_status "302"
@@ -339,6 +344,74 @@ RSpec.describe StudentsController, type: :controller do
           context "ルート画面にリダイレクトすること" do
             it "redirects to the root page" do
               expect(response).to redirect_to root_path
+            end
+          end
+        end
+      end
+    end
+  end
+  describe "#destroy" do
+    context "正常系" do
+      context "管理者としてログインしたとき" do
+        context "as admin" do
+          before do
+            admin = FactoryBot.create(:staff, :admin)
+            sign_in admin
+            @student = FactoryBot.create(:student)
+          end
+          context "削除されること" do
+            it "admin deletes student" do
+              expect {
+                delete :destroy, params: { id: @student.id }
+              }.to change(Student, :count).by(-1)
+            end
+          end
+        end
+      end
+    end
+    context "異常系" do
+      context "スタッフとしてログインしたとき" do
+        context "as a staff" do
+          before do
+            staff = FactoryBot.create(:staff)
+            sign_in staff
+            @student = FactoryBot.create(:student)
+          end
+          context "削除できないこと" do
+            it "does not delelt student" do
+              expect {
+                delete :destroy, params: { id: @student.id }
+              }.to_not change(Student, :count)
+            end
+          end
+        end
+      end
+      context "受講生としてログインしたとき" do
+        context "as a student" do
+          before do
+            student = FactoryBot.create(:student)
+            sign_in student
+            @another_student = FactoryBot.create(:student)
+          end
+          context "削除できないこと" do
+            it "does not delete student" do
+              expect {
+                delete :destroy, params: { id: @another_student.id }
+              }.to_not change(Student, :count)
+            end
+          end
+        end
+      end
+      context "ゲストとして" do
+        context "as a guest" do
+          before do
+            @student = FactoryBot.create(:student)
+          end
+          context "削除できないこと" do
+            it "does not delete student" do
+              expect {
+                delete :destroy, params: { id: @student.id }
+              }.to_not change(Student, :count)
             end
           end
         end
