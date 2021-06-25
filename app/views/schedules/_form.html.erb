@@ -1,18 +1,20 @@
 <%= form_with model: @schedule, local: true  do |f| %> 
+  <%= render 'layouts/error_messages', model: f.object %>
+  
   <%= f.label :date, class: "label-#{yield(:class_text)}" %>
   <%= f.date_field :date, class: "form-control" %>
 
   <%= f.label :event_type, class: "label-#{yield(:class_text)}" %>
-  <%= f.select :event_type, ['イベント', '講座'], {include_blank: false}, class: "form-control" %>
+  <%= f.select :event_type, ['イベント', '講座'], { include_blank: '選択してください'}, class: "form-control" %>
 
   <%= f.label :title, class: "label-#{yield(:class_text)}" %>
   <%= f.text_field :title, class: "form-control" %>
 
   <%= f.label :area, class: "label-#{yield(:class_text)}" %>
-  <%= f.select :area, ['関東', '関西', '中国・四国', '九州', 'オンライン'], {include_blank: false}, class: "form-control" %>
+  <%= f.select :area, ['関東', '関西', '中国・四国', '九州', 'オンライン'], { include_blank: '選択してください'}, class: "form-control" %>
 
   <%= f.label :teacher, class: "label-#{yield(:class_text)}" %>
-  <%= f.select :teacher, ['山本', '田中', '井上'], {include_blank: false}, class: "form-control" %>
+  <%= f.select :teacher, ['山本', '田中', '井上'], { include_blank: '選択してください'}, class: "form-control" %>
 
   <%= f.label :details, class: "label-#{yield(:class_text)}" %>
   <%= f.text_area :details, 'data-provider': :summernote %>

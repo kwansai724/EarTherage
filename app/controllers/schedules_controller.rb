@@ -1,5 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :set_schedule, only: [:show, :edit, :update, :destroy]
+  before_action :staff_only, only: [:new, :edit, :destroy]
 
 
   # スケジュール一覧
@@ -53,7 +54,7 @@ class SchedulesController < ApplicationController
 
   # スケジュール更新
   def update
-    if @schedule.update_attributes!(schedule_params)
+    if @schedule.update_attributes(schedule_params)
       flash[:success] = "更新しました。"
       redirect_to @schedule
     else
@@ -73,6 +74,13 @@ class SchedulesController < ApplicationController
 
       def schedule_params
         params.require(:schedule).permit(:date, :area, :place, :teacher, :event_type, :title, :details, :image, :public_status, :judgement_of_members)
+      end
+
+      def staff_only
+        unless current_staff.present?
+          flash[:danger] = "許可されていない操作です。"
+          redirect_to schedules_url
+        end
       end
 
 end
