@@ -1,4 +1,5 @@
-<%= form_with model: @schedule, local: true  do |f| %> 
+<%= form_with model: @schedule, local: true  do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
   <%= f.label :date, class: "label-#{yield(:class_text)}" %>
   <%= f.date_field :date, class: "form-control" %>
 
