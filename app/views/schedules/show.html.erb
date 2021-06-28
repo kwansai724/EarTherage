@@ -1,4 +1,5 @@
 <div class="container col-10 col-md-10 col-lg-10">
+  <%= render 'layouts/flash_messages' %>
   <h3><%= @schedule.title %></h3>
   <h6><%= l(@schedule.created_at, format: :long) %></h6>
   <!-- %= image_tag @schedule.image.url if @schedule.image? % -->

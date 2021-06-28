@@ -28,7 +28,7 @@ class BlogUploader < CarrierWave::Uploader::Base
 
 
   # このアップローダーを利用した画像の最大値を指定
-  process resize_to_fill: [100, 100, "Center"]
+  process resize_to_fill: [200, 200, "Center"]
   #
   # def scale(width, height)
   #   # do something
@@ -37,7 +37,7 @@ class BlogUploader < CarrierWave::Uploader::Base
 
   # 上記とは別にサムネイルを別サイズで表示
   version :thumb do
-    process resize_to_fit: [100, 100]
+    process resize_to_fit: [200, 200]
   end
 
   # Add an allowlist of extensions which are allowed to be uploaded.
@@ -50,5 +50,9 @@ class BlogUploader < CarrierWave::Uploader::Base
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
     "something.jpg" if original_filename
+  end
+
+  def default_url(*args)
+    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.jpg"].compact.join('_'))
   end
 end

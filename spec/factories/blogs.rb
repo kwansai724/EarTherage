@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :blog do
-    sequence(:title) { |n| "title#{n}" }
-    datetime         { DateTime.current }
+    sequence(:title)    { |n| "title#{n}" }
+    sequence(:datetime) { |n|  DateTime.current + ((n-1)%5).day }
     staff
-    image            { Rack::Test::UploadedFile.new(File.join(Rails.root, "public/uploads/blog/image/1/something1.jpg")) }
-    share_with       { "staff" }
+    image               { Rack::Test::UploadedFile.new(File.join(Rails.root, "public/uploads/blog/image/1/something1.jpg")) }
+    share_with          { "staff" }
 
     trait :admin do
       staff          { FactoryBot.create(:staff, :admin) }

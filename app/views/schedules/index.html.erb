@@ -1,7 +1,8 @@
+<%= render 'layouts/flash_messages' %>
 <% if params[:area].present? || params[:event_type].present? || params[:teacher].present? %>
   <h1>検索結果</h1>
 <% else %>
-  <h1>イベント/講座一覧</h1>
+  <h1>イベント / 講座一覧</h1>
 <% end %>
 
 
@@ -25,20 +26,36 @@
   </div>  
   <div class="seach-forms col-md-4 offset-md-8 row">
     <%= form_tag(schedules_path, method: "get") do %>
-      <%= select_tag :area, options_for_select(Schedule.areas), prompt: "＜開催エリア＞", class: 'form-control' %>
-      <%= select_tag :event_type, options_for_select(Schedule.event_types), prompt: "＜種別＞", class: 'form-control' %>
-      <%= select_tag :teacher, options_for_select(Schedule.teachers), prompt: "＜セラピスト＞", class: 'form-control' %>
+      <%= select_tag :area, options_for_select(Schedule.areas), prompt: "開催エリア", class: 'form-control' %>
+      <%= select_tag :event_type, options_for_select(Schedule.event_types), prompt: "種別", class: 'form-control' %>
+      <%= select_tag :teacher, options_for_select(Schedule.teachers), prompt: "セラピスト", class: 'form-control' %>
       <%= submit_tag "検索", class: "btn btn-info" %>
     <% end %>
   </div>
-  <!-------------------------------------------------------------------------------------------------------->
+  <!--会員限定のみチェックボックス---------------------------------------------->
+  <label><input id="judgement_of_members" type="checkbox">会員限定のみ</label>
 
-  <div class="btn-schedule-new">
-    <%= link_to "新規追加", new_schedule_path(@schedule), class: "btn btn-info" %>
-  </div>
+  <script>
+    $(function(){
+      $('#judgement_of_members').change(function(){
+        $('.contents-box').toggle();
+      })
+    })
+  </script>
+  <!-------------------------------------------------------------------------->    
+
+  <% if current_staff.present? %>
+    <div class="btn-schedule-new">
+      <%= link_to "新規追加", new_schedule_path(@schedule), class: "btn btn-info" %>
+    </div>
+  <% end %>
   <div class="contents-wrap">
     <% @schedules.each do |s| %>
-      <div class="contents-box">
+      <% if s.public_status == '非公開' %>
+        <div class="contents-box-opacity">
+      <% else %>
+        <div class="contents-box">
+      <% end %>
         <div class="contents">
           <p>
             <%= l(s.created_at, format: :long) %>
@@ -48,7 +65,7 @@
               <button type="button" class="btn btn-outline-primary btn-sm">講座</button>
             <% end %>
           </p>
-          <p>
+          <p class="only-members">
             <% if s.judgement_of_members == true %>
               <button type="button" class="btn btn-outline-danger btn-sm">会員限定</button>
             <% end %>
@@ -87,6 +104,7 @@
       </div>
     <% end %>
   </div>
+  <%= will_paginate @schedules, :previous_label => ' &lt 前へ', :next_label => '次へ &gt', class: "pagination justify-content-center mt-6 mb-7 btn--resize", renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>　
   <div class="center">
     <% if params[:area].present? || params[:event_type].present? || params[:teacher].present? %>
       <%= link_to "<　一覧へ戻る", schedules_path, class: "btn btn-outline-secondary" %>

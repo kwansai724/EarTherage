@@ -1,9 +1,11 @@
 <% provide(:class_text, 'staffblog--new') %>
 <% provide(:button_text, '作成する') %>
-
-<h1>スタッフブログ作成</h1><br>
+<div class="blog-title">
+  <h1>スタッフブログ作成</h1><br>
+</div>
 <div class="row">
   <div class="col-md-6 offset-md-3">
-      <%= render 'form' %>
+    <%= render 'form' %>
+    <%= link_to "戻る", staff_blogs_path(@staff), class: "btn btn-outline-secondary btn--resize blog-return" %>
   </div>
 </div>
