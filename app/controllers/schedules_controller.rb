@@ -67,7 +67,7 @@ class SchedulesController < ApplicationController
   # スケジュール削除
   def destroy
     @schedule.destroy
-    flash[:success] = "投稿を削除しました。"
+    flash[:success] = "#{@schedule.date}の投稿を削除しました。"
     redirect_to schedules_url
   end
 
