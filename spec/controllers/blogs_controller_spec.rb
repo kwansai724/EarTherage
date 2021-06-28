@@ -9,10 +9,11 @@ RSpec.describe BlogsController, type: :controller do
           sign_in admin
           get :new, params: { staff_id: admin.id }
         end
-        context "正常にレスポンスを返すこと200レスポンスを返すこと" do
+        context "正常にレスポンスを返すこと、200レスポンスを返すこと、ルート画面にリダイレクトされないこと" do
           it "responds successfully and returns a 200 response" do
             expect(response).to be_successful
             expect(response).to have_http_status "200"
+            expect(response).to_not redirect_to "/"
           end
         end
       end
@@ -24,10 +25,11 @@ RSpec.describe BlogsController, type: :controller do
           sign_in admin
           get :new, params: { staff_id: staff.id }
         end
-        context "正常にレスポンスを返すこと200レスポンスを返すこと" do
+        context "正常にレスポンスを返すこと、200レスポンスを返すこと、ルート画面にリダイレクトされないこと" do
           it "responds successfully and returns a 200 response" do
             expect(response).to be_successful
             expect(response).to have_http_status "200"
+            expect(response).to_not redirect_to "/"
           end
         end
       end
@@ -38,10 +40,11 @@ RSpec.describe BlogsController, type: :controller do
           sign_in staff
           get :new, params: { staff_id: staff.id }
         end
-        context "正常にレスポンスを返すこと200レスポンスを返すこと" do
+        context "正常にレスポンスを返すこと、200レスポンスを返すこと、ルート画面にリダイレクトされないこと" do
           it "responds successfully and returns a 200 response" do
             expect(response).to be_successful
             expect(response).to have_http_status "200"
+            expect(response).to_not redirect_to "/"
           end
         end
       end
@@ -56,7 +59,7 @@ RSpec.describe BlogsController, type: :controller do
           get :new, params: { staff_id: admin.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -72,7 +75,7 @@ RSpec.describe BlogsController, type: :controller do
           get :new, params: { staff_id: staff.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -88,7 +91,7 @@ RSpec.describe BlogsController, type: :controller do
           get :new, params: { staff_id: admin.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -104,7 +107,7 @@ RSpec.describe BlogsController, type: :controller do
           get :new, params: { staff_id: staff.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -120,7 +123,7 @@ RSpec.describe BlogsController, type: :controller do
           get :new, params: { staff_id: admin.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -136,7 +139,7 @@ RSpec.describe BlogsController, type: :controller do
           get :new, params: { staff_id: staff.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -150,7 +153,7 @@ RSpec.describe BlogsController, type: :controller do
           get :new, params: { staff_id: admin.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -164,7 +167,7 @@ RSpec.describe BlogsController, type: :controller do
           get :new, params: { staff_id: staff.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -181,13 +184,55 @@ RSpec.describe BlogsController, type: :controller do
           @admin = FactoryBot.create(:staff, :admin)
           sign_in @admin
         end
-        context "正常にレスポンスを返すこと200レスポンスを返すこと" do
-          it "responds successfully and returns a 200 response" do
+        context "正常にレスポンスを返すこと、200レスポンスを返すこと、ルート画面にリダイレクトされないこと" do
+          it "responds successfully and returns a 200 response and not redirected to root page" do
+            #admin_blog_params = FactoryBot.attributes_for(:blog, staff: @admin)
+            #admin_blog_params = FactoryBot.attributes_for(:blog, owner: @admin)
+            #admin_blog_params = FactoryBot.attributes_for(:blog, :admin, title: "New Blog title")
             admin_blog_params = FactoryBot.attributes_for(:blog, :admin)
+            #admin =  Staff.find(admin_blog_params[:staff].id)
+            #puts admin.name
+            #sign_in admin
             expect {
               post :create, params: { staff_id: @admin.id, blog: admin_blog_params }
             }.to change(@admin.blogs, :count).by(0)
-            #expect(response).to redirect_to staff_blog_path(id: @admin.id, staff_id: @admin_blog)
+            #}.to change(Blog, :count).by(0)
+            expect(response).to be_successful
+            expect(response).to have_http_status "200"
+            expect(response).to_not redirect_to "/"
+          end
+        end
+      end
+      context "管理者はスタッフのブログにcreateでアクセス" do
+        before do
+          @admin = FactoryBot.create(:staff, :admin)
+          sign_in @admin
+          @staff = FactoryBot.create(:staff)
+        end
+        context "正常にレスポンスを返すこと、200レスポンスを返すこと、ルート画面にリダイレクトされないこと" do
+          it "responds successfully and returns a 200 response and not redirected to root page" do
+            blog_params = FactoryBot.attributes_for(:blog)
+            expect {
+              post :create, params: { staff_id: @staff.id, blog: blog_params }
+            }.to change(@staff.blogs, :count).by(0)
+            expect(response).to be_successful
+            expect(response).to have_http_status "200"
+            expect(response).to_not redirect_to "/"
+          end
+        end
+      end
+
+      context "スタッフは自分自身ののブログにcreateでアクセス" do
+        before do
+          @staff = FactoryBot.create(:staff)
+          sign_in @staff
+        end
+        context "正常にレスポンスを返すこと、200レスポンスを返すこと、ルート画面にリダイレクトされないこと" do
+          it "responds successfully and returns a 200 response and not redirected to root page" do
+            blog_params = FactoryBot.attributes_for(:blog)
+            expect {
+              post :create, params: { staff_id: @staff.id, blog: blog_params }
+            }.to change(@staff.blogs, :count).by(0)
             expect(response).to be_successful
             expect(response).to have_http_status "200"
             expect(response).to_not redirect_to "/"
@@ -195,11 +240,157 @@ RSpec.describe BlogsController, type: :controller do
         end
       end
     end
+
+    context "異常系" do
+      context "スタッフは管理者のブログにcreateでアクセス" do
+        before do
+          staff = FactoryBot.create(:staff)
+          sign_in staff
+          @admin = FactoryBot.create(:staff, :admin)
+        end
+        context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
+            admin_blog_params = FactoryBot.attributes_for(:blog, :admin)
+            expect {
+              post :create, params: { staff_id: @admin.id, blog: admin_blog_params }
+            }.to change(@admin.blogs, :count).by(0)
+            expect(response).to_not be_successful
+            expect(response).to have_http_status "302"
+            expect(response).to redirect_to "/"
+          end
+        end
+      end
+
+      context "スタッフは別のスタッフのブログにcreateでアクセス" do
+        before do
+          login_staff = FactoryBot.create(:staff)
+          sign_in login_staff
+          @staff = FactoryBot.create(:staff)
+        end
+        context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
+            blog_params = FactoryBot.attributes_for(:blog)
+            expect {
+              post :create, params: { staff_id: @staff.id, blog: blog_params }
+            }.to change(@staff.blogs, :count).by(0)
+            expect(response).to_not be_successful
+            expect(response).to have_http_status "302"
+            expect(response).to redirect_to "/"
+          end
+        end
+      end
+
+     context "セラピスト養成コースの受講生は管理者のブログにcreateでアクセス" do
+        before do
+          student = FactoryBot.create(:student)
+          sign_in student
+          @admin = FactoryBot.create(:staff, :admin)
+        end
+        context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
+            admin_blog_params = FactoryBot.attributes_for(:blog, :admin)
+            expect {
+              post :create, params: { staff_id: @admin.id, blog: admin_blog_params }
+            }.to change(@admin.blogs, :count).by(0)
+            expect(response).to_not be_successful
+            expect(response).to have_http_status "302"
+            expect(response).to redirect_to "/"
+          end
+        end
+      end
+
+     context "セラピスト養成コースの受講生はスタッフのブログにcreateでアクセス" do
+        before do
+          student = FactoryBot.create(:student)
+          sign_in student
+          @staff = FactoryBot.create(:staff)
+        end
+        context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
+            blog_params = FactoryBot.attributes_for(:blog)
+            expect {
+              post :create, params: { staff_id: @staff.id, blog: blog_params }
+            }.to change(@staff.blogs, :count).by(0)
+            expect(response).to_not be_successful
+            expect(response).to have_http_status "302"
+            expect(response).to redirect_to "/"
+          end
+        end
+      end
+
+     context "セルフケアコースの受講生は管理者のブログにcreateでアクセス" do
+        before do
+          student = FactoryBot.create(:student, :self_care)
+          sign_in student
+          @admin = FactoryBot.create(:staff, :admin)
+        end
+        context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
+            admin_blog_params = FactoryBot.attributes_for(:blog, :admin)
+            expect {
+              post :create, params: { staff_id: @admin.id, blog: admin_blog_params }
+            }.to change(@admin.blogs, :count).by(0)
+            expect(response).to_not be_successful
+            expect(response).to have_http_status "302"
+            expect(response).to redirect_to "/"
+          end
+        end
+      end
+
+     context "セルフケアコースの受講生はスタッフのブログにcreateでアクセス" do
+        before do
+          student = FactoryBot.create(:student, :self_care)
+          sign_in student
+          @staff = FactoryBot.create(:staff)
+        end
+        context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
+            blog_params = FactoryBot.attributes_for(:blog)
+            expect {
+              post :create, params: { staff_id: @staff.id, blog: blog_params }
+            }.to change(@staff.blogs, :count).by(0)
+            expect(response).to_not be_successful
+            expect(response).to have_http_status "302"
+            expect(response).to redirect_to "/"
+          end
+        end
+      end
+
+     context "ゲストは管理者のブログにcreateでアクセス" do
+        before do
+          @admin = FactoryBot.create(:staff, :admin)
+        end
+        context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
+            admin_blog_params = FactoryBot.attributes_for(:blog, :admin)
+            expect {
+              post :create, params: { staff_id: @admin.id, blog: admin_blog_params }
+            }.to change(@admin.blogs, :count).by(0)
+            expect(response).to_not be_successful
+            expect(response).to have_http_status "302"
+            expect(response).to redirect_to "/"
+          end
+        end
+      end
+
+     context "ゲストはスタッフのブログにcreateでアクセス" do
+        before do
+          @staff = FactoryBot.create(:staff)
+        end
+        context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
+            blog_params = FactoryBot.attributes_for(:blog)
+            expect {
+              post :create, params: { staff_id: @staff.id, blog: blog_params }
+            }.to change(@staff.blogs, :count).by(0)
+            expect(response).to_not be_successful
+            expect(response).to have_http_status "302"
+            expect(response).to redirect_to "/"
+          end
+        end
+      end
+    end
   end
-
-
-
-
 
   describe "#edit" do
     context "正常系" do
@@ -210,10 +401,11 @@ RSpec.describe BlogsController, type: :controller do
           sign_in admin
           get :edit, params: { staff_id: admin.id, id: admin_blog.id }
         end
-        context "正常にレスポンスを返すこと200レスポンスを返すこと" do
+        context "正常にレスポンスを返すこと、200レスポンスを返すこと、ルート画面にリダイレクトされないこと" do
           it "responds successfully and returns a 200 response" do
             expect(response).to be_successful
             expect(response).to have_http_status "200"
+            expect(response).to_not redirect_to "/"
           end
         end
       end
@@ -226,10 +418,11 @@ RSpec.describe BlogsController, type: :controller do
           sign_in admin
           get :edit, params: { staff_id: staff.id, id: staff_blog.id }
         end
-        context "正常にレスポンスを返すこと200レスポンスを返すこと" do
+        context "正常にレスポンスを返すこと、200レスポンスを返すこと、ルート画面にリダイレクトされないこと" do
           it "responds successfully and returns a 200 response" do
            expect(response).to be_successful
            expect(response).to have_http_status "200"
+           expect(response).to_not redirect_to "/"
           end
         end
       end
@@ -241,10 +434,11 @@ RSpec.describe BlogsController, type: :controller do
           sign_in staff
           get :edit, params: { staff_id: staff.id, id: staff_blog.id }
         end
-        context "正常にレスポンスを返すこと200レスポンスを返すこと" do
+        context "正常にレスポンスを返すこと、200レスポンスを返すこと、ルート画面にリダイレクトされないこと" do
           it "responds successfully and returns a 200 response" do
             expect(response).to be_successful
             expect(response).to have_http_status "200"
+            expect(response).to_not redirect_to "/"
           end
         end
       end
@@ -252,7 +446,6 @@ RSpec.describe BlogsController, type: :controller do
     end
 
     context "異常系" do
-
        context "スタッフは管理者のブログにeditでアクセス" do
         before do
           admin_blog = FactoryBot.create(:blog, :admin)
@@ -262,7 +455,7 @@ RSpec.describe BlogsController, type: :controller do
           get :edit, params: { staff_id: admin.id, id: admin_blog.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -279,7 +472,7 @@ RSpec.describe BlogsController, type: :controller do
           get :edit, params: { staff_id: staff.id, id: staff_blog.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -296,7 +489,7 @@ RSpec.describe BlogsController, type: :controller do
           get :edit, params: { staff_id: admin.id, id: admin_blog.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -313,7 +506,7 @@ RSpec.describe BlogsController, type: :controller do
           get :edit, params: { staff_id: staff.id, id: staff_blog.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -330,7 +523,7 @@ RSpec.describe BlogsController, type: :controller do
           get :edit, params: { staff_id: admin.id, id: admin_blog.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -347,7 +540,7 @@ RSpec.describe BlogsController, type: :controller do
           get :edit, params: { staff_id: staff.id, id: staff_blog.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -362,7 +555,7 @@ RSpec.describe BlogsController, type: :controller do
           get :edit, params: { staff_id: admin.id, id: admin_blog.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
@@ -377,7 +570,7 @@ RSpec.describe BlogsController, type: :controller do
           get :edit, params: { staff_id: staff.id, id: staff_blog.id }
         end
         context "正常にレスポンスを返さないこと、302レスポンスを返すこと、ルート画面にリダイレクトすること" do
-          it "responds not successfully and returns a 302 response and redirects to the dashboard" do
+          it "responds not successfully and returns a 302 response and redirects to root page" do
             expect(response).not_to be_successful
             expect(response).to have_http_status "302"
             expect(response).to redirect_to "/"
