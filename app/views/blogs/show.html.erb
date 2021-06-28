@@ -1,13 +1,15 @@
 <div class="container col-10 col-md-10 col-lg-10">
   <%= render 'layouts/flash_messages' %>
-  <h1>スタッフブログ詳細表示</h1>
-  <h3><%= @blog.title %></h3>
-  <h6><%= @blog.datetime %></h6>
-  <%= image_tag @blog.image.url if @blog.image? %>
-  <% staff = Staff.find(@blog.staff_id) %>
-  <h6><%= staff.name %></h6>
+  <div class="blog-title">
+    <h1>スタッフブログ詳細表示</h1>
+  </div>
+  <div class = "blog_title_name">
+    <h3><%= @blog.title %></h3>
+  </div>
+  <h6><%= l(@blog.datetime, format: :longdatetime) %></h6>
+  <p><%== Rinku.auto_link(@blog.content, :all, 'target="_blank"').html_safe if @blog.content.present? %></p>
 
   <div>
-    <%= link_to "戻る", staff_blogs_path(@staff), class: "btn btn-outline-secondary" %>
+    <%= link_to "戻る", staff_blogs_path(@staff), class: "btn btn-outline-secondary btn--resize" %>
   </div>
 </div>

@@ -36,6 +36,8 @@
   <% if resource_name == :staff %>
     <%= link_to '受講生の方はこちら', new_student_session_path, class: "btn--resize"%>
   <% end %>
-
+  <br>
+  <br>
+  <%= link_to 'スタッフブログはこちら（一般向け）,（仮）', staff_blogs_path(1), class: "btn--resize" %>
   <!--%= render 'devise/shared/links' %-->
 </div>
