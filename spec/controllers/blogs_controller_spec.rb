@@ -324,6 +324,12 @@ RSpec.describe BlogsController, type: :controller do
         before do
           @blog = FactoryBot.create(:blog)
           @staff = Staff.find(@blog.staff_id)
+          #blog = FactoryBot.create(:blog)
+          blog = []
+          1.upto 4 do |n|
+            blog[n] = FactoryBot.create(:blog)
+          end
+          #puts blog[4].datetime
         end
 
         it "redirects to the dashboard " do
