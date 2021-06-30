@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   #rootを受講生ログイン画面に設定
   devise_scope :student do
+    constraints ->  request { request.session[:student_id].present? } do
+      root to: 'therapist_training_course#index'
+    end
     root "students/sessions#new"
   end
 
