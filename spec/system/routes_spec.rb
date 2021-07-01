@@ -77,8 +77,9 @@ RSpec.describe "Routes", type: :system do
       expect(page).to have_content "ログイン"
       expect(page).to have_content "Eメール"
       expect(page).to have_content "ログインを記憶する"
-      expect(page).to have_content "管理者・スタッフはこちら"
-      expect(page).to have_content "スタッフブログはこちら（一般向け）,（仮）"
+      expect(page).to have_button "ログイン"
+      expect(page).to have_link "管理者・スタッフはこちら"
+      expect(page).to have_link "スタッフブログはこちら（一般向け）,（仮）"
     end
   end
 end
