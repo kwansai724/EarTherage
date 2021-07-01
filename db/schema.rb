@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2021_06_15_130226) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "title", default: "", null: false
-    t.datetime "datetime", default: "2021-06-29 14:26:42", null: false
+    t.datetime "datetime", default: "2021-07-01 12:54:52", null: false
     t.text "content", limit: 10485760
     t.string "image"
     t.integer "share_with", default: 0, null: false
