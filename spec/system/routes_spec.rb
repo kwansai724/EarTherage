@@ -16,14 +16,14 @@ RSpec.describe "Routes", type: :system do
       click_button 'ログイン'
       expect(page).to have_content "ログインしました。"
       expect(page).to have_content "管理者画面"
-      expect(page).to have_content "スタッフブログ投稿"
-      expect(page).to have_content "開講スケジュール投稿"
-      expect(page).to have_content "受講生管理"
+      expect(page).to have_link "スタッフブログ投稿"
+      expect(page).to have_link "開講スケジュール投稿"
+      expect(page).to have_link "受講生管理"
       visit root_path
       expect(page).to have_content "管理者画面"
-      expect(page).to have_content "スタッフブログ投稿"
-      expect(page).to have_content "開講スケジュール投稿"
-      expect(page).to have_content "受講生管理"
+      expect(page).to have_link "スタッフブログ投稿"
+      expect(page).to have_link "開講スケジュール投稿"
+      expect(page).to have_link "受講生管理"
     end
   end
 
@@ -35,12 +35,12 @@ RSpec.describe "Routes", type: :system do
       click_button 'ログイン'
       expect(page).to have_content "ログインしました。"
       expect(page).to have_content "スタッフ画面"
-      expect(page).to have_content "スタッフブログ投稿"
-      expect(page).to have_content "開講スケジュール投稿"
+      expect(page).to have_link "スタッフブログ投稿"
+      expect(page).to have_link "開講スケジュール投稿"
       visit root_path
       expect(page).to have_content "スタッフ画面"
-      expect(page).to have_content "スタッフブログ投稿"
-      expect(page).to have_content "開講スケジュール投稿"
+      expect(page).to have_link "スタッフブログ投稿"
+      expect(page).to have_link "開講スケジュール投稿"
     end
   end
 
