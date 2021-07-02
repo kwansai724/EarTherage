@@ -13,8 +13,10 @@ class Staffs::SessionsController < Devise::SessionsController
         sign_in(resource_name, resource)
         yield resource if block_given?
         if self.resource.admin == false
+          session[:student_id] = "false"
           respond_with resource, :location => staff_after_sign_in_path_for(resource)
         elsif self.resource.admin == true
+          session[:student_id] = "true"
           respond_with resource, :location => admin_after_sign_in_path_for(resource)
         end
       else
