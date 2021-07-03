@@ -38,7 +38,7 @@
   <script>
     $(function(){
       $('#judgement_of_members').change(function(){
-        $('.contents-box').toggle();
+        $('.member-false').toggle();
       })
     })
   </script>
@@ -51,11 +51,11 @@
   <% end %>
   <div class="contents-wrap">
     <% @schedules.each do |s| %>
-      <% if s.public_status == '非公開' %>
-        <div class="contents-box-opacity">
-      <% else %>
-        <div class="contents-box">
-      <% end %>
+    <% if s.public_status == '非公開' %>
+      <div class="contents-box-opacity member-<%= s.judgement_of_members %>">
+    <% else %>
+      <div class="contents-box member-<%= s.judgement_of_members %>">
+    <% end %>
         <div class="contents">
           <p>
             <%= l(s.created_at, format: :long) %>

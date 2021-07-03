@@ -38,6 +38,7 @@ ja:
           title: タイトル
           datetime: 日時
           image: 画像
+          content: 投稿内容
           share_with: 閲覧可能範囲
           staff_id: スタッフID
           created_at: 作成日
