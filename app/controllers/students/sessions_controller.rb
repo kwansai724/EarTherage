@@ -17,6 +17,7 @@ class Students::SessionsController < Devise::SessionsController
         elsif self.resource.course_type == "self_care"
           respond_with resource, :location => self_care_course_student_after_sign_in_path_for(resource)
         end
+        session[:student_id] = self.resource.course_type
       else
         flash[:danger] = "Eメールが違います"
         redirect_to new_student_session_path
