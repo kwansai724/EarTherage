@@ -91,6 +91,15 @@ h1 {
 //   // align-items: flex-start;
 // }
 
+.seach-forms .btn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.btn-schedule-new .btn {
+  margin-bottom: 5px;
+}
+
 @media screen and (max-width: 768px){
 	.contents-wrap {
 		flex-direction: column;
@@ -99,18 +108,10 @@ h1 {
 	.contents-box {
 		width: 100%;
 	}
-}
 
-/* スケジュール詳細画面 */
-.schedule-show{
-  text-align: center;
-}
-
-
-/* スケジュール新規作成ボタン */
-.btn-schedule-new{
-  text-align: left;
-  margin-top: 2px;
+  .seach-forms {
+    display: inline;
+  }
 }
 
 /* スケジュール作成フォーム */
