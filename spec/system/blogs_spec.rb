@@ -29,6 +29,8 @@ RSpec.describe "Blogs", type: :system do
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
           }.to change(admin.blogs, :count).by(1)
+          click_link "戻る"
+          expect(page).to have_content "管理者"
         end
       end
 
@@ -49,8 +51,10 @@ RSpec.describe "Blogs", type: :system do
             expect(page).to have_content "スタッフブログ詳細表示"
             expect(page).to have_content "title0"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
-            #expect(page).to have_selector("img[src$='default.jpg']")
            }.to change(admin.blogs, :count).by(1)
+          click_link "戻る"
+          expect(page).to have_selector("img[src$='default.jpg']")
+          expect(page).to have_content "管理者"
         end
       end
 
@@ -77,8 +81,8 @@ RSpec.describe "Blogs", type: :system do
 
       context "スタッフは新しいブログを作成する" do 
         it "a staff creates new blog" do
-          staff = FactoryBot.create(:staff)
-          fill_in "Eメール", with: staff.email
+          @staff = FactoryBot.create(:staff)
+          fill_in "Eメール", with: @staff.email
           click_button 'ログイン'
           click_link "スタッフブログ投稿"
           expect(page).to have_content "スタッフブログ一覧"
@@ -92,14 +96,16 @@ RSpec.describe "Blogs", type: :system do
             expect(page).to have_content "スタッフブログ詳細表示"
             expect(page).to have_content "title1"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
-          }.to change(staff.blogs, :count).by(1)
+          }.to change(@staff.blogs, :count).by(1)
+          click_link "戻る"
+          expect(page).to have_content @staff.name
         end
       end
 
       context "スタッフは画像の無い新しいブログを作成する" do
         it "staff creates new blog without picture" do
-          staff = FactoryBot.create(:staff)
-          fill_in "Eメール", with: staff.email
+          @staff = FactoryBot.create(:staff)
+          fill_in "Eメール", with: @staff.email
           click_button 'ログイン'
           click_link "スタッフブログ投稿"
           expect(page).to have_content "スタッフブログ一覧"
@@ -113,8 +119,10 @@ RSpec.describe "Blogs", type: :system do
             expect(page).to have_content "スタッフブログ詳細表示"
             expect(page).to have_content "title1"
             expect(page).to have_content I18n.l(Date.today, format: :longdate)
-            #expect(page).to have_selector("img[src$='default.jpg']")
-          }.to change(staff.blogs, :count).by(1)
+          }.to change(@staff.blogs, :count).by(1)
+          click_link "戻る"
+          expect(page).to have_selector("img[src$='default.jpg']")
+          expect(page).to have_content @staff.name
         end
       end
 

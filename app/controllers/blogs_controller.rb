@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
   before_action :set_staff, only: [:new, :create, :show]
   before_action :set_staff_by_blog_object, only: [:edit, :update, :destroy]
   # アクセス制限
-  before_action :correct_staff_only, only: [:edit, :update, :destroy]
+  before_action :correct_staff_only, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     if current_staff.present?
@@ -87,7 +87,7 @@ class BlogsController < ApplicationController
     # 管理者かログインしているスタッフが自身のブログである場合のみアクセス可
     def correct_staff_only
       unless current_staff.present? && (current_staff.admin == true || current_staff.id == @staff.id)
-        flash[:notice] = "許可されていない操作でです。"
+        flash[:notice] = "許可されていない操作です。"
         redirect_to root_url
       end
     end
