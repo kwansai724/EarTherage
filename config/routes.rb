@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   #rootを受講生ログイン画面に設定
   devise_scope :student do
-    root "students/sessions#new"
+    root 'therapist_training_course#index', as: :public_root, constraints: LoggedInConstraint.new("therapist_training")
+    root 'self_care_course#index', constraints: LoggedInConstraint.new("self_care")
+    root 'admin_screen#index', constraints: LoggedInConstraint.new("true")
+    root 'staffs_screen#index', constraints: LoggedInConstraint.new("false")
+    root "students/sessions#new", constraints: LoggedInConstraint.new("")
   end
 
   devise_for :staffs, :controllers => {
