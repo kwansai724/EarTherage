@@ -7,9 +7,9 @@
   margin-left: 105px;
 }
 
-.pyramid_parent_1 {
-  //border :solid;         /* 子要素を左右中央揃えにする */
-}
+// .pyramid_parent_1 {
+//   //border :solid;         /* 子要素を左右中央揃えにする */
+// }
 
 .pyramid_box_1 {
     //border: solid;
@@ -88,9 +88,9 @@
     //vertical-align:  top;
 }
 
-.pyramid_parent_3 {
+// .pyramid_parent_3 {
 
-}
+// }
 
 .pyramid_box_5 {
   height: 20px;
@@ -127,13 +127,18 @@
     margin-left: -12px;
   }
 
-  a.btn.btn-info.btn-sm.font-new {
-    height: 25px;
-    width: 60px;
-    font-size: 5px;
-    margin: 0px 0px 0px 0px;
-    text-align: top;
+  .blog-index {
+    width: 85%;
+    margin: 0 auto;
   }
+
+  // a.btn.btn-info.btn-sm.font-new {
+  //   height: 25px;
+  //   width: 60px;
+  //   font-size: 5px;
+  //   margin: 0px 0px 0px 0px;
+  //   text-align: top;
+  // }
 
 
 
