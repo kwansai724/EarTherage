@@ -12,12 +12,13 @@ RSpec.describe "Students", type: :system do
       1.upto 10 do |n|
         @self_care[n] = FactoryBot.create(:student, :self_care_system_student)
       end
-      admin = FactoryBot.create(:staff, :admin)
-      sign_in admin
-      visit admin_screen_path
-      expect(page).to have_content "管理者画面"
-      click_link "受講生管理"
-      expect(page).to have_content "受講生一覧"
+      sign_in_as_admin
+      #admin = FactoryBot.create(:staff, :admin)
+      #sign_in admin
+      #visit admin_screen_path
+      #expect(page).to have_content "管理者画面"
+      #click_link "受講生管理"
+      #expect(page).to have_content "受講生一覧"
     end
 
     describe "一覧表示機能" do
@@ -317,17 +318,12 @@ RSpec.describe "Students", type: :system do
   end
 
   describe "CSVファイルインポート機能" do
-    before do
-      admin = FactoryBot.create(:staff, :admin)
-      sign_in admin
-      visit admin_screen_path
-      expect(page).to have_content "管理者画面"
-      click_link "受講生管理"
-      expect(page).to have_content "受講生一覧"
-    end
     context "正常系" do
       context "管理者はCSVファイルをインポートする" do
         context "元からstudentが登録されていないとき" do
+          before do
+            sign_in_as_admin
+          end
           it "admin imports CSV file" do
             attach_file "file", "/mnt/c/Users/ruffini47/Documents/セレブエンジニア/人工インターン_EarTherage/売上データ4.csv"
             click_button "CSVをインポート"
@@ -363,6 +359,7 @@ RSpec.describe "Students", type: :system do
             5.times do
               FactoryBot.create(:student, :sample)
             end
+            sign_in_as_admin
           end
           it "admin imports CSV file" do
             attach_file "file", "/mnt/c/Users/ruffini47/Documents/セレブエンジニア/人工インターン_EarTherage/売上データ4.csv"
@@ -399,6 +396,7 @@ RSpec.describe "Students", type: :system do
             10.times do
               FactoryBot.create(:student, :sample)
             end
+            sign_in_as_admin
           end
           it "admin imports CSV file" do
             attach_file "file", "/mnt/c/Users/ruffini47/Documents/セレブエンジニア/人工インターン_EarTherage/売上データ4.csv"
@@ -434,6 +432,9 @@ RSpec.describe "Students", type: :system do
     end
     context "異常系" do
       context "管理者はCSVファイルを選択しないでCSVをインポートボタンを押す" do
+        before do
+          sign_in_as_admin
+        end
         it "admin presses CSV import button without selecting CSV file" do
           click_button "CSVをインポート"
           expect(page).to have_content "csvデータが選択されていません。"

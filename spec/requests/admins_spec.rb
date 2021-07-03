@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AdminsController, type: :controller do
+RSpec.describe "Admins", type: :request do
   describe "#student_edit" do
     context "正常系" do
       context "管理者としてログインしたとき" do
@@ -9,7 +9,7 @@ RSpec.describe AdminsController, type: :controller do
             admin = FactoryBot.create(:staff, :admin)
             sign_in admin
             student = FactoryBot.create(:student, :sample)
-            get :student_edit, params: { student_id: student.id }
+            get student_edit_admin_path student.id
           end
           context "正常にレスポンスを返すこと" do
             it "responds successfully" do
@@ -32,7 +32,7 @@ RSpec.describe AdminsController, type: :controller do
             staff = FactoryBot.create(:staff)
             sign_in staff
             student = FactoryBot.create(:student, :sample)
-            get :student_edit, params: { student_id: student.id }
+            get student_edit_admin_path student.id
           end
           context "正常にレスポンスを返さないこと" do
             it "responds not successfully" do
@@ -58,7 +58,7 @@ RSpec.describe AdminsController, type: :controller do
             student = FactoryBot.create(:student)
             sign_in student
             student = FactoryBot.create(:student, :sample)
-            get :student_edit, params: { student_id: student.id }
+            get student_edit_admin_path student.id
           end
           context "正常にレスポンスを返さないこと" do
             it "responds not successfully" do
@@ -84,7 +84,7 @@ RSpec.describe AdminsController, type: :controller do
             student = FactoryBot.create(:student, :self_care)
             sign_in student
             student = FactoryBot.create(:student, :sample)
-            get :student_edit, params: { student_id: student.id }
+            get student_edit_admin_path student.id
           end
           context "正常にレスポンスを返さないこと" do
             it "responds not successfully" do
@@ -109,7 +109,7 @@ RSpec.describe AdminsController, type: :controller do
         context "as a guest" do
           before do
             student = FactoryBot.create(:student, :sample)
-            get :student_edit, params: { student_id: student.id }
+            get student_edit_admin_path student.id
           end
           context "正常にレスポンスを返さないこと" do
             it "responds not successfully" do
