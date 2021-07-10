@@ -7,7 +7,7 @@ class Schedule < ApplicationRecord
 #検索機能--------------------------------------------------------------------
   enum area: {関東: 0, 関西: 1, 中国・四国: 2, 九州: 3, オンライン: 4}
   enum event_type: {イベント: 1, 講座: 2}
-  enum teacher: {山本: 1, 田中: 2, 井上: 3}
+  enum teacher: {山本: 1, 月ノ宮: 2, 杉山: 3}
 
   enum public_status: {公開: 1, 非公開: 2, 中止: 3}
   # validates :date, presence: true
