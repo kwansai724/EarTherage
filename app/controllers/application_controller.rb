@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
     admin_screen_path(resource)
   end
 
+  def after_sign_up_path_for(resource)
+    staffs_screen_path(resource)
+  end
+
   # ログアウト後に遷移するpathを設定
   def after_sign_out_path_for(resource)
     if resource_name == :student
