@@ -60,19 +60,21 @@ end
 
 puts "Staff Created"
 
-# 5.times do |n|
-#   date  = Faker::Date.in_date_period(month: 2)
-#   title = Faker::Educator.degree
-#   area = Faker::Address.state
-#   teacher = Faker::Name.first_name
-#   Schedule.create!(date: date,
-#               title: title,
-#               area: area,
-#               teacher: teacher,
+5.times do |n|
+  date  = Faker::Date.in_date_period(month: 2)
+  title = Faker::Educator.degree
+  # area = Faker::Address.state
+  # teacher = Faker::Name.first_name
+  Schedule.create!(date: date,
+              event_type: "イベント",
+              title: title,
+              area: "関東",
+              teacher: "山本",
+              public_status: "公開"
 #               # image: File.open("public/uploads/schedule/image/1/something.jpg")
-#               )
-# end
-# puts 'スケジュール作成'
+              )
+end
+puts 'スケジュール作成'
 
 5.times do |n|
   datetime = DateTime.current
