@@ -28,7 +28,8 @@ class ApplicationController < ActionController::Base
     admin_screen_path(resource)
   end
 
-  def after_sign_up_path_for(resource)
+  # スタッフ新規登録後に遷移するpathを設定
+  def staff_after_sign_up_path_for(resource)
     staffs_screen_path(resource)
   end
 

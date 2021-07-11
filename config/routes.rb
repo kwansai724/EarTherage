@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :staffs, :controllers => {
+    :registrations => 'staffs/registrations',
     :sessions => 'staffs/sessions'
   }
   devise_for :students, :controllers => {
