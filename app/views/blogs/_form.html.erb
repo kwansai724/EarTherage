@@ -11,7 +11,7 @@
   <%= f.label :content, class: "label-#{yield(:class_text)} btn--resize" %>
   <%= f.text_area :content, 'data-provider': :summernote , class: "form-control btn--resize" %>
 
-  <%= f.label "画像をアップロード", class: "label-#{yield(:class_text)} btn--resize" %><br>
+  <%= f.label "サムネイル画像を選択", class: "label-#{yield(:class_text)} btn--resize" %><br>
     <%= image_tag @blog.image.url(:thumb), id: :img_prev if @blog.image? %>
   <%= f.file_field :image, id: "blog_image", class: "form-control btn--resize" %>
 
