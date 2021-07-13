@@ -50,6 +50,9 @@ gem 'summernote-rails', '~> 0.8.10.0'
 # 画像投稿機能
 gem 'carrierwave'
 
+# AWSのS3連携
+gem 'fog-aws'
+
 # 画像のリサイズ
 gem 'mini_magick'
 #will_paginate
