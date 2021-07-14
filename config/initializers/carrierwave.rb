@@ -7,7 +7,7 @@ CarrierWave.configure do |config|
     config.storage :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory  = 'eartherage' # バケット名
-    config.fog_public = false
+    config.fog_public = true
     config.fog_credentials = {
       provider: 'AWS',
       aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'], # アクセスキー
