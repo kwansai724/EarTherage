@@ -8,15 +8,15 @@ class BlogsController < ApplicationController
 
   def index
     if current_staff.present?
-      @blogs = Blog.order(datetime: "DESC").paginate(page: params[:page], per_page: 100)
+      @blogs = Blog.order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
     elsif current_student.present?
       if current_student.course_type == "therapist_training"
-        @blogs = Blog.where(share_with: 1..3).order(datetime: "DESC").paginate(page: params[:page], per_page: 100)
+        @blogs = Blog.where(share_with: 1..3).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
       elsif current_student.course_type == "self_care"
-        @blogs = Blog.where(share_with: 2..3).order(datetime: "DESC").paginate(page: params[:page], per_page: 100)
+        @blogs = Blog.where(share_with: 2..3).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
       end
     else
-      @blogs = Blog.where(share_with: 3).order(datetime: "DESC").paginate(page: params[:page], per_page: 100)
+      @blogs = Blog.where(share_with: 3).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
     end
 
     #if current_staff.present?
