@@ -33,7 +33,7 @@ class ScheduleUploader < CarrierWave::Uploader::Base
   end
 
   # このアップローダーを利用した画像の最大値を指定
-  process resize_to_fit: [400, 500]
+  process resize_to_fit: [700, 700]
   #
   # def scale(width, height)
   #   # do something
