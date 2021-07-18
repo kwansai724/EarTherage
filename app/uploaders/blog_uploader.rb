@@ -34,7 +34,7 @@ class BlogUploader < CarrierWave::Uploader::Base
 
 
   # このアップローダーを利用した画像の最大値を指定
-  process resize_to_fill: [200, 200, "Center"]
+  process resize_to_fill: [700, 700, "Center"]
   #
   # def scale(width, height)
   #   # do something
