@@ -3,18 +3,18 @@
   <h1>管理者画面</h1>
 </div>
 <ul class="list-group-flush">
-  <li class="list-group-item">
-    <%= link_to 'スタッフブログ投稿', staff_blogs_path(@staff), class: "btn btn-outline-info" %>
+  <li class="admin_screen--list">
+    <%= link_to 'スタッフブログ投稿', staff_blogs_path(@staff), class: "btn btn-info btn-lg" %>
   </li>
-  <li class="list-group-item">
-    <%= link_to 'イベント・講座投稿', schedules_path, class: "btn btn-outline-info" %>
+  <li class="admin_screen--list">
+    <%= link_to 'イベント・講座投稿', schedules_path, class: "btn btn-info btn-lg" %>
   </li>
-  <li class="list-group-item">
-    <%= link_to '受講生管理', students_path, class: "btn btn-outline-info" %>
+  <li class="admin_screen--list">
+    <%= link_to '受講生管理', students_path, class: "btn btn-info btn-lg" %>
   </li>
-  <!--<li class="list-group-item">
-    <%= link_to "staff新規登録", new_staff_registration_path, class: "btn btn-outline-info" %>
-  </li>-->
+  <li class="admin_screen--list">
+    <%= link_to "スタッフ管理", "#", class: "btn btn-info btn-lg" %>
+  </li>
   <!--<li class="list-group-item">
     <%= link_to 'せらポケ管理', serapoke_path, class: "btn btn-outline-info" %>
   </li>
