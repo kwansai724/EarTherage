@@ -100,12 +100,6 @@ h1 {
   margin-bottom: 5px;
 }
 
-/* スケジュール詳細画面　*/
-// .schedule-show img {
-//   width: 100%;
-// }
-
-
 @media screen and (max-width: 768px){
 	.contents-wrap {
 		flex-direction: column;
@@ -119,9 +113,15 @@ h1 {
     display: inline;
   }
 
-.schedule-show img {
-  max-width: 100%;
-}
+/* スケジュール詳細画面 画像幅　*/
+ .schedule-show img {
+   max-width: 100%;
+ }
+
+/* スケジュール詳細画面 動画幅　*/
+ .schedule-show iframe {
+   max-width: 100%;
+ }
 
 }
 

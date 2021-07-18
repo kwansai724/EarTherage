@@ -120,11 +120,6 @@
   margin-left: 105px;
 }
 
-// /* ブログ詳細画面　*/
-// .blog-show img {
-//   width: 100%;
-// }
-
 //スマホ用
 @media screen and (max-width:480px) {
 
@@ -137,9 +132,16 @@
     margin: 0 auto;
   }
 
+  /* ブログ詳細画面　*/
   .blog-show img {
     max-width: 100%;
   }
+
+  /* ブログ詳細画面 動画幅　*/
+ .blog-show iframe {
+  max-width: 100%;
+}
+
   
 
   // a.btn.btn-info.btn-sm.font-new {
