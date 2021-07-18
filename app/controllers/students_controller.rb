@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   before_action :admin_only, only: [:index, :show, :update, :destroy]
 
   def index
-    @students = Student.paginate(page: params[:page], per_page: 10)
+    @students = Student.order(created_at: "ASC").paginate(page: params[:page], per_page: 10)
   end
 
   def update
@@ -25,12 +25,12 @@ class StudentsController < ApplicationController
 
   def import
     if params[:file].blank?
-      flash[:danger] = "csvデータが選択されていません。"
+      flash[:danger] = "csvファイルが選択されていません。"
       redirect_to students_url
     else
       #fileはtmpに自動で一時保存される
       Student.import(params[:file])
-      flash[:success] = "CSVデータをインポートしました。"
+      flash[:success] = "CSVファイルをインポートしました。"
       redirect_to students_url
     end
   end
