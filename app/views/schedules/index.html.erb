@@ -24,7 +24,7 @@
       <p>【<%= Schedule.teachers.key(params[:teacher].to_i) %>】</p>
     <% end %>
   </div>  
-  <div class="seach-forms col-md-4 offset-md-8 row">
+  <div class="seach-forms col-md-4 offset-md-8">
     <%= form_tag(schedules_path, method: "get") do %>
       <%= select_tag :area, options_for_select(Schedule.areas), prompt: "開催エリア", class: 'form-control' %>
       <%= select_tag :event_type, options_for_select(Schedule.event_types), prompt: "種別", class: 'form-control' %>

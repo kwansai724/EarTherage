@@ -7,9 +7,9 @@
   margin-left: 105px;
 }
 
-.pyramid_parent_1 {
-  //border :solid;         /* 子要素を左右中央揃えにする */
-}
+// .pyramid_parent_1 {
+//   //border :solid;         /* 子要素を左右中央揃えにする */
+// }
 
 .pyramid_box_1 {
     //border: solid;
@@ -17,7 +17,7 @@
     height: 200px;
     width: 200px;               /* 幅指定 */
     display:  inline-block;     /* インラインブロック要素にする */
-    background-color:  #fff;    /* 背景色指定 */
+    // background-color:  #fff;    /* 背景色指定 */
     //padding-top: 50px;
     margin-left: 100px;
     margin-bottom: 5px;         /* 要素同士の隙間調整 */
@@ -88,9 +88,9 @@
     //vertical-align:  top;
 }
 
-.pyramid_parent_3 {
+// .pyramid_parent_3 {
 
-}
+// }
 
 .pyramid_box_5 {
   height: 20px;
@@ -127,13 +127,30 @@
     margin-left: -12px;
   }
 
-  a.btn.btn-info.btn-sm.font-new {
-    height: 25px;
-    width: 60px;
-    font-size: 5px;
-    margin: 0px 0px 0px 0px;
-    text-align: top;
+  .blog-index {
+    width: 85%;
+    margin: 0 auto;
   }
+
+  /* ブログ詳細画面　*/
+  .blog-show img {
+    max-width: 100%;
+  }
+
+  /* ブログ詳細画面 動画幅　*/
+ .blog-show iframe {
+  max-width: 100%;
+}
+
+  
+
+  // a.btn.btn-info.btn-sm.font-new {
+  //   height: 25px;
+  //   width: 60px;
+  //   font-size: 5px;
+  //   margin: 0px 0px 0px 0px;
+  //   text-align: top;
+  // }
 
 
 
@@ -230,17 +247,17 @@
   a.btn.btn-primary.btn-sm.font-edit {
     height: 25px;
     width: 40px;
-    font-size: 5px;
+    font-size: 10px;
     margin: 0px 0px 0px 0px;
-    text-align: top;
+    // text-align: top;
   }
 
   a.btn.btn-danger.btn-sm.font-delete {
     height: 25px;
     width: 40px;
-    font-size: 5px;
+    font-size: 10px;
     margin: 0px 0px 0px 0px;
-    text-align: top;
+    // text-align: top;
   }
 
   .blog-index-return {

@@ -4,7 +4,7 @@
   <h1><%= @staff.name%>のブログ編集</h1><br>
 </div>
 <div class="row">
-  <div class="col-md-6 offset-md-3">
+  <div class="col-md-8 offset-md-2">
     <%= render 'form' %>
     <%= link_to "戻る", staff_blogs_path(@staff), class: "btn btn-outline-secondary btn--resize blog-return" %>
   </div>
