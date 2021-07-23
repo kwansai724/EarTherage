@@ -15,13 +15,13 @@ class Staffs::RegistrationsController < Devise::RegistrationsController
   # end
 
   def create
-    # ここでUser.new（と同等の操作）を行う
+    # ここでStaff.new（と同等の操作）を行う
     build_resource(sign_up_params)
 
-    # ここでUser.save（と同等の操作）を行う
+    # ここでStaff.save（と同等の操作）を行う
     resource.save
 
-    # ブロックが与えられたらresource(=User)を呼ぶ
+    # ブロックが与えられたらresource(=Staff)を呼ぶ
     yield resource if block_given?
     if resource.persisted?
     # 先程のresource.saveが成功していたら
