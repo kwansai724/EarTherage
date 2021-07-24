@@ -1,4 +1,12 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  # スタッフ新規登録時に名前も登録できるように設定
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
+
 
   # セラピスト養成コースの受講生がログイン後に遷移するpathを設定
   def therapist_training_course_student_after_sign_in_path_for(resource)
@@ -18,6 +26,11 @@ class ApplicationController < ActionController::Base
   # 管理者にログイン後に遷移するpathを設定
   def admin_after_sign_in_path_for(resource)
     admin_screen_path(resource)
+  end
+
+  # スタッフ新規登録後に遷移するpathを設定
+  def staff_after_sign_up_path_for(resource)
+    staffs_screen_path(resource)
   end
 
   # ログアウト後に遷移するpathを設定

@@ -1,8 +1,31 @@
+
+.list-group-flush {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.admin_screen--list {
+  list-style: none;
+  display: inline-block;
+}
+
 //スマホ用↲
 @media screen and (max-width:480px) {
 
   .admin_screen--title h1 {
     font-size : 20px;
   }
+
+  .admin_screen--list {
+    list-style: none;
+    display: flex;
+  }
+
+  .admin_screen--list .btn {
+    margin-bottom: 5px;
+  }
+
+
+
 
 }
