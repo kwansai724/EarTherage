@@ -81,7 +81,7 @@ class BlogsController < ApplicationController
   private
 
     def blog_params
-      params.require(:blog).permit(:title, :datetime, :content, :image, :share_with, :staff_id)
+      params.require(:blog).permit(:title, :content, :image, :share_with, :staff_id)
     end
 
     # 管理者かログインしているスタッフが自身のブログである場合のみアクセス可
