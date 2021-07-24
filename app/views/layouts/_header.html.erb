@@ -41,17 +41,13 @@
           <li class="nav-item active">
             <%= link_to 'ログアウト', destroy_staff_session_path, method: :delete, class: 'nav-link' %>
           </li>
-        <%
-=begin%>
- <% else %>
+        <% else %>
           <li class="nav-item active">
             <%= link_to "student新規登録", new_student_registration_path, class: 'nav-link' %>
           </li>
           <li class="nav-item active">
             <%= link_to "staff新規登録", new_staff_registration_path, class: 'nav-link' %>
-          </li> 
-<%
-=end%>
+          </li>
         <% end %>
       </ul>
     </div>  

@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2021_06_15_130226) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "title", default: "", null: false
-    t.datetime "datetime", default: "2021-07-07 14:28:05", null: false
+    t.datetime "datetime", default: "2021-07-20 15:02:58", null: false
     t.text "content", limit: 10485760
     t.string "image"
     t.integer "share_with", default: 0, null: false
@@ -26,15 +26,15 @@ ActiveRecord::Schema.define(version: 2021_06_15_130226) do
 
   create_table "schedules", force: :cascade do |t|
     t.date "date"
-    t.integer "area"
+    t.string "area"
     t.string "place"
-    t.integer "teacher"
-    t.integer "event_type"
+    t.string "teacher"
+    t.string "event_type"
     t.string "title"
     t.text "details"
     t.string "image"
     t.integer "public_status", default: 0, null: false
-    t.boolean "judgement_of_members"
+    t.boolean "judgement_of_members", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
