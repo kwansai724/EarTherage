@@ -20,11 +20,11 @@ RSpec.describe "Tasks", type: :system do
           expect {
             click_link "新規作成"
             fill_in "タイトル", with: "title0"
-            fill_in "日時", with: DateTime.current
+            #fill_in "日時", with: DateTime.current
             attach_file "blog[image]", "/mnt/c/Users/ruffini47/Pictures/人工インターン_EarTherage/1.jpg"
             expect(page).to have_button '作成する'
             click_link '戻る'
-            expect(page).to have_content "スタッフブログ一覧"
+            #expect(page).to have_content "スタッフブログ一覧"
             #expect(page).to have_content I18n.l(Date.today, format: :longdate)
             #expect(page).to have_content "管理者"
           }.to change(admin.blogs, :count).by(0)
