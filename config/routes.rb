@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
   resources :students#ユーザー管理
 
+  resources :staffs#スタッフ管理
+
   resources :uploads, only: [:create, :destroy]
 
   get 'serapoke' => 'serapoke#index', as: :serapoke#せらポケ

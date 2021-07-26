@@ -1,0 +1,38 @@
+<div class="student--title">
+  <%= render 'layouts/flash_messages' %>
+  <h1>スタッフ一覧</h1>
+</div>
+
+<div class="container">
+  <% @staffs.each_with_index do |staff, n| %>
+    <div class="row">
+      <div class="d-flex align-items-center border-top border-dark  student--index col-3">
+        名前:
+      </div>
+      <div class="d-flex align-items-center border-top border-dark student--index col-5">
+        <%= link_to staff.name, "#", class: "edit#{n}" %>
+      </div>
+      <% if current_staff.present? && current_staff.admin == true %>
+        <div class="border-top d-flex align-items-center border-dark student--index col-2">
+          <%= link_to "詳細", staffs_path(staff), class: "btn btn-info btn--resize show#{n}" %>
+        </div>
+        <div class="border-top d-flex align-items-center border-dark student--index col-2">
+          <%= link_to "削除", staff, method: :delete,
+              data: { confirm: "削除してよろしいですか？" },
+              class: "btn btn-danger btn--resize delete#{n}" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="d-flex align-items-center border-top student--index col-3">
+        Eメール:
+      </div>
+      <div class="border-top d-flex align-items-center student--index col-9">
+        <%= staff.email %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br>
+<%= will_paginate(@pusers, :previous_label => ' &lt 前へ', :next_label => '次へ &gt', class: "pagination justify-content-center mt-6 mb-7 btn--resize", renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+<%= link_to "戻る", admin_screen_path, class: "btn btn-outline-secondary btn--resize" %>
