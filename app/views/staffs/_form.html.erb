@@ -1,0 +1,11 @@
+<%= form_with(model: @staff, local: true) do |f| %>
+  <%= render 'devise/shared/error_messages', resource: @staff %>
+
+  <%= f.label :name, class: "staff--edit" %>
+  <%= f.text_field :name, class: "form-control staff--edit" %>
+
+  <%= f.label :email, class: "staff--edit" %>
+  <%= f.email_field :email, class: "form-control staff--edit" %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary btn-block btn-staff--edit btn--resize" %>
+<% end %>
