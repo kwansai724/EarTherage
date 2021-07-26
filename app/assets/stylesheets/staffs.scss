@@ -1,0 +1,44 @@
+// Place all the styles related to the Staffs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// 受講生一覧
+.staff--index {
+  margin-top: 10px;
+  padding-top: 10px;
+ }
+
+// 受講生詳細表示
+.staff--show {
+  margin-top: 10px;
+  padding: 10px;
+ }
+
+ .btn-staff--edit {
+   margin-top: 10px;
+ }
+
+//スマホ用
+@media screen and (max-width:480px) {
+
+  .staff--title h1 {
+    font-size : 20px;
+  }
+
+  .btn--resize {
+    font-size: 10px;
+  }
+
+  .staff--index {
+    font-size: 10px;
+  }
+
+  .staff--show {
+    font-size: 10px;
+  }
+
+  .staff--new {
+    font-size: 10px;
+  }
+
+}
