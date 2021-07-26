@@ -7,7 +7,6 @@ class SchedulesController < ApplicationController
   def index
     if current_staff.present?
       @schedules = Schedule.paginate(page: params[:page], per_page: 6).order(created_at: "DESC")
-    # elsif current_student.present?
     else
       @schedules = Schedule.paginate(page: params[:page], per_page: 6).where.not(public_status: "非公開").order(created_at: "DESC")
     end
@@ -36,6 +35,7 @@ class SchedulesController < ApplicationController
   # スケジュール作成
   def new
     @schedule = Schedule.new
+    # @staffs = Staff.where.not(admin: true)
   end
 
   # スケジュール作成・保存
@@ -51,6 +51,7 @@ class SchedulesController < ApplicationController
 
   # スケジュール編集
   def edit
+    # @staffs = Staff.where.not(admin: true)
   end
 
   # スケジュール更新
