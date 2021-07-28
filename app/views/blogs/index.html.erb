@@ -5,7 +5,7 @@
 <div class="blog-index">
   <% if @staff.present? %>
     <div class="new_blog">
-      <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info font-new" %>
+      <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info font-new btn--resize" %>
     </div>
   <% end %>
   <% @blogs.each_with_index do |blog, n| %>

@@ -25,23 +25,23 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.submit  t('.sign_in'), class: 'btn btn-primary btn-block btn--resize' %>
+      <%= f.submit  t('.sign_in'), class: 'btn btn-primary btn-block btn-resize' %>
     </div>
   <% end %>
 
   <% if resource_name == :student %>
-    <%= link_to '管理者・スタッフはこちら', new_staff_session_path , class: "btn--resize"%>
+    <%= link_to '管理者・スタッフはこちら', new_staff_session_path , class: "btn-resize"%>
   <% end %>
 
   <% if resource_name == :staff %>
-    <%= link_to '受講生の方はこちら', new_student_session_path, class: "btn--resize"%>
+    <%= link_to '受講生の方はこちら', new_student_session_path, class: "btn-resize"%>
   <% end %>
   <br>
   <br>
   <% if resource_name == :staff %>
-    <%= link_to "スタッフ新規登録", new_staff_registration_path, class: "btn--resize" %>
+    <%= link_to "スタッフ新規登録", new_staff_registration_path, class: "btn-resize" %>
   <% end %>
-  <!--<%= link_to 'スタッフブログはこちら（一般向け）,（仮）', staff_blogs_path(1), class: "btn--resize" %>
+  <!--<%= link_to 'スタッフブログはこちら（一般向け）,（仮）', staff_blogs_path(1), class: "btn-resize" %>
   <br>
   <br>-->
 
