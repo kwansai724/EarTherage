@@ -28,7 +28,7 @@
     <%= form_with(url: schedules_path, method: :get, local: true) do |f| %>
       <%= f.select :area, ['関東', '関西', '中国・四国', '九州', 'オンライン'], {prompt: "開催エリア"}, {class: 'form-control'} %>
       <%= f.select :event_type, ['イベント', '講座'], {prompt: "種別"}, {class: 'form-control'} %>
-      <%= f.collection_select :teacher, Staff.where.not(admin: true), :name, :name, {prompt: "セラピスト"}, {class: "form-control"} %>
+      <%= f.collection_select :teacher, Staff.all, :name, :name, {prompt: "セラピスト"}, {class: "form-control"} %>
       <%= f.submit "検索", class: "btn btn-info" %>
     <% end %>
   </div>
