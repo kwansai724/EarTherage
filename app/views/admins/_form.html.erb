@@ -14,5 +14,5 @@
   <%= f.label :course_type, class: "student--edit" %>
   <%= f.select :course_type, [['セラピスト養成コース', 'therapist_training'], ['セルフケアコース', 'self_care']], { include_blank: '選択してください'}, { class: 'form-control student--edit' , required: true } %>
 
-  <%= f.submit yield(:button_text), class: "btn btn-primary btn-block btn-student--edit btn--resize" %>
+  <%= f.submit yield(:button_text), class: "btn btn-primary btn-block btn-student--edit btn-resize" %>
 <% end %>
