@@ -1,0 +1,10 @@
+<% provide(:class_text, 'staff--edit') %>
+<% provide(:button_text, '編集') %>
+<div class="container col-10 col-md-10 col-lg-6">
+  <div class="staff--title">
+    <h1>スタッフ情報の更新</h1>
+    <%= render 'staffs/form' %>
+  </div>
+  <br>
+  <%= link_to "戻る", staffs_path, class: "btn btn-outline-secondary btn-resize" %>
+</div>

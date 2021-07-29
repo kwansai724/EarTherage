@@ -15,21 +15,21 @@
       <p>検索条件：</p>
     <% end %>
     <% if params[:area].present? %>
-      <p>【<%= Schedule.areas.key(params[:area].to_i) %>】</p>
+      <p>【<%= params[:area] %>】</p>
     <% end %>
     <% if params[:event_type].present? %>
-      <p>【<%= Schedule.event_types.key(params[:event_type].to_i) %>】</p>
+      <p>【<%= params[:event_type] %>】</p>
     <% end %>
     <% if params[:teacher].present? %>
-      <p>【<%= Schedule.teachers.key(params[:teacher].to_i) %>】</p>
+      <p>【<%= params[:teacher] %>】</p>
     <% end %>
-  </div>  
-  <div class="seach-forms col-md-4 offset-md-8">
-    <%= form_tag(schedules_path, method: "get") do %>
-      <%= select_tag :area, options_for_select(Schedule.areas), prompt: "開催エリア", class: 'form-control' %>
-      <%= select_tag :event_type, options_for_select(Schedule.event_types), prompt: "種別", class: 'form-control' %>
-      <%= select_tag :teacher, options_for_select(Schedule.teachers), prompt: "セラピスト", class: 'form-control' %>
-      <%= submit_tag "検索", class: "btn btn-info" %>
+  </div >  
+  <div class="seach-forms col-md-4 offset-md-8"> <!--末尾に row を入れると検索フォーム幅が狭くなる-->
+    <%= form_with(url: schedules_path, method: :get, local: true) do |f| %>
+      <%= f.select :area, ['関東', '関西', '中国・四国', '九州', 'オンライン'], {prompt: "開催エリア"}, {class: 'form-control'} %>
+      <%= f.select :event_type, ['イベント', '講座'], {prompt: "種別"}, {class: 'form-control'} %>
+      <%= f.collection_select :teacher, Staff.all, :name, :name, {prompt: "セラピスト"}, {class: "form-control"} %>
+      <%= f.submit "検索", class: "btn btn-info" %>
     <% end %>
   </div>
   <!--会員限定のみチェックボックス---------------------------------------------->
@@ -112,8 +112,10 @@
       <!-- 「staff_toppage_routes」はstaffs_helper.rbに記載 -->
       <% if current_staff.present? %>
         <%= link_to "<　戻る", staff_toppage_routes(current_staff), class: "btn btn-outline-secondary" %>
+      <% elsif current_student.present? %>
+        <%= link_to "<　戻る", student_toppage_routes(current_student), class: "btn btn-outline-secondary" %>
       <% else %>
-        <%= link_to "<　戻る", therapist_training_course_path, class: "btn btn-outline-secondary" %>
+        <%= link_to "<　戻る", 'https://www.eartherage.com/', class: "btn btn-outline-secondary" %>
       <% end %>
     <% end %>
   </div>
