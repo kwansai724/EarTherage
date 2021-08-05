@@ -24,7 +24,7 @@
         </div>
         <div class="pyramid_parent_2">
           <div class="pyramid_box_3">
-            <%= l(blog.created_at, format: :longdatetime) %>
+            <%= l(blog.created_at, format: :longdate) %>
           </div>
           <% staff = Staff.find(blog.staff_id) %>
           <div class="pyramid_box_4">
