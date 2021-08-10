@@ -5,7 +5,7 @@ class Schedule < ApplicationRecord
 
 
 #検索機能--------------------------------------------------------------------
-  enum public_status: {公開: 1, 非公開: 2, 中止: 3}
+  enum public_status: {公開: 1, 非公開: 2, 中止: 3, 延期: 4}
 
   #開催エリアによる絞り込み
   scope :get_by_area, ->(area) {
@@ -19,6 +19,12 @@ class Schedule < ApplicationRecord
   scope :get_by_teacher, ->(teacher) {
     where(teacher: teacher)
   }
-
 #----------------------------------------------------------------------------
+
+#会員限定の絞り込み-------------------------------------------------------------
+  scope :get_by_members, ->(judgement_of_members) {
+    where(judgement_of_members: true)
+  }
+#----------------------------------------------------------------------------
+
 end

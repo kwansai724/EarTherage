@@ -26,6 +26,12 @@ class SchedulesController < ApplicationController
       @schedules = @schedules.paginate(page: params[:page], per_page: 6).get_by_teacher params[:teacher]
     end
   #--------------------------------------------------------------------------    
+
+  #会員限定の絞り込み-----------------------------------------------------------
+    if params[:judgement_of_members] == "1"
+      @schedules = @schedules.paginate(page: params[:page], per_page: 6).get_by_members params[:judgement_of_members]
+    end
+  #-------------------------------------------------------------------------- 
   end
 
   # スケジュール詳細
