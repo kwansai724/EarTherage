@@ -19,6 +19,15 @@ class BlogsController < ApplicationController
       @blogs = Blog.where(share_with: 3).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
     end
 
+  #検索機能-------------------------------------------------------------------↲
+    if params[:share_with].present?
+      @blogs = Blog.where(share_with: 0..4).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
+      #@blogs = @blogs.where(staff: current_staff) if params[:share_with] == 4
+      @blogs = @blogs.get_by_share_with params[:share_with]
+      # @schedules = Schedule.areas.key(params[:area].to_i)
+    end
+  #------------------------------------------------------------------------------↲
+
     #if current_staff.present?
     #  @blogs = Blog.all
     #elsif current_student.present?

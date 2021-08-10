@@ -3,6 +3,14 @@
 </div>
 <%= render 'layouts/flash_messages' %>
 <div class="blog-index">
+
+  <!--検索フォーム-->
+    <%= form_with(url: staff_blogs_path(current_staff), method: :get, local: true) do |f| %>
+      <%= f.select :share_with, [0,1,2,3,4], {prompt: "スタッフ"}, {class: "form-control"} %>
+      <%= f.submit "検索", class: "btn btn-info" %>
+    <% end %>
+  <!--検索フォーム終わり-->
+
   <% if @staff.present? %>
     <div class="new_blog">
       <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info font-new btn--resize" %>
@@ -48,11 +56,17 @@
   <% end %>
   <br>
   <%= will_paginate(@pblogs, :previous_label => ' &lt 前へ', :next_label => '次へ &gt', class: "pagination justify-content-center mt-6 mb-7 btn--resize", renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
-  <% if current_staff.present? %>
-    <%= link_to "戻る", staff_toppage_routes(current_staff), class: "btn btn-outline-secondary btn--resize blog-index-return" %>
-  <% elsif current_student.present? %>
-    <%= link_to "戻る", student_toppage_routes(current_student), class: "btn btn-outline-secondary btn--resize blog-index-return" %>
-  <% else %>
-    <%= link_to "戻る", 'https://www.eartherage.com/', class: "btn btn-outline-secondary btn--resize blog-index-return" %>
-  <% end %>
+
+
+  <div class="center">
+    <% if params[:staff_id].present? %>
+      <%= link_to "<　一覧へ戻る", staff_blogs_path(current_staff), class: "btn btn-outline-secondary" %>
+    <% elsif current_staff.present? %>
+      <!-- 「staff_toppage_routes」はstaffs_helper.rbに記載 -->
+      <%= link_to "戻る", staff_toppage_routes(current_staff), class: "btn btn-outline-secondary btn--resize blog-index-return" %>
+    <% elsif current_student.present? %>
+      <%= link_to "戻る", student_toppage_routes(current_student), class: "btn btn-outline-secondary btn--resize blog-index-return" %>
+    <% else %>
+      <%= link_to "戻る", 'https://www.eartherage.com/', class: "btn btn-outline-secondary btn--resize blog-index-return" %>
+    <% end %>
 </div>
