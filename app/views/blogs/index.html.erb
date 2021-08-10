@@ -4,18 +4,34 @@
 <%= render 'layouts/flash_messages' %>
 <div class="blog-index">
 
-  <!--検索フォーム-->
-    <% if params[:staff_name].present? %>
-      <p>検索条件：</p>
+  <!--検索-->
+  <% if current_staff.present? %>
+    <% if params[:share_with].blank? || params[:share_with].to_i.in?([0,1,2,3]) %>
+      <% share_with = "公開" %>
+    <% else %>
+      <% share_with = "非公開" %>
     <% end %>
-    <% if params[:staff_name].present? %>
+
+    <% if params[:staff_name].present? || params[:share_with].present? %>
+      検索条件：
+    <% end %>
+    <% if params[:staff_name].present? && params[:share_with].present? %>
+      <p>【<%= params[:staff_name] %>】【<%= share_with %>】</p>
+    <% elsif  params[:staff_name].present? %>
       <p>【<%= params[:staff_name] %>】</p>
+    <% elsif params[:share_with].present? %>
+      <p>【<%= share_with %>】</p>
+    <% else %>
+      <p></p>
     <% end %>
+
     <%= form_with(url: staff_blogs_path(current_staff), method: :get, local: true) do |f| %>
       <%= f.collection_select :staff_name, Staff.all, :name, :name, {prompt: "スタッフ"}, {include_blank: true, class: "form-control"} %>
+      <%= f.select :share_with, [['公開', 0], ['非公開', 4]], {prompt: "公開・非公開"}, {class: 'form-control'} %>
       <%= f.submit "検索", class: "btn btn-info" %>
     <% end %>
-  <!--検索フォーム終わり-->
+  <% end %>
+  <!--検索終わり-->
 
   <% if @staff.present? %>
     <div class="new_blog">
