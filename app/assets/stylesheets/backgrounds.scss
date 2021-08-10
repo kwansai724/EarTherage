@@ -1,0 +1,19 @@
+// Place all the styles related to the Backgrounds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bg-index {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.background-index {
+  background-color: rgb(250, 250, 250);
+}
+
+.background-index img{
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+}

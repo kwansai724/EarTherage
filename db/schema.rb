@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_15_130226) do
+ActiveRecord::Schema.define(version: 2021_08_10_012244) do
+
+  create_table "backgrounds", force: :cascade do |t|
+    t.string "image"
+    t.boolean "default", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "blogs", force: :cascade do |t|
     t.string "title", default: "", null: false
-    t.datetime "datetime", default: "2021-07-28 13:22:40", null: false
+    t.datetime "datetime", default: "2021-08-10 05:42:30", null: false
     t.text "content", limit: 10485760
     t.string "image"
     t.integer "share_with", default: 0, null: false
