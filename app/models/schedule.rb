@@ -19,6 +19,12 @@ class Schedule < ApplicationRecord
   scope :get_by_teacher, ->(teacher) {
     where(teacher: teacher)
   }
-
 #----------------------------------------------------------------------------
+
+#会員限定の絞り込み-------------------------------------------------------------
+  scope :get_by_members, ->(judgement_of_members) {
+    where(judgement_of_members: true)
+  }
+#----------------------------------------------------------------------------
+
 end

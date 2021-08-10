@@ -33,15 +33,20 @@
     <% end %>
   </div>
   <!--会員限定のみチェックボックス---------------------------------------------->
-  <label><input id="judgement_of_members" type="checkbox">会員限定のみ</label>
+  <%# <label><input id="judgement_of_members" type="checkbox">会員限定のみ</label> %>
+  <%= form_with(url: schedules_path, method: :get, local: true) do |f| %>
+    <%= f.check_box :judgement_of_members %>
+    <%= f.label :会員限定 %>
+    <%= f.submit "検索", class: "btn btn-info" %>
+  <% end %>
 
-  <script>
+  <%# <script>
     $(function(){
       $('#judgement_of_members').change(function(){
         $('.member-false').toggle();
       })
     })
-  </script>
+  </script> %>
   <!-------------------------------------------------------------------------->    
 
   <% if current_staff.present? %>
