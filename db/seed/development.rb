@@ -23,6 +23,37 @@ end
 
 puts "Staff Created"
 
+10.times do |n|
+  email = "sample-#{n+1}@email.com"
+  password = "password"
+  Student.create!(
+    name: Faker::Name.name,
+    email: email,
+    course_type: "therapist_training",
+    phone_number: "080-1234-000#{n}",
+    password: password,
+    password_confirmation: password
+  )
+end
+
+puts "セラピスト養成コース生作成"
+
+10.times do |n|
+  email = "sample-#{n+11}@email.com"
+  password = "password"
+  Student.create!(
+    name: Faker::Name.name,
+    email: email,
+    course_type: "self_care",
+    phone_number: "080-1234-999#{n}",
+    password: password,
+    password_confirmation: password
+  )
+end
+
+puts "セルフケアコース生作成"
+
+
 5.times do |n|
   date  = Faker::Date.in_date_period(month: 2)
   title = Faker::Educator.degree
@@ -33,8 +64,8 @@ puts "Staff Created"
               title: title,
               area: "関東",
               teacher: "山本",
-              public_status: "公開"
-#               # image: File.open("public/uploads/schedule/image/1/something.jpg")
+              public_status: "公開",
+              image: File.open("public/uploads/schedule/image/2/thumb_something.jpg")
               )
 end
 puts 'スケジュール作成'
@@ -44,7 +75,7 @@ puts 'スケジュール作成'
   title = Faker::Educator.degree
   Blog.create!(datetime: datetime,
               title: title,
-              #  image: File.open("public/uploads/blog/image/1/something.jpg"),
+              image: File.open("public/uploads/blog/image/1/thumb_something.jpg"),
               staff_id: n+1,
               share_with: n%4
               )
