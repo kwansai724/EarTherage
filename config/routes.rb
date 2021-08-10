@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   resources :uploads, only: [:create, :destroy]
 
+  resources :backgrounds#背景画像選択
+
   get 'serapoke' => 'serapoke#index', as: :serapoke#せらポケ
 
   get 'diploma' => 'diploma#index', as: :diploma#ディプロマ

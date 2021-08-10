@@ -1,0 +1,33 @@
+<%= render 'layouts/flash_messages' %>
+<div class="container col-10 col-md-10 col-lg-4">
+  <div class="background-new">
+    <h1>背景画像一覧</h1>
+    <%= form_with(model: @background, local: true) do |f| %>
+      <%= f.label "新しい画像を追加" %>
+      <%= f.file_field :image, class: "form-control" %>
+      <%= f.submit "選択", class: "btn btn-primary mt-2" %>
+      <%= link_to "キャンセル", backgrounds_path, class: "btn btn-secondary mt-2" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="bg-index container col-10 col-md-10 col-lg-10">
+  
+  <% @backgrounds.each do |bg| %>
+    <div class="background-index mt-3 mr-2">
+      <div class="background">
+        <%= image_tag bg.image.url if bg.image? %>
+      </div>
+      <div class="select-btn">
+        <div class="text-center mb-2">
+          <% if bg.default == true %>
+            <%= "背景に設定中" %>
+          <% else %>
+            <%= link_to "背景に設定", background_path(bg.id), method: :patch, data: {confirm: "背景画像に設定します"}, class:"btn btn-primary btn-sm" %>
+            <%= link_to "削除", background_path(bg.id), data: { confirm: "削除してよろしいですか？" }, method: :delete, class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </div>    
+      </div>
+    </div>  
+  <% end %>
+</div>  
