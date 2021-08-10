@@ -15,7 +15,7 @@
     <![endif]-->    
   </head>
 
-  <body>
+  <body style="background-image: url(<%= Background.all.find_by(default: true).image.url if Background.all.find_by(default: true).present? %>)">
     <%= render 'layouts/header' %>
     <div class="container-fluid py-4 <%= devise_controller? ? 'mw-md' : 'mw-xl' %>">
       <%= yield %>
