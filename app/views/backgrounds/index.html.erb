@@ -5,7 +5,7 @@
     <%= form_with(model: @background, local: true) do |f| %>
       <%= f.label "新しい画像を追加" %>
       <%= f.file_field :image, class: "form-control" %>
-      <%= f.submit "選択", class: "btn btn-primary mt-2" %>
+      <%= f.submit "追加", class: "btn btn-primary mt-2" %>
       <%= link_to "キャンセル", backgrounds_path, class: "btn btn-secondary mt-2" %>
     <% end %>
   </div>
