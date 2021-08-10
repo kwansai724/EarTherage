@@ -78,11 +78,12 @@ puts 'スケジュール作成'
 5.times do |n|
   datetime = DateTime.current
   title = Faker::Educator.degree
+  staff_name = Faker::Name.name
   Blog.create!(datetime: datetime,
               title: title,
               #  image: File.open("public/uploads/blog/image/1/something.jpg"),
               staff_id: n+1,
-              staff_name: n+1,
+              staff_name: Staff.find(n+1).name,
               share_with: n%5
               )
 end

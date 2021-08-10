@@ -5,8 +5,14 @@
 <div class="blog-index">
 
   <!--検索フォーム-->
+    <% if params[:staff_name].present? %>
+      <p>検索条件：</p>
+    <% end %>
+    <% if params[:staff_name].present? %>
+      <p>【<%= params[:staff_name] %>】</p>
+    <% end %>
     <%= form_with(url: staff_blogs_path(current_staff), method: :get, local: true) do |f| %>
-      <%= f.select :staff_name, [0,1,2,3,4], {prompt: "スタッフ"}, {include_blank: true, class: "form-control"} %>
+      <%= f.collection_select :staff_name, Staff.all, :name, :name, {prompt: "スタッフ"}, {include_blank: true, class: "form-control"} %>
       <%= f.submit "検索", class: "btn btn-info" %>
     <% end %>
   <!--検索フォーム終わり-->

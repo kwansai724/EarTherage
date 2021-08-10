@@ -14,14 +14,14 @@ ActiveRecord::Schema.define(version: 2021_08_10_073602) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "title", default: "", null: false
-    t.datetime "datetime", default: "2021-08-10 07:54:40", null: false
+    t.datetime "datetime", default: "2021-08-10 08:18:00", null: false
     t.text "content", limit: 10485760
     t.string "image"
     t.integer "share_with", default: 0, null: false
     t.integer "staff_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "staff_name"
+    t.string "staff_name"
     t.index ["staff_id"], name: "index_blogs_on_staff_id"
   end
 
