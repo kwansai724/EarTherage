@@ -7,7 +7,7 @@ class Blog < ApplicationRecord
 
 #検索機能--------------------------------------------------------------------
   #閲覧可能範囲による絞り込み
-  scope :get_by_share_with, ->(share_with) { where(share_with: share_with) }
+  scope :get_by_staff_name, ->(staff_name) { where(staff_name: staff_name) }
 #----------------------------------------------------------------------------
 
 end

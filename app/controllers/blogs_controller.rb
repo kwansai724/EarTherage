@@ -20,10 +20,10 @@ class BlogsController < ApplicationController
     end
 
   #検索機能-------------------------------------------------------------------↲
-    if params[:share_with].present?
+    if params[:staff_name].present?
       @blogs = Blog.where(share_with: 0..4).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
       #@blogs = @blogs.where(staff: current_staff) if params[:share_with] == 4
-      @blogs = @blogs.get_by_share_with params[:share_with]
+      @blogs = @blogs.get_by_staff_name params[:staff_name]
       # @schedules = Schedule.areas.key(params[:area].to_i)
     end
   #------------------------------------------------------------------------------↲
@@ -90,7 +90,7 @@ class BlogsController < ApplicationController
   private
 
     def blog_params
-      params.require(:blog).permit(:title, :content, :image, :share_with, :staff_id)
+      params.require(:blog).permit(:title, :content, :image, :share_with, :staff_id, :staff_name)
     end
 
     # 管理者かログインしているスタッフが自身のブログである場合のみアクセス可

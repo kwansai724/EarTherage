@@ -82,6 +82,7 @@ puts 'スケジュール作成'
               title: title,
               #  image: File.open("public/uploads/blog/image/1/something.jpg"),
               staff_id: n+1,
+              staff_name: n+1,
               share_with: n%5
               )
 end
