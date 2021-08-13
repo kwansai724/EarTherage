@@ -52,6 +52,18 @@
         <div class="blog_title">
           <%= blog.title %>
         </div>
+        <% if blog.share_with == "staff" %>
+          <div class="publication_status">
+            <button type="button" class="btn btn-outline-primary btn-sm">スタッフ</button>
+          </div>
+        <% elsif blog.share_with == "private" %>
+           <div class="publication_status">
+            <button type="button" class="btn btn-outline-success btn-sm">非公開</button>
+          </div>
+        <% else %>
+          <div class="publication_status">
+          </div>
+        <% end %>
         <div class="pyramid_parent_2">
           <div class="pyramid_box_3">
             <%= l(blog.created_at, format: :longdate) %>
