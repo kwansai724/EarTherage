@@ -26,9 +26,9 @@
     <% end %>
 
     <%= form_with(url: staff_blogs_path(current_staff), method: :get, local: true) do |f| %>
-      <%= f.collection_select :staff_name, Staff.all, :name, :name, {prompt: "スタッフ"}, {include_blank: true, class: "form-control"} %>
-      <%= f.select :share_with, [['公開', 0], ['非公開', 4]], {prompt: "公開状況"}, {class: 'form-control'} %>
-      <%= f.submit "検索", class: "btn btn-info" %>
+      <%= f.collection_select :staff_name, Staff.all, :name, :name, {prompt: "スタッフ"}, {include_blank: true, class: "font-search form-control"} %>
+      <%= f.select :share_with, [['公開', 0], ['非公開', 4]], {prompt: "公開状況"}, {class: 'font-search form-control'} %>
+      <%= f.submit "検索", class: "btn btn-info btn--resize" %>
     <% end %>
   <% end %>
   <!--検索終わり-->
@@ -94,7 +94,7 @@
 
   <div class="center">
     <% if params[:staff_name].present? %>
-      <%= link_to "<　一覧へ戻る", staff_blogs_path(current_staff), class: "btn btn-outline-secondary" %>
+      <%= link_to "<　一覧へ戻る", staff_blogs_path(current_staff), class: "btn btn-outline-secondary btn--resize blog-index-return" %>
     <% elsif current_staff.present? %>
       <!-- 「staff_toppage_routes」はstaffs_helper.rbに記載 -->
       <%= link_to "戻る", staff_toppage_routes(current_staff), class: "btn btn-outline-secondary btn--resize blog-index-return" %>

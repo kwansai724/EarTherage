@@ -137,6 +137,7 @@
 @media screen and (max-width:480px) {
 
   .new_blog {
+    margin-top: 10px;
     margin-left: -12px;
   }
 
@@ -155,7 +156,6 @@
   max-width: 100%;
 }
 
-  
 
   // a.btn.btn-info.btn-sm.font-new {
   //   height: 25px;
@@ -164,6 +164,10 @@
   //   margin: 0px 0px 0px 0px;
   //   text-align: top;
   // }
+
+  .font-search.form-control{
+    font-size: 13px;
+  }
 
   .pyramid_parent_1 {
     width: 350px;
@@ -176,12 +180,13 @@
   }
 
   .pyramid_box_1 {
+    display: block;
     //border: solid;
     //border-color: red;
     height: 100px;
     width: 100px;               /* 幅指定 */
     padding-top: 50px;
-    margin-top: 2px;          /* 要素同士の隙間調整 */
+    margin-top: 10px;          /* 要素同士の隙間調整 */
     margin-left: -12px;
     margin-bottom: 0px;
     margin-right: 0px;
@@ -189,9 +194,10 @@
   }
 
   .pyramid_box_2 {
-    height: 100px;
-    width: 230px;    /* 幅指定 */
-    margin-top: 2px;
+    display: block;
+    height: 180px;
+    width: 300px;    /* 幅指定 */
+    margin-top: 0px;
     margin-left: -12px;         /* 要素同士の隙間調整 */
     margin-bottom: 0px;
     margin-right: 0px;
@@ -199,10 +205,24 @@
   }
 
   .blog_title {
-    height: 35px;
-    margin-top: 10px;
+    //border: solid;
+    //border-color: red;
+    display: block;
+    height: 40%;
+    width: 280px;
+    margin-top: 0px;
     margin-left: 10px;
     font-size: 15px;
+  }
+
+  .publication_status {
+    //border: solid;
+    //border-color: green;
+    margin-top: 5px;
+    display: block;
+    width: 90px;
+    height: 10px;
+    font-size: 10px;
   }
 
   .pyramid_parent_2 {
@@ -218,9 +238,10 @@
   .pyramid_box_3 {
     //border: solid;
     //border-color: red;
-    height: 30px;
+    display: block;
+    height: 5px;
     width: 95px;               /* 幅指定 */
-    margin-top: 10px;
+    margin-top: 25px;
     font-size: 10px;
     //margin-left: 100px;
     //margin-bottom: 5px;         /* 要素同士の隙間調整 */
@@ -230,7 +251,8 @@
   .pyramid_box_4 {
     //border: solid;
     //border-color: blue;
-    height: 30px;
+    display: block;
+    height: 5px;
     width: 95px;               /* 幅指定 */
     margin-top: 10px;
     font-size: 11px;
@@ -248,9 +270,13 @@
   .pyramid_box_5 {
     //border: solid;
     //border-color: red;
+    display: inline-block;
     height: 10px;
     width: 40px;
-    margin: 0px 0px 0px 124px;
+    margin-top: 10px;
+    margin-left: 200px;
+    margin-bottom: 0px;
+    margin-right: 0px;
     //font-size: 10px;
     //background-color: yellow;
   }
@@ -258,6 +284,7 @@
   .pyramid_box_6 {
     //border: solid;
     //border-color: blue;
+    display: inline-block;
     height: 10px;
     width: 40px;
     margin: 0px 0px 0px 0px;
@@ -268,6 +295,23 @@
   .pyramid_parent_3 .a {
     margin-right: 5px;
   }
+
+  .publication_status button.btn.btn-outline-primary.btn-sm {
+    height: 25px;
+    width: 60px;
+    font-size: 10px;
+    margin: 0px 0px 0px 0px;
+    // text-align: top;
+  }
+
+  .publication_status button.btn.btn-outline-success.btn-sm {
+    height: 25px;
+    width: 50px;
+    font-size: 10px;
+    margin: 0px 0px 0px 0px;
+    // text-align: top;
+  }
+
 
 
   a.btn.btn-primary.btn-sm.font-edit {
