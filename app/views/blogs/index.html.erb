@@ -27,7 +27,7 @@
 
     <%= form_with(url: staff_blogs_path(current_staff), method: :get, local: true) do |f| %>
       <%= f.collection_select :staff_name, Staff.all, :name, :name, {prompt: "スタッフ"}, {include_blank: true, class: "form-control"} %>
-      <%= f.select :share_with, [['公開', 0], ['非公開', 4]], {prompt: "公開・非公開"}, {class: 'form-control'} %>
+      <%= f.select :share_with, [['公開', 0], ['非公開', 4]], {prompt: "公開状況"}, {class: 'form-control'} %>
       <%= f.submit "検索", class: "btn btn-info" %>
     <% end %>
   <% end %>
