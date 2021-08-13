@@ -49,7 +49,9 @@ class ApplicationController < ActionController::Base
   
   def set_students
     @student = current_student
-  end  
+  end
+
+  
   private
 
     def admin_only

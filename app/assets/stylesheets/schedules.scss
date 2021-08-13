@@ -57,12 +57,16 @@ h1 {
 //   margin-right: 2%;
 // }
 
+.only-members{
+  margin-bottom: 0.5rem;
+}
 
 .thumbnail{
   position: relative;
 }
 
-.thumbnail p{
+//「中止」の表示
+.cancel{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -77,7 +81,24 @@ h1 {
   font-family :Quicksand, sans-serif;
 }
 
-.thumb-image-cancel{
+//「延期」の表示
+.postponed{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  color: blue;
+  font-weight: bold;
+  font-size: 3em;
+  font-family :Quicksand, sans-serif;
+}
+
+//「中止」「延期」の表示
+.thumb-image-message{
   pointer-events: none;
   opacity: 0.4;
 }
