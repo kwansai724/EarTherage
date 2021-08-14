@@ -23,6 +23,42 @@ end
 
 puts "Staff Created"
 
+10.times do |n|
+  name  = Faker::Name.name
+  email = "sample-#{n+1}@email.com"
+  course_type = "therapist_training"
+  phone_number = Faker::Number.number(digits: 11)
+  password = "password"
+  Student.create!(
+    name: name,
+    email: email,
+    course_type: course_type,
+    phone_number: phone_number,
+    password: password,
+    password_confirmation: password,
+  )
+end
+
+puts "Therapist training course students Created"
+
+10.times do |n|
+  name  = Faker::Name.name
+  email = "sample-#{n+11}@email.com"
+  course_type = "self_care"
+  phone_number = Faker::Number.number(digits: 11)
+  password = "password"
+  Student.create!(
+    name: name,
+    email: email,
+    course_type: course_type,
+    phone_number: phone_number,
+    password: password,
+    password_confirmation: password,
+  )
+end
+
+puts "Self care course students Created"
+
 5.times do |n|
   date  = Faker::Date.in_date_period(month: 2)
   title = Faker::Educator.degree
@@ -42,11 +78,13 @@ puts 'スケジュール作成'
 5.times do |n|
   datetime = DateTime.current
   title = Faker::Educator.degree
+  staff_name = Faker::Name.name
   Blog.create!(datetime: datetime,
               title: title,
               #  image: File.open("public/uploads/blog/image/1/something.jpg"),
               staff_id: n+1,
-              share_with: n%4
+              staff_name: Staff.find(n+1).name,
+              share_with: n%5
               )
 end
 

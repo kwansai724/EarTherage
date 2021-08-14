@@ -8,7 +8,7 @@ class BlogsController < ApplicationController
 
   def index
     if current_staff.present?
-      @blogs = Blog.order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
+      @blogs = Blog.where(share_with: 0..4).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
     elsif current_student.present?
       if current_student.course_type == "therapist_training"
         @blogs = Blog.where(share_with: 1..3).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
@@ -18,6 +18,26 @@ class BlogsController < ApplicationController
     else
       @blogs = Blog.where(share_with: 3).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
     end
+
+  #検索機能-------------------------------------------------------------------↲
+  if current_staff.present?
+    if params[:share_with].blank? || params[:share_with].to_i.in?([0,1,2,3])
+      if params[:staff_name].present?
+        @blogs = Blog.where(share_with: 0..3).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
+        @blogs = @blogs.get_by_staff_name params[:staff_name]
+      else
+        @blogs = Blog.where(share_with: 0..3).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
+      end
+    elsif params[:share_with].to_i == 4
+      if params[:staff_name].present?
+        @blogs = Blog.where(share_with: 4).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
+        @blogs = @blogs.get_by_staff_name params[:staff_name]
+      else
+        @blogs = Blog.where(share_with: 4).order(created_at: "DESC").paginate(page: params[:page], per_page: 100)
+      end
+    end
+  end
+  #------------------------------------------------------------------------------↲
 
     #if current_staff.present?
     #  @blogs = Blog.all
@@ -81,7 +101,7 @@ class BlogsController < ApplicationController
   private
 
     def blog_params
-      params.require(:blog).permit(:title, :content, :image, :share_with, :staff_id)
+      params.require(:blog).permit(:title, :content, :image, :share_with, :staff_id, :staff_name)
     end
 
     # 管理者かログインしているスタッフが自身のブログである場合のみアクセス可

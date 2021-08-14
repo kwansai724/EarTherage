@@ -1,6 +1,9 @@
 <%= form_with model: [@staff,@blog], local: true do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
+
   <%= f.hidden_field :staff_id, :value => @staff.id %>
+
+  <%= f.hidden_field :staff_name, :value => @staff.name %>
 
   <%= f.label :title, class: "label-#{yield(:class_text)} btn-resize" %>
   <%= f.text_field :title, class: "form-control btn-resize" %>
@@ -16,7 +19,7 @@
   <%= f.file_field :image, id: "blog_image", class: "form-control btn-resize" %>
 
   <%= f.label :share_with, class: "label-#{yield(:class_text)} btn-resize" %>
-  <%= f.select :share_with, [['スタッフ', 'staff'],['セラピスト養成コース','therapist_training'],['セルフケアコース','self_care'],['一般','general']], class: "form-control btn-resize" %>
+  <%= f.select :share_with, [['スタッフ', 'staff'],['セラピスト養成コース','therapist_training'],['セルフケアコース','self_care'],['一般','general'],['非公開', 'private']], class: "form-control btn-resize" %>
 
   <%= f.submit yield(:button_text), class: "btn btn-outline-primary btn-block btn-#{yield(:class_text)} btn-resize" %>
 <% end %>
