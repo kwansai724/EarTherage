@@ -91,7 +91,7 @@ end
 puts "ブログ作成"
 
 Background.create!(
-  image: File.open("public/uploads/background/image/8/background-image1.jpg"),
+  # image: File.open("public/uploads/background/image/8/background-image1.jpg"),
   default: true
 )
 
