@@ -208,4 +208,5 @@ ja:
       time: "%H：%M"
       date: "%Y/%-m/%-d"
       longdatetime: "%Y.%-m.%-d %-H:%M"
+      longdate: "%Y.%-m.%-d"
     pm: 午後

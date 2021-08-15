@@ -24,37 +24,42 @@ end
 puts "Staff Created"
 
 10.times do |n|
+  name  = Faker::Name.name
   email = "sample-#{n+1}@email.com"
+  course_type = "therapist_training"
+  phone_number = Faker::Number.number(digits: 11)
   password = "password"
   Student.create!(
-    name: Faker::Name.name,
+    name: name,
     email: email,
-    course_type: "therapist_training",
-    phone_number: "080-1234-000#{n}",
+    course_type: course_type,
+    phone_number: phone_number,
     password: password,
-    password_confirmation: password
+    password_confirmation: password,
   )
 end
 
-puts "セラピスト養成コース生作成"
+puts "Therapist training course students Created"
 
 10.times do |n|
+  name  = Faker::Name.name
   email = "sample-#{n+11}@email.com"
+  course_type = "self_care"
+  phone_number = Faker::Number.number(digits: 11)
   password = "password"
   Student.create!(
-    name: Faker::Name.name,
+    name: name,
     email: email,
-    course_type: "self_care",
-    phone_number: "080-1234-999#{n}",
+    course_type: course_type,
+    phone_number: phone_number,
     password: password,
-    password_confirmation: password
+    password_confirmation: password,
   )
 end
 
-puts "セルフケアコース生作成"
+puts "Self care course students Created"
 
-
-15.times do |n|
+12.times do |n|
   date  = Faker::Date.in_date_period(month: 2)
   title = Faker::Educator.degree
   # area = Faker::Address.state
@@ -73,11 +78,13 @@ puts 'スケジュール作成'
 15.times do |n|
   datetime = DateTime.current
   title = Faker::Educator.degree
+  staff_name = Faker::Name.name
   Blog.create!(datetime: datetime,
               title: title,
               # image: File.open("public/uploads/blog/image/1/thumb_something.jpg"),
               staff_id: n+1,
-              share_with: n%4
+              staff_name: Staff.find(n+1).name,
+              share_with: n%5
               )
 end
 
