@@ -37,66 +37,66 @@
   <% end %>
   <!--検索終わり-->
 
-  <% if @staff.present? %>
-    <div class="new_blog">
-      <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info font-new btn--resize" %>
-    </div>
-  <% end %>
-  <% @blogs.each_with_index do |blog, n| %>
-    <div class="pyramid_parent_1">
-      <div class="pyramid_box_1">
-        <!-- blogインスタンスの画像ファイルのURLを取得し表示 -->
-        <% if blog.image? %>
-          <p><%= link_to (image_tag(blog.image.thumb.to_s, alt: "show#{n}")), staff_blog_url(Staff.find(blog.staff_id), blog) %></p>
-        <% else %>
-          <p><%= link_to (image_tag("/assets/default.jpg", alt: "show#{n}")), staff_blog_url(Staff.find(blog.staff_id), blog) %></p>
-        <% end %>
+  <div class="container col-lg-10">
+    <% if @staff.present? %>
+      <div class="new_blog">
+        <%= link_to "新規作成", new_staff_blog_path(@staff), class: "btn btn-info font-new btn--resize" %>
       </div>
-      <div class="pyramid_box_2">
-        <div class="blog_title">
-          <%= blog.title %>
-        </div>
-        <% if blog.share_with == "staff" %>
-          <div class="publication_status">
-            <button type="button" class="btn btn-outline-primary btn-sm">スタッフ</button>
-          </div>
-        <% elsif blog.share_with == "private" %>
-           <div class="publication_status">
-            <button type="button" class="btn btn-outline-success btn-sm">非公開</button>
-          </div>
-        <% else %>
-          <div class="publication_status">
-          </div>
-        <% end %>
-        <div class="pyramid_parent_2">
-          <div class="pyramid_box_3">
-            <%= l(blog.created_at, format: :longdate) %>
-          </div>
-          <% staff = Staff.find(blog.staff_id) %>
-          <div class="pyramid_box_4">
-            <%= staff.name %>
-          </div>
-        </div>
-        <div class="pyramid_parent_3">
-          <% if current_staff.present? && (current_staff.admin == true || current_staff.id == blog.staff_id) %>
-            <div class="pyramid_box_5">
-              <%= link_to "編集", edit_staff_blog_path(staff, blog), class: "btn btn-primary btn-sm edit#{n} font-edit" %>
-            </div>
-            <div class="pyramid_box_6">
-              <%= link_to "削除", staff_blog_path(staff, blog), method: :delete,
-                                          data: {confirm: "削除してよろしいですか？" },
-                                          class: "btn btn-danger btn-sm delete#{n} font-delete" %>
-            </div>
+    <% end %>
+    <% @blogs.each_with_index do |blog, n| %>
+      <div class="pyramid_parent_1 mt-2">
+        <div class="pyramid_box_1">
+          <!-- blogインスタンスの画像ファイルのURLを取得し表示 -->
+          <% if blog.image? %>
+            <p><%= link_to (image_tag(blog.image.thumb.to_s, alt: "show#{n}")), staff_blog_url(Staff.find(blog.staff_id), blog) %></p>
+          <% else %>
+            <p><%= link_to (image_tag("/assets/default.jpg", alt: "show#{n}")), staff_blog_url(Staff.find(blog.staff_id), blog) %></p>
           <% end %>
         </div>
+        <div class="pyramid_box_2">
+          <div class="blog_title">
+            <%= blog.title %>
+          </div>
+          <% if blog.share_with == "staff" %>
+            <div class="publication_status">
+              <button type="button" class="btn btn-outline-primary btn-sm">スタッフ</button>
+            </div>
+          <% elsif blog.share_with == "private" %>
+            <div class="publication_status">
+              <button type="button" class="btn btn-outline-success btn-sm">非公開</button>
+            </div>
+          <% else %>
+            <div class="publication_status">
+            </div>
+          <% end %>
+          <div class="pyramid_parent_2">
+            <div class="pyramid_box_3">
+              <%= l(blog.created_at, format: :longdate) %>
+            </div>
+            <% staff = Staff.find(blog.staff_id) %>
+            <div class="pyramid_box_4">
+              <%= staff.name %>
+            </div>
+          </div>
+          <div class="pyramid_parent_3">
+            <% if current_staff.present? && (current_staff.admin == true || current_staff.id == blog.staff_id) %>
+              <div class="pyramid_box_5">
+                <%= link_to "編集", edit_staff_blog_path(staff, blog), class: "btn btn-primary btn-sm edit#{n} font-edit" %>
+              </div>
+              <div class="pyramid_box_6">
+                <%= link_to "削除", staff_blog_path(staff, blog), method: :delete,
+                                            data: {confirm: "削除してよろしいですか？" },
+                                            class: "btn btn-danger btn-sm delete#{n} font-delete" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
-    </div>
-  <% end %>
-  <br>
-  <%= will_paginate(@pblogs, :previous_label => ' &lt 前へ', :next_label => '次へ &gt', class: "pagination justify-content-center mt-6 mb-7 btn--resize", renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+    <% end %>
+    <br>
+    <%= will_paginate(@pblogs, :previous_label => ' &lt 前へ', :next_label => '次へ &gt', class: "pagination justify-content-center mt-6 mb-7 btn--resize", renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 
 
-  <div class="center">
     <% if params[:staff_name].present? %>
       <%= link_to "<　一覧へ戻る", staff_blogs_path(current_staff), class: "btn btn-outline-secondary btn--resize blog-index-return" %>
     <% elsif current_staff.present? %>
@@ -107,4 +107,5 @@
     <% else %>
       <%= link_to "戻る", 'https://www.eartherage.com/', class: "btn btn-outline-secondary btn--resize blog-index-return" %>
     <% end %>
+  </div>  
 </div>
