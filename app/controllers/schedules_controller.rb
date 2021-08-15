@@ -6,9 +6,9 @@ class SchedulesController < ApplicationController
   # スケジュール一覧
   def index
     if current_staff.present?
-      @schedules = Schedule.paginate(page: params[:page], per_page: 6).order(created_at: "DESC")
+      @schedules = Schedule.paginate(page: params[:page], per_page: 9).order(created_at: "DESC")
     else
-      @schedules = Schedule.paginate(page: params[:page], per_page: 6).where.not(public_status: "非公開").order(created_at: "DESC")
+      @schedules = Schedule.paginate(page: params[:page], per_page: 9).where.not(public_status: "非公開").order(created_at: "DESC")
     end
     # if params[:search].present?
     #   @schedules = Schedule.paginate(page: params[:page]).search(params[:search]) 
@@ -26,6 +26,12 @@ class SchedulesController < ApplicationController
       @schedules = @schedules.paginate(page: params[:page], per_page: 6).get_by_teacher params[:teacher]
     end
   #--------------------------------------------------------------------------    
+
+  #会員限定の絞り込み-----------------------------------------------------------
+    if params[:judgement_of_members] == "1"
+      @schedules = @schedules.paginate(page: params[:page], per_page: 6).get_by_members params[:judgement_of_members]
+    end
+  #-------------------------------------------------------------------------- 
   end
 
   # スケジュール詳細
