@@ -54,7 +54,7 @@ end
 puts "セルフケアコース生作成"
 
 
-5.times do |n|
+15.times do |n|
   date  = Faker::Date.in_date_period(month: 2)
   title = Faker::Educator.degree
   # area = Faker::Address.state
@@ -65,17 +65,17 @@ puts "セルフケアコース生作成"
               area: "関東",
               teacher: "山本",
               public_status: "公開",
-              image: File.open("public/uploads/schedule/image/2/thumb_something.jpg")
+              # image: File.open("public/uploads/schedule/image/2/thumb_something.jpg")
               )
 end
 puts 'スケジュール作成'
 
-5.times do |n|
+15.times do |n|
   datetime = DateTime.current
   title = Faker::Educator.degree
   Blog.create!(datetime: datetime,
               title: title,
-              image: File.open("public/uploads/blog/image/1/thumb_something.jpg"),
+              # image: File.open("public/uploads/blog/image/1/thumb_something.jpg"),
               staff_id: n+1,
               share_with: n%4
               )
