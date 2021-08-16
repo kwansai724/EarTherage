@@ -91,8 +91,8 @@ group :test do
   gem 'webdrivers', '~> 3.0'
 end
 
-# group :production do
-#   gem 'pg', '0.20.0'
-# end
+group :production do
+  gem 'pg', '0.20.0'
+end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
