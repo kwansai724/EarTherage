@@ -6,10 +6,10 @@
   <div class = "blog_title_name">
     <h3><%= @blog.title %></h3>
   </div>
-  <h6><%= l(@blog.created_at, format: :longdatetime) %></h6>
+  <h6><%= l(@blog.created_at, format: :longdate) %></h6>
   <p><%== Rinku.auto_link(@blog.content, :all, 'target="_blank"').html_safe if @blog.content.present? %></p>
 
   <div>
-    <%= link_to "戻る", staff_blogs_path(@staff), class: "btn btn-outline-secondary btn-resize" %>
+    <%= link_to "戻る", staff_blogs_path, class: "btn btn-outline-secondary btn-resize" %>
   </div>
 </div>

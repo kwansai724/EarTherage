@@ -5,7 +5,7 @@
   <%= f.date_field :date, class: "form-control" %>
 
   <%= f.label :event_type, class: "label-#{yield(:class_text)}" %>
-  <%= f.select :event_type, ['イベント', '講座'], { include_blank: '選択してください'}, class: "form-control" %>
+  <%= f.select :event_type, ['イベント', '講座', 'セミナー', 'その他'], { include_blank: '選択してください'}, class: "form-control" %>
 
   <%= f.label :title, class: "label-#{yield(:class_text)}" %>
   <%= f.text_field :title, class: "form-control" %>
@@ -24,7 +24,7 @@
   <%= f.file_field :image, id: "schedule_image", class: "form-control" %>
 
   <%= f.label :public_status, class: "label-#{yield(:class_text)}" %><br>
-  <div class="col-sm-10 btn-group" data-toggle="buttons">
+  <div class="col-sm-12 btn-group" data-toggle="buttons">
     <label class="btn btn-outline-secondary <%= "active" if @schedule.public_status == '公開' %>" style="width:50%">
       <%= f.radio_button :public_status, '公開', {class: "radio_view"} %> 公開
     </label>
@@ -33,6 +33,9 @@
     </label>
     <label class="btn btn-outline-secondary <%= "active" if @schedule.public_status == '中止' %>" style="width:50%">
       <%= f.radio_button :public_status, '中止', {class: "radio_view"} %> 中止
+    </label>
+    <label class="btn btn-outline-secondary <%= "active" if @schedule.public_status == '延期' %>" style="width:50%">
+      <%= f.radio_button :public_status, '延期', {class: "radio_view"} %> 延期
     </label>
   </div><br>
 
@@ -43,7 +46,7 @@
     <div class="col-1">
     </div>
     <div class="col-5">
-      <%= link_to "戻る", schedules_path, class: "btn btn-outline-secondary btn-block" %>
+      <%= link_to "戻る", 'javascript:history.back()', class: "btn btn-outline-secondary btn-block" %>
     </div>
     <div class="col-5">
       <%= f.submit yield(:button_text), class: "btn btn-outline-primary btn-block btn-#{yield(:class_text)}" %>

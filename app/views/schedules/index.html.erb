@@ -27,21 +27,26 @@
   <div class="seach-forms col-md-4 offset-md-8"> <!--末尾に row を入れると検索フォーム幅が狭くなる-->
     <%= form_with(url: schedules_path, method: :get, local: true) do |f| %>
       <%= f.select :area, ['関東', '関西', '中国・四国', '九州', 'オンライン'], {prompt: "開催エリア"}, {class: 'form-control'} %>
-      <%= f.select :event_type, ['イベント', '講座'], {prompt: "種別"}, {class: 'form-control'} %>
+      <%= f.select :event_type, ['イベント', '講座', 'セミナー', 'その他'], {prompt: "種別"}, {class: 'form-control'} %>
       <%= f.collection_select :teacher, Staff.all, :name, :name, {prompt: "セラピスト"}, {class: "form-control"} %>
       <%= f.submit "検索", class: "btn btn-info" %>
     <% end %>
   </div>
   <!--会員限定のみチェックボックス---------------------------------------------->
-  <label><input id="judgement_of_members" type="checkbox">会員限定のみ</label>
+  <%# <label><input id="judgement_of_members" type="checkbox">会員限定のみ</label> %>
+  <%= form_with(url: schedules_path, method: :get, local: true) do |f| %>
+    <%= f.check_box :judgement_of_members %>
+    <%= f.label :会員限定のみ %>
+    <%= f.submit "表示" %>
+  <% end %>
 
-  <script>
+  <%# <script>
     $(function(){
       $('#judgement_of_members').change(function(){
         $('.member-false').toggle();
       })
     })
-  </script>
+  </script> %>
   <!-------------------------------------------------------------------------->    
 
   <% if current_staff.present? %>
@@ -57,30 +62,42 @@
       <div class="contents-box member-<%= s.judgement_of_members %>">
     <% end %>
         <div class="contents">
-          <p>
+          <div>
             <%= l(s.created_at, format: :long) %>
             <% if s.event_type == "イベント" %>
-              <button type="button" class="btn btn-outline-success btn-sm">イベント</button>
-            <% else %>
-              <button type="button" class="btn btn-outline-primary btn-sm">講座</button>
+              <button type="button" class="btn btn-outline-success w-60 p-0">イベント</button>
+            <% elsif s.event_type == "講座" %>
+              <button type="button" class="btn btn-outline-primary w-60 p-0">講座</button>
+            <% elsif s.event_type == "セミナー" %>
+              <button type="button" class="btn btn-outline-warning w-40 p-0">セミナー</button>
+            <% elsif s.event_type == "その他" %>
+              <button type="button" class="btn btn-outline-secondary w-60 p-0">その他</button>
             <% end %>
-          </p>
-          <p class="only-members">
+          </div>
+          <div class="only-members">
             <% if s.judgement_of_members == true %>
-              <button type="button" class="btn btn-outline-danger btn-sm">会員限定</button>
+              <button type="button" class="btn btn-outline-danger p-0">会員限定</button>
+            <% else %>
+              <button type="button" class="btn btn-outline btn-sm" disabled>　</button>
             <% end %>
-          </p>
+          </div>
           <div class="thumbnail">
             <% if s.image? %>
               <% if s.public_status == '中止' %>
-                <%= link_to (image_tag s.image.thumb.to_s), s, class: "thumb-image-cancel" %>
-                <p>中止</p>
+                <%= link_to (image_tag s.image.thumb.to_s), s, class: "thumb-image-message" %>
+                <div class="cancel">中止</div>
+              <% elsif s.public_status == '延期' %>
+                <%= link_to (image_tag s.image.thumb.to_s), s, class: "thumb-image-message" %>
+                <div class="postponed">延期</div>
               <% else %>
                 <%= link_to (image_tag s.image.thumb.to_s), s, class: "thumb-image" %>
               <% end %>
             <% elsif s.public_status == '中止' %>
-              <image src="/assets/default.jpg" width="200" height="200" class="thumb-image-cancel">
-              <p>中止</p>
+              <image src="/assets/default.jpg" width="200" height="200" class="thumb-image-message">
+              <div class="cancel">中止</div>
+            <% elsif s.public_status == '延期' %>
+              <image src="/assets/default.jpg" width="200" height="200" class="thumb-image-message">
+              <div class="postponed">延期</div>
             <% else %>
               <image src="/assets/default.jpg" width="200" height="200">
             <% end %>

@@ -10,31 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_15_130226) do
+ActiveRecord::Schema.define(version: 2021_08_10_073602) do
+
+  create_table "backgrounds", force: :cascade do |t|
+    t.string "image"
+    t.boolean "default", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "blogs", force: :cascade do |t|
     t.string "title", default: "", null: false
-    t.datetime "datetime", default: "2021-07-29 16:44:35", null: false
+    t.datetime "datetime", default: "2021-08-16 03:12:45", null: false
     t.text "content", limit: 10485760
     t.string "image"
     t.integer "share_with", default: 0, null: false
     t.integer "staff_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "staff_name"
     t.index ["staff_id"], name: "index_blogs_on_staff_id"
   end
 
   create_table "schedules", force: :cascade do |t|
     t.date "date"
-    t.integer "area"
+    t.string "area"
     t.string "place"
-    t.integer "teacher"
-    t.integer "event_type"
+    t.string "teacher"
+    t.string "event_type"
     t.string "title"
     t.text "details"
     t.string "image"
     t.integer "public_status", default: 0, null: false
-    t.boolean "judgement_of_members"
+    t.boolean "judgement_of_members", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
